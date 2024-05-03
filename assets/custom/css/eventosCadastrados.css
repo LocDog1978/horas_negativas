@@ -1,0 +1,31 @@
+/* Adicione este estilo para fornecer uma aparência visual de clique */
+.hoverable {
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+/* Adicione este estilo para alterar a cor de fundo quando a célula é clicada */
+.hoverable:active {
+	background-color: #c0c0c0; /* Cor a ser alterada conforme necessário */
+}
+
+.event-color{
+	color: blue;
+}
+
+#icon-close-modal {
+	border: 2px ridge red; /* Borda em relevo vermelha */
+	cursor: pointer; /* Adicione um cursor para indicar que o botão é clicável */
+}
+
+#icon-close-modal:hover {
+	background-color: #ffcccc; /* Altere a cor de fundo quando o mouse passar sobre o botão */
+}
+
+#tableEquipe {
+/*    font-size: 16px; /* Substitua 16px pelo tamanho desejado da fonte */*/
+}
+
+.oculto {
+	display: none;
+}

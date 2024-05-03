@@ -1,0 +1,39 @@
+#container_external{
+	margin-top: 30px;
+	color: black;
+}
+#header_1{
+	padding-bottom: 34px;
+	background-color: #D5DBDB;
+}
+#header_2{
+	background-color: #E5E8E8;
+	padding-left: 10px;
+	padding-bottom: 7px;
+}
+#line{
+	border-top: 1px solid white;
+	margin: 0px;
+}
+#container_internal{
+	padding: 10px;
+	background-color: #F8F9F9;
+}
+#add_button{
+	background-color: transparent;
+	border-right: 1px solid #D0D3D4;
+	border-left: 2px solid #E5E8E8;
+	border-top: 2px solid #E5E8E8;
+	border-bottom: 2px solid #E5E8E8;
+}
+#add_button:hover{
+	border: 2px ridge white;
+    cursor:pointer;
+}
+#alertAfterSave{
+	color: white;
+	
+	border: 1px solid green;
+	padding: 20px;
+	margin-bottom: 20px;
+}

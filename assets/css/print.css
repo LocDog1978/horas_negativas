@@ -1,0 +1,100 @@
+@media print {
+    :root{
+    }
+    * {
+        --bs-dark: #000 !important;
+        background: transparent !important;
+        text-shadow: none !important;
+        filter: none !important;
+        -ms-filter: none !important;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        /*line-height: 1.4em;*/
+    }
+
+    header .navbar,
+    footer {
+        color: #000 !important;
+    }
+
+    header {
+        border-bottom: 1px solid #000;
+    }
+
+    footer {
+        border-top: 1px solid #000;
+    }
+
+    header .navbar .logo-uerj > svg [fill^='rgb('] {
+        fill: #000000;
+    }
+
+    .navbar-toggler {
+        color: #000 !important;
+        border-color: #000 !important;
+    }
+
+    .offcanvas {
+        background-color: #fff !important;
+    }
+
+    .sub-menu > ul {
+        display: block !important;
+    }
+
+    .bg-uerj-blue,
+    .bg-uerj-gold,
+    .bg-uerj-gray,
+    .bg-uerj-light-gray,
+    .bg-uerj-medium-gray,
+    .bg-uerj-warm-red {
+        background-color: #afafaf !important;
+        color: #000 !important;
+    }
+
+    a {
+        color: #000 !important;
+    }
+
+    #pageContent,
+    fieldset,
+    .card,
+    .form-control,
+    .form-select,
+    .form-check-input,
+    .input-group-text {
+        border: 1px solid #848484 !important;
+    }
+
+    [class*=btn-],
+    [class*=alert-] {
+        background-color: #fff !important;
+        border-color: #848484 !important;
+        color: #000 !important;
+    }
+
+    .accordion-collapse {
+        display: block !important;
+    }
+
+    .accordion-item {
+        border-color: #848484 !important;
+
+    }
+
+    .accordion-button {
+        color: #000 !important;
+        background-color: #fff !important;
+        box-shadow: none !important;
+        border-bottom: 1px solid #848484 !important;
+    }
+
+    .badge {
+        background-color: #848484 !important;
+        color: #fff !important;
+    }
+
+}

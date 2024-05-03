@@ -1,0 +1,188 @@
+/* Alto contraste */
+body.alto_contraste {
+    /* cores padrão do bootstrap 5 */
+    --bs-blue: #000;
+    --bs-indigo: #000;
+    --bs-purple: #000;
+    --bs-pink: #000;
+    --bs-red: #000;
+    --bs-orange: #FF0;
+    --bs-yellow: #FF0;
+    --bs-green: #333;
+    --bs-teal: #0F0;
+    --bs-cyan: #FFF;
+    --bs-white: #000;
+    --bs-gray: #CDC5DF;
+    --bs-gray-light: #1A1A1A;
+    --bs-gray-dark: #CDC5DF;
+    --bs-primary: #1A1A1A;
+    --bs-secondary: #DEDAD6;
+    --bs-success: #0F0;
+    --bs-info: #00F;
+    --bs-warning: #FF0;
+    --bs-danger: #FF0;
+    --bs-light: #070605;
+    --bs-dark: #DEDAD6;
+    --bs-table-striped-color: #DEDAD6;
+
+
+    /* cores padrão da marca Uerj */
+    --uerj-blue: #FFF;
+    --uerj-gold: #FFFF;
+    --uerj-warm-red: #FFF;
+    --uerj-light-gray: #FFF;
+    --uerj-gray: #FFF;
+    --uerj-medium-gray: #FFF;
+    --uerj-light-gray: #FFF;
+
+}
+
+body.alto_contraste header a,
+body.alto_contraste header .container a,
+body.alto_contraste footer a,
+body.alto_contraste footer .container a,
+body.alto_contraste .form-control {
+    color: #000000;
+}
+
+body.alto_contraste .container a,
+body.alto_contraste main#pageContent a {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+body.alto_contraste .container a.btn,
+body.alto_contraste main#pageContent a.btn {
+    color: #000000;
+    text-decoration: underline;
+}
+
+
+body.alto_contraste .bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: #FFFF00;
+}
+
+body.alto_contraste .popover-body,
+body.alto_contraste .tooltip-inner {
+    border: 1px solid #FFFF00;
+    color: #FFFF00;
+    background-color: #000000;
+}
+
+body.alto_contraste .bs-popover-end > .popover-arrow::after{
+    border-right-color: #ffff00;
+}
+
+body.alto_contraste main#pageContent {
+    border: 1px solid #FFFFFF;
+}
+
+body.alto_contraste header #btnMenuIdiomas:hover,
+body.alto_contraste header #btnAcessibilidade:hover,
+body.alto_contraste header #menuAcessibilidade > *:hover,
+body.alto_contraste header .opened {
+    outline: 1px solid #000000;
+}
+
+body.alto_contraste header #menuIdiomas .dropdown-menu.show {
+    outline: 1px solid #FFFFFF;
+    border-color: #000000;
+}
+
+body.alto_contraste header #menuIdiomas .dropdown-menu .dropdown-item {
+    text-transform: uppercase;
+}
+
+body.alto_contraste header #menuIdiomas .dropdown-menu .dropdown-item:hover {
+    outline: 1px solid #000000;
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+body.alto_contraste header .navbar .offcanvas-body a {
+    color: #FFFFFF;
+}
+
+body.alto_contraste header .navbar .offcanvas-body nav ul li a.opened,
+body.alto_contraste header .navbar .offcanvas-body nav ul li a:hover {
+    outline: 1px solid #FFFFFF;
+}
+
+body.alto_contraste header .navbar .offcanvas-body nav ul ul {
+    border-color: var(--bs-gray);
+}
+
+body.alto_contraste .form-control:focus {
+    color: #000000;
+    border-color: #AFAFAF;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.4);
+}
+
+body.alto_contraste .was-validated .form-check-input:invalid ~ .form-check-label,
+body.alto_contraste .form-check-input.is-invalid ~ .form-check-label,
+body.alto_contraste .invalid-feedback {
+    color: #ffff00;
+}
+
+body.alto_contraste .was-validated .form-select:invalid,
+body.alto_contraste .form-select.is-invalid,
+body.alto_contraste .was-validated .form-check-input:invalid,
+body.alto_contraste .form-check-input.is-invalid,
+body.alto_contraste .was-validated .form-control:invalid,
+body.alto_contraste .form-control.is-invalid {
+    border-color: #ffff00;
+}
+
+body.alto_contraste .alert {
+    font-weight: bold;
+    background-color: #ffff00;
+    border-color: #ffff00;
+    color: #000000;
+}
+
+body.alto_contraste .btn {
+    text-transform: uppercase;
+    color: #000000;
+    border-color: #ffffff;
+    background-color: #FFFFFF;
+}
+
+body.alto_contraste [class*="btn-outline"].btn {
+    font-weight: bold;
+    border-width: 2px;
+    background-color: transparent;
+    color: #FFFFFF;
+}
+
+body.alto_contraste [class*="btn-outline"].btn:hover {
+    border-color: #898989;
+}
+
+body.alto_contraste .btn-check:checked + [class*="btn-outline"],
+body.alto_contraste .btn-check:active + [class*="btn-outline"],
+body.alto_contraste [class*="btn-outline"]:active,
+body.alto_contraste [class*="btn-outline"].active,
+body.alto_contraste [class*="btn-outline"].dropdown-toggle.show {
+    color: #000000;
+    background-color: #FFFF00;
+    border-color: #000000;
+}
+
+body.alto_contraste .btn:focus,
+body.alto_contraste .btn:active,
+body.alto_contraste .btn:hover,
+body.alto_contraste .btn-check:checked + [class*="btn-outline"]:focus,
+body.alto_contraste .btn-check:focus + [class*="btn-outline"],
+body.alto_contraste [class*="btn-outline"]:focus
+body.alto_contraste .btn-check:active + [class*="btn-outline"]:focus,
+body.alto_contraste [class*="btn-outline"]:active:focus,
+body.alto_contraste [class*="btn-outline"].active:focus,
+body.alto_contraste [class*="btn-outline"].dropdown-toggle.show:focus {
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.5);
+}
+
+body.alto_contraste .offcanvas .btn-close {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23FFF'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e")
+}
+
+/* FIM - Alto contraste */

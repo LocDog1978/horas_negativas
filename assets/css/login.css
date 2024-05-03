@@ -1,0 +1,21 @@
+main#pageContent {
+	background-color: transparent;
+	max-width: 540px;
+}
+
+section#loginPage {
+	background-color: var(--bs-white);
+	padding: calc(var(--bs-gutter-y) * 2);
+}
+
+section#loginPage:first-child {
+	margin: 100px auto 0px auto;
+}
+
+@media (max-width: 767px) {
+
+	section#loginPage:first-child {
+		margin-top: 0px;
+	}
+
+}

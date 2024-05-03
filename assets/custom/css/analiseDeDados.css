@@ -1,0 +1,21 @@
+@media print {
+	.print-hidden {
+		display: none !important;
+	}
+}
+
+.imprimir {
+	display: none;
+}
+
+@media print {
+	.imprimir {
+		display: block;
+	}
+}
+
+.accordion-item {
+	border: 2px solid #0072CE;
+	border-radius: 5px;
+	padding: 10px;
+}

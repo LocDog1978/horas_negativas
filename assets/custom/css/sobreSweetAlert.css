@@ -1,0 +1,44 @@
+.white-background .swal2-popup {
+	background-color: white;
+	width: 50%;
+}
+
+#swal2-popup{
+	width: 100%;
+}
+
+.swal2-popup .swal2-modal .swal2-show{
+	width: 100%;
+	margin: 0 auto;
+}
+
+.custom-title {
+	font-size: 14px;
+	font-weight: normal;
+	color: blue;
+	text-decoration: underline;
+}
+
+.chosen-container {
+	width: 100% !important;
+}
+
+/* Estilos para o alerta em smartphones */
+@media screen and (max-width: 768px) {
+	.white-background-media .swal2-popup {
+		background-color: white;
+		width: 100%;
+	}
+
+	.title-size {
+		font-size: 12px !important;
+	}
+
+	.body-size {
+		font-size: 7px !important;
+	}
+
+	.legend-size {
+		font-size: 12px !important;
+	}
+}

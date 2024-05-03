@@ -1,0 +1,129 @@
+#container_external{
+	margin-top: 60px;
+	color: black;
+}
+#header{
+	background-color: #D5DBDB;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 7px;
+	font-weight: bold;
+	font-size: 14px;
+}
+.zebraOn{
+	background-color: #F0F3F4;
+	color: black;
+	border: 1px solid #999;
+}
+.zebraOn:hover{
+	background-color: #F0F3F4;
+	color: black;
+	border: 1px solid #21618C;
+}
+.zebraOn:focus{
+	background-color: #F0F3F4;
+	color: black;
+	border: 1px solid #999;
+}
+.zebraOff{
+	background-color: #D0D3D4;
+	color: black;
+	border: 1px solid #999;
+}
+.zebraOff:hover{
+	background-color: #D0D3D4;
+	color: black;
+	border: 1px solid #21618C;
+}
+.zebraOff:focus{
+	background-color: #D0D3D4;
+	color: black;
+	border: 1px solid #999;
+}
+.mySelect{
+	padding: 0;
+	margin: 0;
+	border-radius: 10px;
+	font-size: 14px;
+	height: 30px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#preFooter{
+	background-color: white;
+	padding-top: 26px;
+}
+#preFooter2{
+	background-color: white;
+	padding-top: 26px;
+}
+#line{
+	border-top: 1px solid gray;
+	margin: 0px;
+}
+.formFooter{
+	background-color: white;
+	height: 100%;
+}
+.footerButton{
+	background-color: #D5DBDB;
+	border: 1px solid #999;
+	border-radius: 10px;
+	color: black;
+	height: 50px;
+	margin: 10px;
+	font-size: 14px;
+}
+.footerButton:focus{
+	background-color: #D0D3D4;
+	border: 1px solid #999;
+	border-radius: 10px;
+	color: black;
+	height: 50px;
+	margin: 10px;
+	font-size: 14px;
+}
+#nome_local {
+	background-color: #D0D3D4;
+	color: black;
+	border: 1px solid #999;
+}
+#nome_local:disabled{
+	background-color: gray;
+	color: gray;
+	font-size: 0px;
+}
+#nome_local::placeholder {
+    color: gray;
+    font-size: 12px;
+}
+#nome_local:focus{
+	background-color: #D0D3D4;
+	color: black;
+	border: 1px solid #999;
+}
+#requiredMessage{
+	padding-bottom: 10px;
+	border: 1px solid red;
+	padding: 10px;
+}
+#rqTipoLocal{
+	padding-bottom: 10px;
+}
+#rqPredio{
+	padding-bottom: 10px;
+}
+#rqPavTemp{
+	padding-bottom: 10px;
+}
+#rqPavimento{
+	padding-bottom: 10px;
+}
+#rqNomeLocal{
+	padding-bottom: 10px;
+}
+#successSave{
+	padding-bottom: 10px;
+	border: 1px solid green;
+	padding: 10px;
+}

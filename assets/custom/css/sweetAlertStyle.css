@@ -1,0 +1,29 @@
+.white-background .swal2-popup {
+	background-color: white;
+	width: 90%;
+}
+
+#swal2-popup{
+	width: 100%;
+}
+
+.swal2-popup .swal2-modal .swal2-show{
+	width: 100%;
+	margin: 0 auto;
+}
+
+.custom-title {
+	font-size: 14px;
+	font-weight: normal;
+	color: blue;
+	text-decoration: underline;
+}
+
+#tableEquipe {
+	width: 100%;
+	font-size: 12px;
+}
+
+.chosen-container {
+	width: 100% !important;
+}
