@@ -16,7 +16,7 @@ class App extends BaseConfig
 	 *
 	 *    http://example.com/
 	 */
-	public string $baseURL = 'http://localhost/framework_base/';
+	public string $baseURL = 'http://localhost/horas_negativas/';
 
 	/**
 	 * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
