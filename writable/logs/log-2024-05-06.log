@@ -1,0 +1,17 @@
+INFO - 2024-05-06 14:31:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 14:31:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-06 14:32:00 --> file_get_contents(http://localhost/framework_base/assets/images/acessibilidade.svg): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+
+in APPPATH\Views\template\dgti_template.php on line 131.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'file_get_contents(http://localhost/framework_base/assets/images/acessibilidade.svg): Failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+', 'C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\template\\dgti_template.php', 131)
+ 2 APPPATH\Views\template\dgti_template.php(131): file_get_contents('http://localhost/framework_base/assets/images/acessibilidade.svg')
+ 3 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\template\\dgti_template.php')
+ 4 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\View\View.php(242): CodeIgniter\View\View->render('template/dgti_template', [], true)
+ 6 SYSTEMPATH\Common.php(1188): CodeIgniter\View\View->render('login', [], true)
+ 7 APPPATH\Controllers\LoginController.php(24): view('login', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\LoginController->index()
+ 9 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+10 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
