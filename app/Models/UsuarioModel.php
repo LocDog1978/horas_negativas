@@ -8,7 +8,7 @@ class UsuarioModel extends Model {
     protected $primaryKey = 'id';
     protected $returnType = 'object';
     protected $db;
-    protected $allowedFields = ['id', 'nome', 'sobrenome', 'login', 'senha', 'fk_nivel', 'ativo'];
+    protected $allowedFields = ['id', 'nome', 'sobrenome', 'login', 'senha', 'nivel', 'ativo'];
 
 	public function __construct() {
 		parent::__construct();
@@ -22,10 +22,8 @@ class UsuarioModel extends Model {
 
 	public function getUserData($userId) {
 	    $query = $this->db->table($this->table)
-	        ->select('usuarios.id as id_usuario, tipos_niveis_usuario.id as id_tipos_niveis_usuario, 	
-				usuarios.nome, usuarios.sobrenome, usuarios.login, usuarios.senha, usuarios.fk_nivel,
-				usuarios.ativo, tipos_niveis_usuario.nivel, tipos_niveis_usuario.descricao')
-	        ->join('tipos_niveis_usuario', 'tipos_niveis_usuario.nivel = usuarios.fk_nivel')
+	        ->select('usuarios.id as id_usuario, usuarios.nome, usuarios.sobrenome, usuarios.login, usuarios.senha, usuarios.nivel,
+				usuarios.ativo')
 	        ->where('usuarios.id', $userId)
 	        ->get();
 	    return $query->getRow();
@@ -34,8 +32,7 @@ class UsuarioModel extends Model {
 
 	public function getAllData() {
 		$builder = $this->db->table($this->table);
-		$builder->select('usuarios.id as userId, usuarios.*, tipos_niveis_usuario.*');
-		$builder->join('tipos_niveis_usuario', 'tipos_niveis_usuario.id = usuarios.fk_nivel');
+		$builder->select('');
 		$query = $builder->get();
 		return $query->getResult();
 	}

@@ -30,7 +30,7 @@ $sobrenomeValue = isset($toUpdate['sobrenome']) ? $toUpdate['sobrenome'] : '';
 $loginValue = isset($toUpdate['login']) ? $toUpdate['login'] : '';
 $senhaValue = isset($toUpdate['senha']) ? $toUpdate['senha'] : '';
 $senhaConfirmarValue = isset($toUpdate['senhaConfirmar']) ? $toUpdate['senhaConfirmar'] : '';
-$nivelValue = isset($toUpdate['fk_nivel']) ? $toUpdate['fk_nivel'] : '';
+$nivelValue = isset($toUpdate['nivel']) ? $toUpdate['nivel'] : '';
 
 $openRow = "<div class='mb-3 row'>";
 $openRowOn = "<div class='mb-3 row zebraOn' style='padding: 0; margin: 0 !important;'>";
@@ -334,14 +334,14 @@ echo "<div id='preFooter'>";
 			let login = $("#login").val();
 			let senha = $("#senha").val();
 			let senhaConfirmar = $("#senhaConfirmar").val();
-			let fk_nivel = $("#nivel").val();
+			let nivel = $("#nivel").val();
 			
 			validator = (nome === '') ||
 				(sobrenome === '') ||
 				(login === '') ||
 				(senha === '') ||
 				(senhaConfirmar === '') ||
-				(fk_nivel === '') ? 1 : 0;
+				(nivel === '') ? 1 : 0;
 
 			if (validator){ //deixou campo em branco
 				$('#preFooter2').hide();
@@ -371,7 +371,7 @@ echo "<div id='preFooter'>";
 							if (!validationSenhaMenor6 && !validationSenhasConferem) {
 								$.ajax({
 									url: '<?php echo base_url('cadastro/usuarios/store'); ?>',
-									data: { flagToUpdate:update,id:id,v1:nome,v2:sobrenome,v3:login,v4:senha,v5:fk_nivel },
+									data: { flagToUpdate:update,id:id,v1:nome,v2:sobrenome,v3:login,v4:senha,v5:nivel },
 									type: 'POST',
 									dataType: 'json',
 									success: function(response) {
@@ -441,7 +441,7 @@ echo "<div id='preFooter'>";
 				$("#divSenhaConfirmar").css("border", "1px solid #999");
 				$('#rqSenhaConfirmar').hide();
 			}
-			if (fk_nivel === ''){
+			if (nivel === ''){
 				$("#divNivel").css("border","solid 1px red");
 				$('#rqNivel').show();
 			} else {

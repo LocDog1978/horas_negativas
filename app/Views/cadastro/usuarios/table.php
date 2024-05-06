@@ -17,7 +17,7 @@
 	<tbody>
 		<?php //dd($currentUser);
 
-		if ($currentUser->fk_nivel == 3) { /*** tabela para Colaborador ***/ // verificar necessidade de testar se único usuário está ativo ?>
+		if ($currentUser->nivel == 3) { /*** tabela para Colaborador ***/ // verificar necessidade de testar se único usuário está ativo ?>
 			<tr>
 				<td><?php echo $count++; ?></td>
 				<td><?php echo $userList->nome; ?></td>
@@ -31,7 +31,7 @@
 
 		<?php } else { /*** tabela para Administrador ***/
 
-			if ($currentUser->fk_nivel == 2) {
+			if ($currentUser->nivel == 2) {
 
 				foreach ($userList as $value) :			
 					if ($value->ativo == 1) { //mostra ativos
@@ -44,7 +44,7 @@
 						<td><?php echo $value->descricao; ?></td>
 						<td>
 							<a href="<?php echo base_url('cadastro/usuarios/update/'.$value->userId); ?>"><img src="<?php echo base_url('/assets/grocery_crud/themes/flexigrid/css/images/edit.png'); ?>"></a>
-							<?php if ($value->userId != session()->userID && $value->fk_nivel != 1) { ?>
+							<?php if ($value->userId != session()->userID && $value->nivel != 1) { ?>
 								<a href="<?php echo base_url('cadastro/usuarios/trash/'.$value->userId); ?>" class="trash-row"><i class="fa fa-trash fa-lg"></i></a>
 							<?php } ?>
 						</td>

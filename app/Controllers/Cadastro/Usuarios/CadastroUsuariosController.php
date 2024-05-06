@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Cadastro\Usuarios;
 use App\Models\UsuarioModel;
-use App\Models\TiposNiveisUsuariosModel;
 use App\Models\LogAlteracoesModel;
 
 class CadastroUsuariosController extends \CodeIgniter\Controller
@@ -10,14 +9,12 @@ class CadastroUsuariosController extends \CodeIgniter\Controller
 	protected $userModel;
 	protected $currentUser;
 	protected $logAlteracoes;
-	protected $tiposNiveisUsuarios;
 
 	public function __construct()
 	{
 		helper('form');
 		$this->userModel = new UsuarioModel();
 		$this->currentUser = $this->userModel->getUserData(session()->userID);
-		$this->tiposNiveisUsuarios = new TiposNiveisUsuariosModel();
 		$this->logAlteracoes = new LogAlteracoesModel();
 	}
 
@@ -63,7 +60,7 @@ class CadastroUsuariosController extends \CodeIgniter\Controller
 				'sobrenome'		=> $this->request->getPost('v2'),
 				'login'			=> $this->request->getPost('v3'),
 				'senha'			=> password_hash($this->request->getPost('v4'), PASSWORD_DEFAULT),
-				'fk_nivel'		=> $this->request->getPost('v5'),
+				'nivel'		=> $this->request->getPost('v5'),
 				'ativo'			=> 1
 			]);
 			$idInserted = $this->userModel->insertID();
@@ -94,7 +91,7 @@ class CadastroUsuariosController extends \CodeIgniter\Controller
 				'sobrenome'		=> $this->request->getPost('v2'),
 				'login'			=> $this->request->getPost('v3'),
 				'senha'			=> password_hash($this->request->getPost('v4'), PASSWORD_DEFAULT),
-				'fk_nivel'		=> $this->request->getPost('v5'),
+				'nivel'		=> $this->request->getPost('v5'),
 				'ativo'			=> 1
 			]);
 			return ($this->response->setJSON($this->request->getPost('id')));
@@ -121,7 +118,7 @@ class CadastroUsuariosController extends \CodeIgniter\Controller
 				'sobrenome'		=> $data['user']->sobrenome,
 				'login'			=> $data['user']->login,
 				'senha'			=> password_hash($data['user']->senha, PASSWORD_DEFAULT),
-				'fk_nivel'		=> $data['user']->fk_nivel
+				'nivel'		=> $data['user']->nivel
 			];
 			return view('cadastro/usuarios/add', $data);
 		}
@@ -133,7 +130,7 @@ class CadastroUsuariosController extends \CodeIgniter\Controller
 	}
 
 	public function trash($id = null){
-		if ($id == session()->userID || $this->currentUser->fk_nivel == 3) { // só envia para a lixeira seu próprio usuário se não for dev/adm
+		if ($id == session()->userID || $this->currentUser->nivel == 3) { // só envia para a lixeira seu próprio usuário se não for dev/adm
 			return redirect()->to('error/e403');
 		} else {
 			$data = [

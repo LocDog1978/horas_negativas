@@ -65,12 +65,12 @@ class TiposStatusController extends \CodeIgniter\Controller
 		});
 
 		// caso seja administrador
-		if ($this->userData->fk_nivel == 2) {
+		if ($this->userData->nivel == 2) {
 			$crud->unsetDelete();
 		}
 
 		// caso seja colaborador
-		if ($this->userData->fk_nivel == 3) {
+		if ($this->userData->nivel == 3) {
 			$crud->unsetColumns(['ativo']);
 			$crud->unsetOperations();
 			$crud->where('ativo', 1);

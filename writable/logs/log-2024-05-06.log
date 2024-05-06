@@ -18,3 +18,199 @@ in APPPATH\Views\template\dgti_template.php on line 131.
 INFO - 2024-05-06 14:35:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-05-06 14:37:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-05-06 14:37:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:57:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:57:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:57:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:57:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:57:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:57:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:57:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:57:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:57:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:57:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:57:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-06 16:57:34 --> Arquivo não encontrado: C:\xampp\htdocs\horas_negativas\public\assets\datatables\pt-BR.json
+in SYSTEMPATH\Files\File.php on line 47.
+ 1 SYSTEMPATH\Files\File.php(47): CodeIgniter\Files\Exceptions\FileNotFoundException::forFileNotFound('C:\\xampp\\htdocs\\horas_negativas\\public\\assets\\datatables\\pt-BR.json')
+ 2 SYSTEMPATH\HTTP\DownloadResponse.php(102): CodeIgniter\Files\File->__construct('C:\\xampp\\htdocs\\horas_negativas\\public\\assets\\datatables\\pt-BR.json', true)
+ 3 SYSTEMPATH\HTTP\ResponseTrait.php(806): CodeIgniter\HTTP\DownloadResponse->setFilePath('C:\\xampp\\htdocs\\horas_negativas\\public\\assets\\datatables\\pt-BR.json')
+ 4 APPPATH\Controllers\Assets\DatatablesController.php(9): CodeIgniter\HTTP\Response->download('pt-BR.json', null)
+ 5 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\Assets\DatatablesController->traducao()
+ 6 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Assets\DatatablesController))
+ 7 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-06 16:57:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:58:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:58:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:58:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:58:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 16:58:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-06 16:58:33 --> Arquivo não encontrado: C:\xampp\htdocs\horas_negativas\public\assets\datatables\pt-BR.json
+in SYSTEMPATH\Files\File.php on line 47.
+ 1 SYSTEMPATH\Files\File.php(47): CodeIgniter\Files\Exceptions\FileNotFoundException::forFileNotFound('C:\\xampp\\htdocs\\horas_negativas\\public\\assets\\datatables\\pt-BR.json')
+ 2 SYSTEMPATH\HTTP\DownloadResponse.php(102): CodeIgniter\Files\File->__construct('C:\\xampp\\htdocs\\horas_negativas\\public\\assets\\datatables\\pt-BR.json', true)
+ 3 SYSTEMPATH\HTTP\ResponseTrait.php(806): CodeIgniter\HTTP\DownloadResponse->setFilePath('C:\\xampp\\htdocs\\horas_negativas\\public\\assets\\datatables\\pt-BR.json')
+ 4 APPPATH\Controllers\Assets\DatatablesController.php(9): CodeIgniter\HTTP\Response->download('pt-BR.json', null)
+ 5 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\Assets\DatatablesController->traducao()
+ 6 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Assets\DatatablesController))
+ 7 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-06 17:01:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-05-06 17:01:24 --> mysqli_sql_exception: Table 'horas_negativas.tipos_niveis_usuario' doesn't exist in C:\xampp\htdocs\horas_negativas\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\horas_negativas\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `usuario...', 0)
+#1 C:\xampp\htdocs\horas_negativas\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `usuario...')
+#2 C:\xampp\htdocs\horas_negativas\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `usuario...')
+#3 C:\xampp\htdocs\horas_negativas\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `usuario...', Array, false)
+#4 C:\xampp\htdocs\horas_negativas\app\Models\UsuarioModel.php(30): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\horas_negativas\app\Filters\UpdateOwnUser.php(19): App\Models\UsuarioModel->getUserData('2')
+#6 C:\xampp\htdocs\horas_negativas\system\Filters\Filters.php(180): App\Filters\UpdateOwnUser->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#7 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(466): CodeIgniter\Filters\Filters->run('cadastro/usuari...', 'before')
+#8 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\horas_negativas\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-05-06 17:01:24 --> Table 'horas_negativas.tipos_niveis_usuario' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 646.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `usuarios`.`id` as `id_usuario`, `tipos_niveis_usuario`.`id` as `id_tipos_niveis_usuario`, `usuarios`.`nome`, `usuarios`.`sobrenome`, `usuarios`.`login`, `usuarios`.`senha`, `usuarios`.`fk_nivel`, `usuarios`.`ativo`, `tipos_niveis_usuario`.`nivel`, `tipos_niveis_usuario`.`descricao`
+FROM `usuarios`
+JOIN `tipos_niveis_usuario` ON `tipos_niveis_usuario`.`nivel` = `usuarios`.`fk_nivel`
+WHERE `usuarios`.`id` = :usuarios.id:', [...], false)
+ 2 APPPATH\Models\UsuarioModel.php(30): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Filters\UpdateOwnUser.php(19): App\Models\UsuarioModel->getUserData('2')
+ 4 SYSTEMPATH\Filters\Filters.php(180): App\Filters\UpdateOwnUser->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 5 SYSTEMPATH\CodeIgniter.php(466): CodeIgniter\Filters\Filters->run('cadastro/usuarios/2', 'before')
+ 6 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-06 17:04:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 17:04:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 17:04:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 17:04:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 17:04:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 17:04:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 17:04:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 17:05:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-05-06 17:05:31 --> mysqli_sql_exception: Unknown column 'usuarios.fk_nivel' in 'field list' in C:\xampp\htdocs\horas_negativas\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\horas_negativas\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `usuario...', 0)
+#1 C:\xampp\htdocs\horas_negativas\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `usuario...')
+#2 C:\xampp\htdocs\horas_negativas\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `usuario...')
+#3 C:\xampp\htdocs\horas_negativas\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `usuario...', Array, false)
+#4 C:\xampp\htdocs\horas_negativas\app\Models\UsuarioModel.php(28): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\horas_negativas\app\Controllers\HomeController.php(15): App\Models\UsuarioModel->getUserData('2')
+#6 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(891): App\Controllers\HomeController->__construct()
+#7 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(485): CodeIgniter\CodeIgniter->createController()
+#8 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\horas_negativas\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-05-06 17:05:31 --> Unknown column 'usuarios.fk_nivel' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 646.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `usuarios`.`id` as `id_usuario`, `usuarios`.`nome`, `usuarios`.`sobrenome`, `usuarios`.`login`, `usuarios`.`senha`, `usuarios`.`fk_nivel`, `usuarios`.`ativo`
+FROM `usuarios`
+WHERE `usuarios`.`id` = :usuarios.id:', [...], false)
+ 2 APPPATH\Models\UsuarioModel.php(28): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\HomeController.php(15): App\Models\UsuarioModel->getUserData('2')
+ 4 SYSTEMPATH\CodeIgniter.php(891): App\Controllers\HomeController->__construct()
+ 5 SYSTEMPATH\CodeIgniter.php(485): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-06 17:06:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-05-06 17:06:53 --> mysqli_sql_exception: Unknown column 'usuarios.fk_nivel' in 'field list' in C:\xampp\htdocs\horas_negativas\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\horas_negativas\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `usuario...', 0)
+#1 C:\xampp\htdocs\horas_negativas\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `usuario...')
+#2 C:\xampp\htdocs\horas_negativas\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `usuario...')
+#3 C:\xampp\htdocs\horas_negativas\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `usuario...', Array, false)
+#4 C:\xampp\htdocs\horas_negativas\app\Models\UsuarioModel.php(28): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\horas_negativas\app\Controllers\HomeController.php(15): App\Models\UsuarioModel->getUserData('2')
+#6 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(891): App\Controllers\HomeController->__construct()
+#7 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(485): CodeIgniter\CodeIgniter->createController()
+#8 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\horas_negativas\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-05-06 17:06:53 --> Unknown column 'usuarios.fk_nivel' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 646.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `usuarios`.`id` as `id_usuario`, `usuarios`.`nome`, `usuarios`.`sobrenome`, `usuarios`.`login`, `usuarios`.`senha`, `usuarios`.`fk_nivel`, `usuarios`.`ativo`
+FROM `usuarios`
+WHERE `usuarios`.`id` = :usuarios.id:', [...], false)
+ 2 APPPATH\Models\UsuarioModel.php(28): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\HomeController.php(15): App\Models\UsuarioModel->getUserData('2')
+ 4 SYSTEMPATH\CodeIgniter.php(891): App\Controllers\HomeController->__construct()
+ 5 SYSTEMPATH\CodeIgniter.php(485): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-06 17:08:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-05-06 17:08:54 --> mysqli_sql_exception: Unknown column 'usuarios.fk_nivel' in 'field list' in C:\xampp\htdocs\horas_negativas\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\horas_negativas\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `usuario...', 0)
+#1 C:\xampp\htdocs\horas_negativas\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `usuario...')
+#2 C:\xampp\htdocs\horas_negativas\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `usuario...')
+#3 C:\xampp\htdocs\horas_negativas\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `usuario...', Array, false)
+#4 C:\xampp\htdocs\horas_negativas\app\Models\UsuarioModel.php(28): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\horas_negativas\app\Controllers\HomeController.php(15): App\Models\UsuarioModel->getUserData('2')
+#6 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(891): App\Controllers\HomeController->__construct()
+#7 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(485): CodeIgniter\CodeIgniter->createController()
+#8 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\horas_negativas\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-05-06 17:08:54 --> Unknown column 'usuarios.fk_nivel' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 646.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `usuarios`.`id` as `id_usuario`, `usuarios`.`nome`, `usuarios`.`sobrenome`, `usuarios`.`login`, `usuarios`.`senha`, `usuarios`.`fk_nivel`, `usuarios`.`ativo`
+FROM `usuarios`
+WHERE `usuarios`.`id` = :usuarios.id:', [...], false)
+ 2 APPPATH\Models\UsuarioModel.php(28): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\HomeController.php(15): App\Models\UsuarioModel->getUserData('2')
+ 4 SYSTEMPATH\CodeIgniter.php(891): App\Controllers\HomeController->__construct()
+ 5 SYSTEMPATH\CodeIgniter.php(485): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-06 17:08:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-05-06 17:08:58 --> mysqli_sql_exception: Unknown column 'usuarios.fk_nivel' in 'field list' in C:\xampp\htdocs\horas_negativas\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\horas_negativas\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `usuario...', 0)
+#1 C:\xampp\htdocs\horas_negativas\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `usuario...')
+#2 C:\xampp\htdocs\horas_negativas\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `usuario...')
+#3 C:\xampp\htdocs\horas_negativas\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `usuario...', Array, false)
+#4 C:\xampp\htdocs\horas_negativas\app\Models\UsuarioModel.php(28): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\horas_negativas\app\Controllers\HomeController.php(15): App\Models\UsuarioModel->getUserData('2')
+#6 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(891): App\Controllers\HomeController->__construct()
+#7 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(485): CodeIgniter\CodeIgniter->createController()
+#8 C:\xampp\htdocs\horas_negativas\system\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\horas_negativas\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-05-06 17:08:58 --> Unknown column 'usuarios.fk_nivel' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 646.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT `usuarios`.`id` as `id_usuario`, `usuarios`.`nome`, `usuarios`.`sobrenome`, `usuarios`.`login`, `usuarios`.`senha`, `usuarios`.`fk_nivel`, `usuarios`.`ativo`
+FROM `usuarios`
+WHERE `usuarios`.`id` = :usuarios.id:', [...], false)
+ 2 APPPATH\Models\UsuarioModel.php(28): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\HomeController.php(15): App\Models\UsuarioModel->getUserData('2')
+ 4 SYSTEMPATH\CodeIgniter.php(891): App\Controllers\HomeController->__construct()
+ 5 SYSTEMPATH\CodeIgniter.php(485): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-06 17:10:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 17:10:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-06 17:10:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-06 17:10:13 --> Undefined property: stdClass::$descricao
+in APPPATH\Views\cadastro\usuarios\table.php on line 44.
+ 1 APPPATH\Views\cadastro\usuarios\table.php(44): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$descricao', 'C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\cadastro\\usuarios\\table.php', 44)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\cadastro\\usuarios\\table.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1188): CodeIgniter\View\View->render('cadastro/usuarios/table', [], true)
+ 5 APPPATH\Controllers\Cadastro\Usuarios\CadastroUsuariosController.php(33): view('cadastro/usuarios/table', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\Cadastro\Usuarios\CadastroUsuariosController->table()
+ 7 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cadastro\Usuarios\CadastroUsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-06 17:10:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-06 17:10:19 --> Undefined property: stdClass::$descricao
+in APPPATH\Views\cadastro\usuarios\table.php on line 44.
+ 1 APPPATH\Views\cadastro\usuarios\table.php(44): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$descricao', 'C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\cadastro\\usuarios\\table.php', 44)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\cadastro\\usuarios\\table.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1188): CodeIgniter\View\View->render('cadastro/usuarios/table', [], true)
+ 5 APPPATH\Controllers\Cadastro\Usuarios\CadastroUsuariosController.php(33): view('cadastro/usuarios/table', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\Cadastro\Usuarios\CadastroUsuariosController->table()
+ 7 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cadastro\Usuarios\CadastroUsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
