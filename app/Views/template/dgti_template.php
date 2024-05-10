@@ -106,8 +106,8 @@
 
 						</span>
 						<div class="titulo">
-							<p class="sigla">TÍTULO</p>
-							<p class="nome">SUBTÍTULO</p>
+							<p class="sigla">HORAS NEGATIVAS</p>
+							<p class="nome">DISEG</p>
 						</div>						
 					</a>
 

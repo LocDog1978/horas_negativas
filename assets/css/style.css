@@ -424,6 +424,10 @@ header .navbar a {
 
 }
 
+.nome {
+    font-size: 20px !important;
+    ;
+}
 /* Fim - Header */
 
 /* Menus Acessibilidade e Idiomas */
