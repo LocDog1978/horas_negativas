@@ -201,7 +201,10 @@
 			<!-- Conteúdo mensagem -->
 			<!-- FIM - Conteúdo mensagem -->
 			<!-- Conteúdo da página -->
-				<?php $this->renderSection('content'); ?>
+				
+			
+			<?php $this->renderSection('content'); ?>
+			
 			<!-- FIM - Conteúdo da página -->
 
 			<!--  Mensagens do Sistema  -->
