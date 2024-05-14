@@ -1,0 +1,86 @@
+INFO - 2024-05-14 13:30:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 13:30:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 13:30:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 13:30:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 13:33:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 13:37:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 13:38:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 13:38:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 13:39:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 13:41:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 13:49:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 14:35:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 14:36:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 16:59:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 16:59:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 16:59:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 16:59:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 16:59:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 16:59:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 17:00:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 17:00:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 17:05:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 17:05:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 17:06:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 17:13:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 17:13:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-14 17:13:29 --> Arquivo inválido: cadastro/postos.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('cadastro/postos.php')
+ 2 SYSTEMPATH\Common.php(1188): CodeIgniter\View\View->render('cadastro/postos', [], true)
+ 3 APPPATH\Controllers\PostosController.php(11): view('cadastro/postos')
+ 4 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\PostosController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PostosController))
+ 6 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-14 17:13:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-14 17:13:41 --> Arquivo inválido: cadastro/postos/.php
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('cadastro/postos/.php')
+ 2 SYSTEMPATH\Common.php(1188): CodeIgniter\View\View->render('cadastro/postos/', [], true)
+ 3 APPPATH\Controllers\PostosController.php(11): view('cadastro/postos/')
+ 4 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\PostosController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PostosController))
+ 6 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-14 17:13:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-14 17:15:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-14 17:15:02 --> Undefined variable $currentUser
+in APPPATH\Views\template\dgti_template.php on line 171.
+ 1 APPPATH\Views\template\dgti_template.php(171): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $currentUser', 'C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\template\\dgti_template.php', 171)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\template\\dgti_template.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(242): CodeIgniter\View\View->render('template/dgti_template', [], true)
+ 5 SYSTEMPATH\Common.php(1188): CodeIgniter\View\View->render('cadastro/postos/index', [], true)
+ 6 APPPATH\Controllers\PostosController.php(11): view('cadastro/postos/index')
+ 7 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\PostosController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PostosController))
+ 9 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-14 17:19:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-14 17:19:40 --> Undefined variable $currentUser
+in APPPATH\Views\template\dgti_template.php on line 171.
+ 1 APPPATH\Views\template\dgti_template.php(171): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $currentUser', 'C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\template\\dgti_template.php', 171)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\template\\dgti_template.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(242): CodeIgniter\View\View->render('template/dgti_template', [], true)
+ 5 SYSTEMPATH\Common.php(1188): CodeIgniter\View\View->render('cadastro/postos/index', [], true)
+ 6 APPPATH\Controllers\PostosController.php(25): view('cadastro/postos/index')
+ 7 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\PostosController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PostosController))
+ 9 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-14 17:19:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-14 17:19:42 --> Undefined variable $currentUser
+in APPPATH\Views\template\dgti_template.php on line 171.
+ 1 APPPATH\Views\template\dgti_template.php(171): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $currentUser', 'C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\template\\dgti_template.php', 171)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\template\\dgti_template.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(242): CodeIgniter\View\View->render('template/dgti_template', [], true)
+ 5 SYSTEMPATH\Common.php(1188): CodeIgniter\View\View->render('cadastro/postos/index', [], true)
+ 6 APPPATH\Controllers\PostosController.php(25): view('cadastro/postos/index')
+ 7 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\PostosController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PostosController))
+ 9 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-14 17:20:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

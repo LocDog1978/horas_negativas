@@ -16,6 +16,8 @@ $routes->group('login', function($routes) {
 /*** ---------- Miscellaneous ---------- ***/
 /* Home route */
 $routes->get('/', 'HomeController::index');
+
+$routes->get('postos', 'PostosController');
 /* datatables assets */
 $routes->get('assets/datatables/traducao', 'Assets\DatatablesController::traducao');
 $routes->get('assets/js/libs/DataTables-1.12.1/traducao', 'Assets\DatatablesController::traducao');
@@ -57,3 +59,7 @@ $routes->group('cadastro', ['filter' => 'nivel'], function($routes) {
 $routes->group('cadastro', ['filter' => 'nivel_delete'], function($routes) {
 	$routes->get('logs_alteracoes/delete/(:num)', 'Cadastro\LogAlteracoesController::log_alteracoes/$1');
 });
+
+
+/***--------------- cadastro postos ------------------***/
+

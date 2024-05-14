@@ -159,16 +159,14 @@
 							<nav class="">
 								<ul class="">
 									<li class="">
-										<a href="#" class="">OPÇÃO 1</a>
+										<a href="#" class="">Horas Negativas</a>
 									</li>
-									<li class="sub-menu"><a href="#">OPÇÃO 2</a>
+									<li class="sub-menu"><a href="#">Cadastro</a>
 										<ul class="">
-											<li class=""><a href="" class="">SUBMENU1</a></li>
-											<li class=""><a href="" class="">SUBMENU2</a></li>
-											<li class=""><a href="" class="">SUBMENU3</a></li>
+											<li class=""><a href="" class="">Postos</a></li>
+											<li class=""><a href="<?=base_url('cadastro/usuarios');?>" class="">Usuários</a></li>
 										</ul>
 									</li>
-									<li class=""><a href="<?=base_url('cadastro/usuarios');?>" class="">Usuários</a></li>
 									<?php if ((bool)session()->usuario_logado)  : ?>
 										<li class=""><a href="<?=base_url('cadastro/usuarios/update/'.$currentUser->id_usuario);?>" class="">Alterar Meus Dados</a></li>
 									<?php endif; ?>
