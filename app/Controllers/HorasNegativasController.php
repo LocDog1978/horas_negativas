@@ -3,18 +3,16 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Controllers\TurnoController;
 use App\Models\UsuarioModel;
 use App\Models\LogAlteracoesModel;
 use App\Models\PostosModel;
 
-class PostosController extends BaseController
+class HorasNegativasController extends BaseController
 {
     protected $userModel;
     protected $currentUser;
     protected $logAlteracoes;
     protected $postosModel;
-    protected $turnos;
 
     public function __construct()
 	{
@@ -22,15 +20,20 @@ class PostosController extends BaseController
 		$this->currentUser = $this->userModel->getUserData(session()->userID);
 		$this->logAlteracoes = new LogAlteracoesModel();
         $this->postosModel = new PostosModel();
-        // $this->turnos = new TurnoController();
 	}
-
+    
     public function index()
     {
         $data['currentUser'] = $this->currentUser;
         $data['listaPostos'] = $this->postosModel->getAlldata();
         $data['isChosenPage'] = true;
+        $data['isDaterangepickerPage'] = true;
+        
+        return view('horas_negativas/index', $data);
+    }
 
-        return view('cadastro/postos/index', $data);
+    public function horasValidate()
+    {
+        //
     }
 }

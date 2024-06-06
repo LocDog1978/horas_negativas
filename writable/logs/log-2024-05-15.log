@@ -2,3 +2,31 @@ INFO - 2024-05-15 16:12:17 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2024-05-15 16:12:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-05-15 16:12:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-05-15 16:12:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-15 16:21:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-15 16:21:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-15 16:21:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-15 16:25:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-15 16:28:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-15 16:28:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-15 16:28:07 --> Undefined property: stdClass::$descricao
+in APPPATH\Views\cadastro\usuarios\table.php on line 44.
+ 1 APPPATH\Views\cadastro\usuarios\table.php(44): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$descricao', 'C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\cadastro\\usuarios\\table.php', 44)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\cadastro\\usuarios\\table.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1188): CodeIgniter\View\View->render('cadastro/usuarios/table', [], true)
+ 5 APPPATH\Controllers\Cadastro\Usuarios\CadastroUsuariosController.php(33): view('cadastro/usuarios/table', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\Cadastro\Usuarios\CadastroUsuariosController->table()
+ 7 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cadastro\Usuarios\CadastroUsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-15 16:28:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-05-15 16:28:26 --> Undefined property: App\Controllers\Cadastro\Usuarios\CadastroUsuariosController::$tiposNiveisUsuarios
+in APPPATH\Controllers\Cadastro\Usuarios\CadastroUsuariosController.php on line 43.
+ 1 APPPATH\Controllers\Cadastro\Usuarios\CadastroUsuariosController.php(43): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Cadastro\\Usuarios\\CadastroUsuariosController::$tiposNiveisUsuarios', 'C:\\xampp\\htdocs\\horas_negativas\\app\\Controllers\\Cadastro\\Usuarios\\CadastroUsuariosController.php', 43)
+ 2 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\Cadastro\Usuarios\CadastroUsuariosController->add()
+ 3 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cadastro\Usuarios\CadastroUsuariosController))
+ 4 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-05-15 16:44:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-15 16:45:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-05-15 16:52:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

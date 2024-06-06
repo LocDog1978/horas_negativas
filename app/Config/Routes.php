@@ -13,10 +13,18 @@ $routes->group('login', function($routes) {
 	$routes->get('signOut', 'LoginController::signOut');
 });
 
+// horas negativas
+$routes->get('cad_negativas', 'HorasNegativasController');
+
+$routes->group('cad_negativas', function($routes) {
+	$routes->get('/', 'HorasNegativasController');
+	$routes->get('/validate', 'HorasNegativasController::horasValidate');
+});
+
 /*** ---------- Miscellaneous ---------- ***/
 /* Home route */
 $routes->get('/', 'HomeController::index');
-
+$routes->get('turno', 'TurnoController');
 $routes->get('postos', 'PostosController');
 /* datatables assets */
 $routes->get('assets/datatables/traducao', 'Assets\DatatablesController::traducao');

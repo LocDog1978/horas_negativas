@@ -159,7 +159,7 @@
 							<nav class="">
 								<ul class="">
 									<li class="">
-										<a href="#" class="">Horas Negativas</a>
+										<a href="<?php echo base_url('cad_negativas'); ?>" class="">Horas Negativas</a>
 									</li>
 									<li class="sub-menu"><a href="#">Cadastro</a>
 										<ul class="">
