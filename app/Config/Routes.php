@@ -14,11 +14,12 @@ $routes->group('login', function($routes) {
 });
 
 // horas negativas
-$routes->get('cad_negativas', 'HorasNegativasController');
+//$routes->get('cad_negativas', 'HorasNegativasController');
 
 $routes->group('cad_negativas', function($routes) {
 	$routes->get('/', 'HorasNegativasController');
-	$routes->get('/validate', 'HorasNegativasController::horasValidate');
+	$routes->post('validate', 'HorasNegativasController::horasValidate');
+	$routes->get('calendario', 'HorasNegativasController::calendario');
 });
 
 /*** ---------- Miscellaneous ---------- ***/

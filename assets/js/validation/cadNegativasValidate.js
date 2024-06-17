@@ -42,7 +42,7 @@ function validateHorasNegativas() {
 
 	$.ajax({
 		type: 'post',
-		url: baseUrl + '/eventos/eventoValidate',
+		url: baseUrl + '/cad_negativas/validate',
 		data: formData,
 		processData: false,
 		contentType: false,
@@ -50,7 +50,8 @@ function validateHorasNegativas() {
 			$("#divLoading").show();
 		},
 		success: function (retorno) {
-			if (retorno.validation) {
+			console.log(retorno);
+			/*if (retorno.validation) {
 				$("#msgErroGeral").html("Este evento já está cadastrado no sistema.").show();
 			} else {
 				if (retorno.update) {
@@ -86,7 +87,7 @@ function validateHorasNegativas() {
 						console.log('Erro ao obter o número da página.');
 					}
 				});
-			}
+			}*/
 		},
 		error: function () {
 			console.log('Erro durante a requisição AJAX.');
@@ -112,6 +113,20 @@ function dataValidation() {
 		$('#posto').addClass("is-invalid");
 		$("#postoAux").addClass("red");
 		$('#divError-posto').html("O campo Posto é obrigatório.").show();
+	}
+
+	if ($("#mes").val() == "") {
+		totalErros++;
+		$('#mes').addClass("is-invalid");
+		$("#mesAux").addClass("red");
+		$('#divError-mes').html("O campo Mês é obrigatório.").show();
+	}
+
+	if ($("#ano").val() == "") {
+		totalErros++;
+		$('#ano').addClass("is-invalid");
+		$("#anoAux").addClass("red");
+		$('#divError-ano').html("O campo Ano é obrigatório.").show();
 	}
 
 	if (totalErros > 0) {

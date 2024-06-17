@@ -34,6 +34,22 @@ class HorasNegativasController extends BaseController
 
     public function horasValidate()
     {
-        //
+        $posto = $this->request->getPost('postos');
+        $mes = $this->request->getPost('mes');
+        $ano = $this->request->getPost('ano');
+
+        $response = [
+            'update' => 1,
+            'validation' => 2,
+            'insertid' => 3
+        ];
+        return $this->response->setJSON($response);
+
+    }
+
+    public function calendario()
+    {
+        $data['currentUser'] = $this->currentUser;
+        return view('horas_negativas/calendario', $data);
     }
 }
