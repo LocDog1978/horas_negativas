@@ -6,7 +6,7 @@
 <form action="<?php echo base_url('cad_negativas/validate'); ?>" id="formCadNegativas" name="formCadNegativas" role="form" class="form-cadNegativas" method="post" accept-charset="utf-8">
 
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <label for="Postos" class="form-label"><b>Postos:</b></label>
 
             <div id="postoAux">
@@ -31,10 +31,9 @@
 
 
 <div class="row">
-    <div class="col-12 d-flex flex-row justify-content-end py-2 py-sm-0">
+    <div class="col-12 flex-row justify-content-end py-2 py-sm-4">
         <button name="btnLimpar" type="button" id="btnLimpar" value="true" class="btn btn-warning">Limpar</button>
-        <button name="btnCancel" type="button" id="btnCancel" value="true" class="btn btn-danger">Cancelar</button>
-        <button name="btnValidateHorasNegativas" type="button" id="btnValidateHorasNegativas" value="true" class="btn btn-primary">Salvar</button>
+        <button name="btnValidateHorasNegativas" type="button" id="btnValidateHorasNegativas" value="true" class="btn btn-primary">Exibir</button>
     </div>
 </div>
 
