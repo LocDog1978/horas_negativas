@@ -23,38 +23,26 @@
         <div id="divNotice-posto" class="notice-feedback"></div>
     </div>
     <div class="col-sm-4">
-        <label for="Mês" class="form-label"><b>Mês:</b></label>
-        <div id="mesAux">
-            <select name="mes" id="mes" class="chosen-select" data-placeholder="Selecione um mês">
-                <option></option>
-                <option value="1">Janeiro</option>
-                <option value="2">Fevereiro</option>
-                <option value="3">Março</option>
-                <option value="4">Abril</option>
-                <option value="5">Maio</option>
-                <option value="6">Junho</option>
-                <option value="7">Julho</option>
-                <option value="8">Agosto</option>
-                <option value="9">Seembro</option>
-                <option value="10">Outrubro</option>
-                <option value="11">Novembro</option>
-                <option value="12">Dezembro</option>
-            </select>
-        </div>
+        <label for="Data" class="form-label"><b>Data:</b></label>
+        <input type="date" name="data" id="data" class="form-control">
         <div id="divError-mes" class="invalid-feedback"></div>
         <div id="divNotice-mes" class="notice-feedback"></div>
     </div>
+</div>
+
+<div class="row">
     <div class="col-sm-4">
-        <label for="Ano" class="form-label"><b>Ano:</b></label>
-        <div id="anoAux">
-            <select name="ano" id="ano" class="chosen-select" data-placeholder="Selecione um ano">
-                <option></option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-            </select>
-        </div>
-        <div id="divError-ano" class="invalid-feedback"></div>
-        <div id="divNotice-ano" class="notice-feedback"></div>
+        <label for="Diurno" class="form-label"><b>Diurno:</b></label>
+        <input type="number" name="diurno" id="diurno" class="form-control">
+        <div id="divError-diruno" class="invalid-feedback"></div>
+        <div id="divNotice-diruno" class="notice-feedback"></div>
+    </div>
+
+    <div class="col-sm-4">
+        <label for="Noturno" class="form-label"><b>Noturno:</b></label>
+        <input type="number" name="noturno" id="noturno" class="form-control">
+        <div id="divError-noturno" class="invalid-feedback"></div>
+        <div id="divNotice-noturno" class="notice-feedback"></div>
     </div>
 </div>
 
@@ -67,7 +55,7 @@
 <div class="row">
     <div class="col-12 d-flex flex-row justify-content-end py-2 py-sm-4">
         <button name="btnLimpar" type="button" id="btnLimpar" value="true" class="btn btn-warning">Limpar</button>
-        <button name="btnValidateHorasNegativas" type="button" id="btnValidateHorasNegativas" value="true" class="btn btn-primary">Exibir</button>
+        <button name="btnValidateHorasNegativas" type="button" id="btnValidateHorasNegativas" value="true" class="btn btn-primary">Salvar</button>
     </div>
 </div>
 
@@ -80,5 +68,47 @@
 </script>
 <!-- Validation -->
 <script type="text/javascript" src="<?php echo base_url('assets/js/validation/cadNegativasValidate.js'); ?>"></script>
+
+<script>
+    function checkSelects() {
+        let postoSelected = $('#posto').val();
+        let dataSelected = $('#data').val();
+
+        if (postoSelected && dataSelected) {
+            let form = $("#formCadNegativas")[0]; // Obtém o formulário DOM
+            let formData = new FormData(form); // Cria um objeto FormData
+
+            $.ajax({
+                type: 'post',
+                url: baseUrl + '/cad_negativas/getHorasNegativas',
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    $("#divLoading").show();
+                },
+                success: function (response) {
+                    if (response.status === 'success') {
+                        $('#diurno').val(response.diurno);
+                        $('#noturno').val(response.noturno);
+                    } else {
+                        $('#diurno').val(0);
+                        $('#noturno').val(0);
+                    }
+                },
+                error: function () {
+                    console.log('Erro durante a requisição AJAX.');
+                },
+                complete: function () {
+                    $('#divLoading').hide();
+                }
+            });
+        }
+    }
+
+    $('#posto, #data').change(function() {
+        checkSelects();
+    });
+</script>
 
 <?php $this->endSection('content'); ?>

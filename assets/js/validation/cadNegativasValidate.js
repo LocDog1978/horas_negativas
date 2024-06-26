@@ -50,7 +50,7 @@ function validateHorasNegativas() {
 			$("#divLoading").show();
 		},
 		success: function (retorno) {
-			console.log(retorno);
+			$("#msgSucessoGeral").html("Horas cadastradas com sucesso!").show();
 			/*if (retorno.validation) {
 				$("#msgErroGeral").html("Este evento já está cadastrado no sistema.").show();
 			} else {
@@ -112,21 +112,13 @@ function dataValidation() {
 		totalErros++;
 		$('#posto').addClass("is-invalid");
 		$("#postoAux").addClass("red");
-		$('#divError-posto').html("O campo Posto é obrigatório.").show();
+		$('#divError-posto').html("O campo POSTO é obrigatório.").show();
 	}
 
-	if ($("#mes").val() == "") {
+	if ($.trim($("#data").val()) == "") {
 		totalErros++;
-		$('#mes').addClass("is-invalid");
-		$("#mesAux").addClass("red");
-		$('#divError-mes').html("O campo Mês é obrigatório.").show();
-	}
-
-	if ($("#ano").val() == "") {
-		totalErros++;
-		$('#ano').addClass("is-invalid");
-		$("#anoAux").addClass("red");
-		$('#divError-ano').html("O campo Ano é obrigatório.").show();
+		$('#data').addClass("is-invalid");
+		$('#divError-mes').html("O campo DATA é obrigatório.").show();
 	}
 
 	if (totalErros > 0) {

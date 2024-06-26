@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\UsuarioModel;
 use App\Models\LogAlteracoesModel;
 use App\Models\PostosModel;
+use App\Models\HorasNegativasModel;
 
 class HorasNegativasController extends BaseController
 {
@@ -13,6 +14,7 @@ class HorasNegativasController extends BaseController
     protected $currentUser;
     protected $logAlteracoes;
     protected $postosModel;
+    protected $horasNegativasModel;
 
     public function __construct()
 	{
@@ -20,6 +22,7 @@ class HorasNegativasController extends BaseController
 		$this->currentUser = $this->userModel->getUserData(session()->userID);
 		$this->logAlteracoes = new LogAlteracoesModel();
         $this->postosModel = new PostosModel();
+        $this->horasNegativasModel = new HorasNegativasModel();
 	}
     
     public function index()
@@ -34,18 +37,94 @@ class HorasNegativasController extends BaseController
 
     public function horasValidate()
     {
-        $posto = $this->request->getPost('postos');
-        $mes = $this->request->getPost('mes');
-        $ano = $this->request->getPost('ano');
+        $posto = $this->request->getPost('posto');
+        $data = $this->request->getPost('data');
+        $diurno = $this->request->getPost('diurno');
+        $noturno = $this->request->getPost('noturno');
 
-        $response = [
-            'update' => 1,
-            'validation' => 2,
-            'insertid' => 3
+        $dataToInsertOrUpdate = [
+            'fk_local' => $posto,
+            'diurno' => $diurno,
+            'noturno' => $noturno,
+            'data' => $data
         ];
-        return $this->response->setJSON($response);
 
+        // Verificar se já existe um registro com o mesmo fk_local e data
+        $existingRecord = $this->horasNegativasModel
+                            ->where('fk_local', $posto)
+                            ->where('data', $data)
+                            ->first();
+
+        if ($existingRecord) {
+            // Se existir, faça um update
+            $updated = $this->horasNegativasModel
+                            ->where('fk_local', $posto)
+                            ->where('data', $data)
+                            ->set($dataToInsertOrUpdate)
+                            ->update();
+
+            if ($updated) {
+                $response = [
+                    'update' => 1,
+                    'validation' => 2,
+                    'insertid' => $existingRecord['id'] // ID do registro atualizado
+                ];
+            } else {
+                $response = [
+                    'update' => 0,
+                    'validation' => 0,
+                    'insertid' => $existingRecord['id']
+                ];
+            }
+        } else {
+            // Se não existir, faça um insert
+            $inserted = $this->horasNegativasModel->insert($dataToInsertOrUpdate);
+
+            if ($inserted) {
+                $response = [
+                    'update' => 1,
+                    'validation' => 2,
+                    'insertid' => $this->horasNegativasModel->insertID()
+                ];
+            } else {
+                $response = [
+                    'update' => 0,
+                    'validation' => 0,
+                    'insertid' => 0
+                ];
+            }
+        }
+
+        return $this->response->setJSON($response);
     }
+
+    public function getHorasNegativas()
+    {
+        $posto = $this->request->getPost('posto');
+        $data = $this->request->getPost('data');
+
+        $record = $this->horasNegativasModel->getHorasNegativasByPostoData($posto, $data);
+
+        if ($record) {
+            $response = [
+                'diurno' => $record->diurno,
+                'noturno' => $record->noturno,
+                'status' => 'success'
+            ];
+        } else {
+            $response = [
+                'diurno' => 0,
+                'noturno' => 0,
+                'status' => 'not_found'
+            ];
+        }
+
+        return $this->response->setJSON($response);
+    }
+
+
+
+
 
     public function calendario()
     {
