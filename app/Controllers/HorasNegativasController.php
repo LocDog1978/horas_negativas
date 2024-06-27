@@ -66,14 +66,12 @@ class HorasNegativasController extends BaseController
             if ($updated) {
                 $response = [
                     'update' => 1,
-                    'validation' => 2,
-                    'insertid' => $existingRecord['id'] // ID do registro atualizado
+                    'insertid' => $existingRecord->id
                 ];
             } else {
                 $response = [
                     'update' => 0,
-                    'validation' => 0,
-                    'insertid' => $existingRecord['id']
+                    'insertid' => $existingRecord->id
                 ];
             }
         } else {
@@ -82,14 +80,12 @@ class HorasNegativasController extends BaseController
 
             if ($inserted) {
                 $response = [
-                    'update' => 1,
-                    'validation' => 2,
+                    'update' => 0,
                     'insertid' => $this->horasNegativasModel->insertID()
                 ];
             } else {
                 $response = [
                     'update' => 0,
-                    'validation' => 0,
                     'insertid' => 0
                 ];
             }
@@ -121,10 +117,6 @@ class HorasNegativasController extends BaseController
 
         return $this->response->setJSON($response);
     }
-
-
-
-
 
     public function calendario()
     {

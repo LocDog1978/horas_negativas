@@ -92,8 +92,8 @@
                         $('#diurno').val(response.diurno);
                         $('#noturno').val(response.noturno);
                     } else {
-                        $('#diurno').val(0);
-                        $('#noturno').val(0);
+                        $('#diurno').val(null);
+                        $('#noturno').val(null);
                     }
                 },
                 error: function () {

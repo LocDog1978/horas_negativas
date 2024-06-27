@@ -50,44 +50,11 @@ function validateHorasNegativas() {
 			$("#divLoading").show();
 		},
 		success: function (retorno) {
-			$("#msgSucessoGeral").html("Horas cadastradas com sucesso!").show();
-			/*if (retorno.validation) {
-				$("#msgErroGeral").html("Este evento já está cadastrado no sistema.").show();
+			if (retorno.update) {
+				$("#msgSucessoGeral").html("Horas atualizadas com sucesso!").show();
 			} else {
-				if (retorno.update) {
-					$("#msgSucessoGeral").html("Evento Atualizado com Sucesso").show();
-				} else {
-					$("#msgSucessoGeral").html("Evento Cadastrado com Sucesso").show();
-				}
-				$("#btnLimpar").show();
-
-				$("#divParaOBotao").empty();
-
-				// Requisição para obter o número da página
-				$.ajax({
-					type: 'post',
-					url: baseUrl + '/eventos/getPaginateNumber',
-					data: { id_evento: retorno.insertid },
-					success: function (pageNumber) {
-						if (pageNumber && !isNaN(pageNumber)) {
-							// Criação do botão
-							let btnDetalhes = $('<a/>', {
-								'class': 'btn btn-primary',
-								'href': baseUrl + '/eventos/cadastrados?page=' + pageNumber,
-								'html': 'Gerenciar Evento'
-							});
-
-							// Adiciona o botão à sua div ou aonde preferir
-							$("#divParaOBotao").append(btnDetalhes);
-						} else {
-							console.log('Número de página inválido.');
-						}
-					},
-					error: function () {
-						console.log('Erro ao obter o número da página.');
-					}
-				});
-			}*/
+				$("#msgSucessoGeral").html("Horas cadastradas com sucesso!").show();
+			}
 		},
 		error: function () {
 			console.log('Erro durante a requisição AJAX.');
@@ -97,8 +64,6 @@ function validateHorasNegativas() {
 			$("#btnValidateHorasNegativas").prop("disabled", false);
 		}
 	});
-
-
 
 } /* fim function validateEvento() */
 
@@ -119,6 +84,13 @@ function dataValidation() {
 		totalErros++;
 		$('#data').addClass("is-invalid");
 		$('#divError-mes').html("O campo DATA é obrigatório.").show();
+	}
+
+	let diurno = $("#diurno").val();
+	let noturno = $("#noturno").val();
+
+	if (!noturno && !diurno) {
+		totalErros++;
 	}
 
 	if (totalErros > 0) {
