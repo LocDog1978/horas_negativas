@@ -3,3 +3,104 @@ INFO - 2024-07-03 10:32:02 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2024-07-03 10:32:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-07-03 10:32:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-07-03 10:32:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-03 10:35:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-03 10:35:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-03 10:35:44 --> Cannot access offset of type string on string
+in APPPATH\Controllers\HorasNegativasController.php on line 128.
+ 1 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\HorasNegativasController->tabelaHorasNegativas()
+ 2 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HorasNegativasController))
+ 3 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-03 10:35:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-03 10:42:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-07-03 10:42:42 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Models\HorasNegativasModel.php on line 24.
+ 1 APPPATH\Models\HorasNegativasModel.php(24): strtotime(null)
+ 2 APPPATH\Controllers\HorasNegativasController.php(128): App\Models\HorasNegativasModel->getIntervalo(null, null)
+ 3 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\HorasNegativasController->tabelaHorasNegativas()
+ 4 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HorasNegativasController))
+ 5 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-03 10:42:42 --> foreach() argument must be of type array|object, null given
+in APPPATH\Views\horas_negativas\tabelaHorasNegativas.php on line 11.
+ 1 APPPATH\Views\horas_negativas\tabelaHorasNegativas.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, null given', 'C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\horas_negativas\\tabelaHorasNegativas.php', 11)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\horas_negativas\\app\\Views\\horas_negativas\\tabelaHorasNegativas.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1188): CodeIgniter\View\View->render('horas_negativas/tabelaHorasNegativas', [], true)
+ 5 APPPATH\Controllers\HorasNegativasController.php(130): view('horas_negativas/tabelaHorasNegativas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\HorasNegativasController->tabelaHorasNegativas()
+ 7 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HorasNegativasController))
+ 8 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-03 10:49:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-07-03 10:49:44 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Models\HorasNegativasModel.php on line 24.
+ 1 APPPATH\Models\HorasNegativasModel.php(24): strtotime(null)
+ 2 APPPATH\Controllers\HorasNegativasController.php(128): App\Models\HorasNegativasModel->getIntervalo(null, null)
+ 3 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\HorasNegativasController->tabelaHorasNegativas()
+ 4 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HorasNegativasController))
+ 5 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-03 11:27:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-07-03 11:27:40 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Models\HorasNegativasModel.php on line 24.
+ 1 APPPATH\Models\HorasNegativasModel.php(24): strtotime(null)
+ 2 APPPATH\Controllers\HorasNegativasController.php(128): App\Models\HorasNegativasModel->getIntervalo(null, null)
+ 3 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\HorasNegativasController->tabelaHorasNegativas()
+ 4 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HorasNegativasController))
+ 5 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-03 11:35:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-03 11:35:11 --> Undefined property: App\Controllers\HorasNegativasController::$yourModel
+in APPPATH\Controllers\HorasNegativasController.php on line 123.
+ 1 APPPATH\Controllers\HorasNegativasController.php(123): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\HorasNegativasController::$yourModel', 'C:\\xampp\\htdocs\\horas_negativas\\app\\Controllers\\HorasNegativasController.php', 123)
+ 2 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\HorasNegativasController->tabelaHorasNegativas()
+ 3 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HorasNegativasController))
+ 4 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-03 11:37:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-07-03 11:37:32 --> Undefined property: App\Controllers\HorasNegativasController::$yourModel
+in APPPATH\Controllers\HorasNegativasController.php on line 123.
+ 1 APPPATH\Controllers\HorasNegativasController.php(123): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\HorasNegativasController::$yourModel', 'C:\\xampp\\htdocs\\horas_negativas\\app\\Controllers\\HorasNegativasController.php', 123)
+ 2 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\HorasNegativasController->tabelaHorasNegativas()
+ 3 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HorasNegativasController))
+ 4 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-03 11:43:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-07-03 11:43:31 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Models\HorasNegativasModel.php on line 24.
+ 1 APPPATH\Models\HorasNegativasModel.php(24): strtotime(null)
+ 2 APPPATH\Controllers\HorasNegativasController.php(128): App\Models\HorasNegativasModel->getIntervalo(null, null)
+ 3 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\HorasNegativasController->tabelaHorasNegativas()
+ 4 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HorasNegativasController))
+ 5 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-03 11:56:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-07-03 11:56:33 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Models\HorasNegativasModel.php on line 24.
+ 1 APPPATH\Models\HorasNegativasModel.php(24): strtotime(null)
+ 2 APPPATH\Controllers\HorasNegativasController.php(128): App\Models\HorasNegativasModel->getIntervalo(null, null)
+ 3 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\HorasNegativasController->tabelaHorasNegativas()
+ 4 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HorasNegativasController))
+ 5 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-03 11:57:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-07-03 11:58:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-07-03 11:58:28 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Models\HorasNegativasModel.php on line 24.
+ 1 APPPATH\Models\HorasNegativasModel.php(24): strtotime(null)
+ 2 APPPATH\Controllers\HorasNegativasController.php(128): App\Models\HorasNegativasModel->getIntervalo(null, null)
+ 3 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\HorasNegativasController->tabelaHorasNegativas()
+ 4 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HorasNegativasController))
+ 5 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-03 13:12:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-07-03 13:12:15 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Models\HorasNegativasModel.php on line 24.
+ 1 APPPATH\Models\HorasNegativasModel.php(24): strtotime(null)
+ 2 APPPATH\Controllers\HorasNegativasController.php(128): App\Models\HorasNegativasModel->getIntervalo(null, null)
+ 3 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\HorasNegativasController->tabelaHorasNegativas()
+ 4 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HorasNegativasController))
+ 5 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-07-03 13:14:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-07-03 13:14:04 --> [DEPRECATED] strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH\Models\HorasNegativasModel.php on line 24.
+ 1 APPPATH\Models\HorasNegativasModel.php(24): strtotime(null)
+ 2 APPPATH\Controllers\HorasNegativasController.php(128): App\Models\HorasNegativasModel->getIntervalo(null, null)
+ 3 SYSTEMPATH\CodeIgniter.php(919): App\Controllers\HorasNegativasController->tabelaHorasNegativas()
+ 4 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\HorasNegativasController))
+ 5 SYSTEMPATH\CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
