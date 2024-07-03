@@ -18,4 +18,25 @@ class HorasNegativasModel extends Model
                     ->where('data', $data)
                     ->first();
     }
+
+    public function getIntervalo($posto, $data)
+    {
+        $input_date = strtotime($data);
+        $day = date('j', $input_date);
+
+        // Calcular o intervalo de datas
+        if ($day >= 25) {
+            $start_date = date('Y-m-25', $input_date);
+            $end_date = date('Y-m-24', strtotime('+1 month', $input_date));
+        } else {
+            $start_date = date('Y-m-25', strtotime('-1 month', $input_date));
+            $end_date = date('Y-m-24', $input_date);
+        }
+
+        $teste = $this->select('data, diurno, noturno')
+                    ->where('fk_local', $posto)
+                    ->where('data >=', $start_date)
+                    ->where('data <=', $end_date)
+                    ->findAll();
+    }
 }

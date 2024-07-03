@@ -63,6 +63,8 @@
 
 </section>
 
+<div id="tabelaHorasNegativas"></div>
+
 <script>
     let baseUrl = "<?php echo base_url(); ?>";
 </script>
@@ -109,6 +111,20 @@
     $('#posto, #data').change(function() {
         checkSelects();
     });
+
+    $("#btnValidateHorasNegativas").on('click', function(e) {
+
+        let posto = $('#posto').val();
+        let data = $('#data').val();
+
+        let parametros = {
+            local: posto,
+            data: data
+        };
+
+        $("#tabelaHorasNegativas").load("<?php echo base_url("cad_negativas/tabelaHorasNegativas"); ?>", parametros);
+    });
+
 </script>
 
 <?php $this->endSection('content'); ?>

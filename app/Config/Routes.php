@@ -20,7 +20,7 @@ $routes->group('cad_negativas', function($routes) {
 	$routes->get('/', 'HorasNegativasController');
 	$routes->post('validate', 'HorasNegativasController::horasValidate');
 	$routes->post('getHorasNegativas', 'HorasNegativasController::getHorasNegativas');
-	$routes->get('calendario', 'HorasNegativasController::calendario');
+	$routes->post('tabelaHorasNegativas', 'HorasNegativasController::tabelaHorasNegativas');
 });
 
 /*** ---------- Miscellaneous ---------- ***/

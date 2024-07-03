@@ -118,9 +118,15 @@ class HorasNegativasController extends BaseController
         return $this->response->setJSON($response);
     }
 
-    public function calendario()
+    public function tabelaHorasNegativas()
     {
         $data['currentUser'] = $this->currentUser;
-        return view('horas_negativas/calendario', $data);
+        
+        $posto = $this->request->getPOST('posto');
+        $data = $this->request->getPOST('data');
+
+        $data['period'] = $this->horasNegativasModel->getIntervalo($posto, $data);
+        
+        return view('horas_negativas/tabelaHorasNegativas', $data);
     }
 }
