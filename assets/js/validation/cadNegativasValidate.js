@@ -80,17 +80,18 @@ function dataValidation() {
 		$('#divError-posto').html("O campo POSTO é obrigatório.").show();
 	}
 
-	if ($.trim($("#data").val()) == "") {
+	if ($("#mes").val() == "") {
 		totalErros++;
-		$('#data').addClass("is-invalid");
-		$('#divError-mes').html("O campo DATA é obrigatório.").show();
+		$('#mes').addClass("is-invalid");
+		$("#mesAux").addClass("red");
+		$('#divError-mes').html("O campo MÊS é obrigatório.").show();
 	}
 
-	let diurno = $("#diurno").val();
-	let noturno = $("#noturno").val();
-
-	if (!noturno && !diurno) {
+	if ($("#ano").val() == "") {
 		totalErros++;
+		$('#ano').addClass("is-invalid");
+		$("#anoAux").addClass("red");
+		$('#divError-ano').html("O campo ANO é obrigatório.").show();
 	}
 
 	if (totalErros > 0) {

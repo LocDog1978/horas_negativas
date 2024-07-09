@@ -23,28 +23,43 @@
         <div id="divNotice-posto" class="notice-feedback"></div>
     </div>
     <div class="col-sm-4">
-        <label for="Data" class="form-label"><b>Data:</b></label>
-        <input type="date" name="data" id="data" class="form-control">
+        <label for="Mês" class="form-label"><b>Mês:</b></label>
+        <div id="mesAux">
+            <select name="mes" id="mes" class="chosen-select" data-placeholder="Selecione um Mês">
+                <option></option>
+                <option value="1">JANEIRO/FEVEREIRO</option>
+                <option value="2">FEVEREIRO/MARÇO</option>
+                <option value="3">MARÇO/ABRIL</option>
+                <option value="4">ABRIL/MAIO</option>
+                <option value="5">MAIO/JUNHO</option>
+                <option value="6">JUNHO/JULHO</option>
+                <option value="7">JULHO/AGOSTO</option>
+                <option value="8">AGOSTO/SETEMBRO</option>
+                <option value="9">SETEMBRO/OUTUBRO</option>
+                <option value="10">OUTUBRO/NOVEMBRO</option>
+                <option value="11">NOVEMBRO/DEZEMBRO</option>
+                <option value="12">DEZEMBRO/JANEIRO</option>
+            </select>
+        </div>
         <div id="divError-mes" class="invalid-feedback"></div>
         <div id="divNotice-mes" class="notice-feedback"></div>
     </div>
-</div>
-
-<div class="row">
     <div class="col-sm-4">
-        <label for="Diurno" class="form-label"><b>Diurno:</b></label>
-        <input type="number" name="diurno" id="diurno" class="form-control">
-        <div id="divError-diruno" class="invalid-feedback"></div>
-        <div id="divNotice-diruno" class="notice-feedback"></div>
-    </div>
-
-    <div class="col-sm-4">
-        <label for="Noturno" class="form-label"><b>Noturno:</b></label>
-        <input type="number" name="noturno" id="noturno" class="form-control">
-        <div id="divError-noturno" class="invalid-feedback"></div>
-        <div id="divNotice-noturno" class="notice-feedback"></div>
+        <label for="Ano" class="form-label"><b>Ano:</b></label>
+        <div id="anoAux">
+            <select name="ano" id="ano" class="chosen-select" data-placeholder="Selecione um Ano">
+                <option></option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+            </select>     
+        </div>
+        <div id="divError-ano" class="invalid-feedback"></div>
+        <div id="divNotice-ano" class="notice-feedback"></div>
     </div>
 </div>
+
+
 
 
 <!-- <div id=""></div>
@@ -74,9 +89,10 @@
 <script>
     function checkSelects() {
         let postoSelected = $('#posto').val();
-        let dataSelected = $('#data').val();
+        let mesSelected = $('#mes').val();
+        let anoSelected = $('#ano').val();
 
-        if (postoSelected && dataSelected) {
+        if (postoSelected && mesSelected && anoSelected) {
             let form = $("#formCadNegativas")[0]; // Obtém o formulário DOM
             let formData = new FormData(form); // Cria um objeto FormData
 
@@ -108,7 +124,7 @@
         }
     }
 
-    $('#posto, #data').change(function() {
+    $('#posto, #mes, #ano').change(function() {
         checkSelects();
     });
 
