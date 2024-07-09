@@ -33,10 +33,12 @@ class HorasNegativasModel extends Model
             $end_date = date('Y-m-24', $input_date);
         }
 
-        $teste = $this->select('data, diurno, noturno')
+        $intervalo = $this->select('data, diurno, noturno')
                     ->where('fk_local', $posto)
                     ->where('data >=', $start_date)
                     ->where('data <=', $end_date)
                     ->findAll();
+
+        return $intervalo;
     }
 }

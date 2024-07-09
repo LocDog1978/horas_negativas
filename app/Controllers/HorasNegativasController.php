@@ -122,10 +122,11 @@ class HorasNegativasController extends BaseController
     {
         $data['currentUser'] = $this->currentUser;
         
-        $posto = $this->request->getPOST('posto');
-        $data = $this->request->getPOST('data');
+        $posto = $this->request->getPost('local');
+        $getData = $this->request->getPost('data');
 
-        $data['period'] = $this->horasNegativasModel->getIntervalo($posto, $data);
+
+        $data['period'] = $this->horasNegativasModel->getIntervalo($posto, $getData);
         
         return view('horas_negativas/tabelaHorasNegativas', $data);
     }
