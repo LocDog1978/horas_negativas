@@ -39,6 +39,7 @@ function validateHorasNegativas() {
 	//let params = $("#formCadNegativas").serialize();
 	let form = $("#formCadNegativas")[0]; // Obtém o formulário DOM
 	let formData = new FormData(form); // Cria um objeto FormData
+	let posto = ($('#posto').val());
 
 	$.ajax({
 		type: 'post',
@@ -50,11 +51,7 @@ function validateHorasNegativas() {
 			$("#divLoading").show();
 		},
 		success: function (retorno) {
-			if (retorno.update) {
-				$("#msgSucessoGeral").html("Horas atualizadas com sucesso!").show();
-			} else {
-				$("#msgSucessoGeral").html("Horas cadastradas com sucesso!").show();
-			}
+			$("#tabelaHorasNegativas").load(baseUrl+'cad_negativas/tabelaHorasNegativas', {periodo:retorno, posto:posto});
 		},
 		error: function () {
 			console.log('Erro durante a requisição AJAX.');

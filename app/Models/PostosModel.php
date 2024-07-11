@@ -11,7 +11,13 @@ class PostosModel extends Model
     protected $allowedFields    = ['id', 'nome'];
     protected $returnType       = 'object';
 
-    public function getAlldata(){
+    public function getAlldata()
+    {
         return $this->findAll();
     }
+
+    public function getPosto($id)
+	{
+		return $this->find($id);
+	}
 }

@@ -19,26 +19,34 @@ class HorasNegativasModel extends Model
                     ->first();
     }
 
-    public function getIntervalo($posto, $data)
+    public function saveHoras($dados, $postoID)
     {
-        $input_date = strtotime($data);
-        $day = date('j', $input_date);
+        foreach ($dados as $item) {
+            $data_invisivel = $item['data_invisivel'];
+            $diurno = $item['diurno'];
+            $noturno = $item['noturno'];
 
-        // Calcular o intervalo de datas
-        if ($day >= 25) {
-            $start_date = date('Y-m-25', $input_date);
-            $end_date = date('Y-m-24', strtotime('+1 month', $input_date));
-        } else {
-            $start_date = date('Y-m-25', strtotime('-1 month', $input_date));
-            $end_date = date('Y-m-24', $input_date);
+            // Verificar se já existe um registro com a mesma data_invisivel e fk_local
+            $existingRecord = $this->where('data', $data_invisivel)
+                                   ->where('fk_local', $postoID)
+                                   ->first();
+
+            if ($existingRecord) {
+                // Se existir, faz um UPDATE
+                $this->update($existingRecord->id, [
+                    'diurno' => $diurno == "" ? NULL : $diurno,
+                    'noturno' => $noturno == "" ? NULL : $noturno,
+                ]);
+            } else {
+                // Se não existir, faz um INSERT
+                $this->insert([
+                    'data' => $data_invisivel,
+                    'diurno' => $diurno == "" ? NULL : $diurno,
+                    'noturno' => $noturno == "" ? NULL : $noturno,
+                    'fk_local' => $postoID,
+                ]);
+            }
         }
 
-        $intervalo = $this->select('data, diurno, noturno')
-                    ->where('fk_local', $posto)
-                    ->where('data >=', $start_date)
-                    ->where('data <=', $end_date)
-                    ->findAll();
-
-        return $intervalo;
     }
 }

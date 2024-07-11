@@ -17,13 +17,13 @@ class HorasNegativasController extends BaseController
     protected $horasNegativasModel;
 
     public function __construct()
-	{
-		$this->userModel = new UsuarioModel();
-		$this->currentUser = $this->userModel->getUserData(session()->userID);
-		$this->logAlteracoes = new LogAlteracoesModel();
+    {
+        $this->userModel = new UsuarioModel();
+        $this->currentUser = $this->userModel->getUserData(session()->userID);
+        $this->logAlteracoes = new LogAlteracoesModel();
         $this->postosModel = new PostosModel();
         $this->horasNegativasModel = new HorasNegativasModel();
-	}
+    }
     
     public function index()
     {
@@ -31,103 +31,49 @@ class HorasNegativasController extends BaseController
         $data['listaPostos'] = $this->postosModel->getAlldata();
         $data['isChosenPage'] = true;
         $data['isDaterangepickerPage'] = true;
-        
+
         return view('horas_negativas/index', $data);
     }
 
     public function horasValidate()
     {
-        $posto = $this->request->getPost('posto');
-        $data = $this->request->getPost('data');
-        $diurno = $this->request->getPost('diurno');
-        $noturno = $this->request->getPost('noturno');
+        $mes = $this->request->getPost('mes');
+        $ano = $this->request->getPost('ano');
 
-        $dataToInsertOrUpdate = [
-            'fk_local' => $posto,
-            'diurno' => $diurno,
-            'noturno' => $noturno,
-            'data' => $data
-        ];
-
-        // Verificar se já existe um registro com o mesmo fk_local e data
-        $existingRecord = $this->horasNegativasModel
-                            ->where('fk_local', $posto)
-                            ->where('data', $data)
-                            ->first();
-
-        if ($existingRecord) {
-            // Se existir, faça um update
-            $updated = $this->horasNegativasModel
-                            ->where('fk_local', $posto)
-                            ->where('data', $data)
-                            ->set($dataToInsertOrUpdate)
-                            ->update();
-
-            if ($updated) {
-                $response = [
-                    'update' => 1,
-                    'insertid' => $existingRecord->id
-                ];
-            } else {
-                $response = [
-                    'update' => 0,
-                    'insertid' => $existingRecord->id
-                ];
-            }
-        } else {
-            // Se não existir, faça um insert
-            $inserted = $this->horasNegativasModel->insert($dataToInsertOrUpdate);
-
-            if ($inserted) {
-                $response = [
-                    'update' => 0,
-                    'insertid' => $this->horasNegativasModel->insertID()
-                ];
-            } else {
-                $response = [
-                    'update' => 0,
-                    'insertid' => 0
-                ];
-            }
-        }
-
-        return $this->response->setJSON($response);
-    }
-
-    public function getHorasNegativas()
-    {
-        $posto = $this->request->getPost('posto');
-        $data = $this->request->getPost('data');
-
-        $record = $this->horasNegativasModel->getHorasNegativasByPostoData($posto, $data);
-
-        if ($record) {
-            $response = [
-                'diurno' => $record->diurno,
-                'noturno' => $record->noturno,
-                'status' => 'success'
-            ];
-        } else {
-            $response = [
-                'diurno' => 0,
-                'noturno' => 0,
-                'status' => 'not_found'
-            ];
-        }
-
-        return $this->response->setJSON($response);
+        helper('data_helper');
+        return $this->response->setJSON(dias_entre_datas($mes, $ano));
     }
 
     public function tabelaHorasNegativas()
     {
-        $data['currentUser'] = $this->currentUser;
+        $periodo = $this->request->getPost('periodo');
+        $postoID = $this->request->getPost('posto');
         
-        $posto = $this->request->getPost('local');
-        $getData = $this->request->getPost('data');
+        $data['periodo'] = $periodo;
+        $data['postoID'] = $postoID;
+        $data['nome_posto'] = $this->postosModel->getPosto($postoID)->nome;
 
+        // Carregar os dados existentes do banco de dados
+        $data['horasNegativas'] = [];
+        foreach ($periodo as $data_invisivel) {
+            $horas = $this->horasNegativasModel->getHorasNegativasByPostoData($postoID, $data_invisivel);
+            if ($horas) {
+                $data['horasNegativas'][$data_invisivel] = $horas;
+            }
+        }
 
-        $data['period'] = $this->horasNegativasModel->getIntervalo($posto, $getData);
-        
         return view('horas_negativas/tabelaHorasNegativas', $data);
     }
+
+    public function getHorasNegativas()
+    {
+        $dados = $this->request->getPost('dados');
+        $postoID = $this->request->getPost('posto');
+        $result = $this->horasNegativasModel->saveHoras($dados, $postoID);
+
+        return $this->response->setJSON([
+            'message' => "Horas cadastradas com sucesso!"
+        ]);
+    }
+
 }

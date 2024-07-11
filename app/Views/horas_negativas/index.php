@@ -22,7 +22,7 @@
         <div id="divError-posto" class="invalid-feedback"></div>
         <div id="divNotice-posto" class="notice-feedback"></div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <label for="Mês" class="form-label"><b>Mês:</b></label>
         <div id="mesAux">
             <select name="mes" id="mes" class="chosen-select" data-placeholder="Selecione um Mês">
@@ -44,7 +44,7 @@
         <div id="divError-mes" class="invalid-feedback"></div>
         <div id="divNotice-mes" class="notice-feedback"></div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <label for="Ano" class="form-label"><b>Ano:</b></label>
         <div id="anoAux">
             <select name="ano" id="ano" class="chosen-select" data-placeholder="Selecione um Ano">
@@ -57,20 +57,13 @@
         <div id="divError-ano" class="invalid-feedback"></div>
         <div id="divNotice-ano" class="notice-feedback"></div>
     </div>
+    <div class="col-sm-2">
+        <button name="btnValidateHorasNegativas" type="button" id="btnValidateHorasNegativas" value="true" class="btn btn-primary mt-4">Selecionar</button>
+    </div>
 </div>
 
-
-
-
-<!-- <div id=""></div>
-
-<script>$('input[name="dates"]').daterangepicker();</script> -->
-
-
 <div class="row">
-    <div class="col-12 d-flex flex-row justify-content-end py-2 py-sm-4">
-        <button name="btnLimpar" type="button" id="btnLimpar" value="true" class="btn btn-warning">Limpar</button>
-        <button name="btnValidateHorasNegativas" type="button" id="btnValidateHorasNegativas" value="true" class="btn btn-primary">Salvar</button>
+    <div class="col-12 d-flex flex-row justify-content-end py-2 py-sm-4">     
     </div>
 </div>
 
@@ -83,64 +76,12 @@
 <script>
     let baseUrl = "<?php echo base_url(); ?>";
 </script>
+
 <!-- Validation -->
-<script type="text/javascript" src="<?php echo base_url('assets/js/validation/cadNegativasValidate.js'); ?>"></script>
-
-<script>
-    function checkSelects() {
-        let postoSelected = $('#posto').val();
-        let mesSelected = $('#mes').val();
-        let anoSelected = $('#ano').val();
-
-        if (postoSelected && mesSelected && anoSelected) {
-            let form = $("#formCadNegativas")[0]; // Obtém o formulário DOM
-            let formData = new FormData(form); // Cria um objeto FormData
-
-            $.ajax({
-                type: 'post',
-                url: baseUrl + '/cad_negativas/getHorasNegativas',
-                data: formData,
-                processData: false,
-                contentType: false,
-                beforeSend: function () {
-                    $("#divLoading").show();
-                },
-                success: function (response) {
-                    if (response.status === 'success') {
-                        $('#diurno').val(response.diurno);
-                        $('#noturno').val(response.noturno);
-                    } else {
-                        $('#diurno').val(null);
-                        $('#noturno').val(null);
-                    }
-                },
-                error: function () {
-                    console.log('Erro durante a requisição AJAX.');
-                },
-                complete: function () {
-                    $('#divLoading').hide();
-                }
-            });
-        }
-    }
-
-    $('#posto, #mes, #ano').change(function() {
-        checkSelects();
-    });
-
-    $("#btnValidateHorasNegativas").on('click', function(e) {
-
-        let posto = $('#posto').val();
-        let data = $('#data').val();
-
-        let parametros = {
-            local: posto,
-            data: data
-        };
-
-        $("#tabelaHorasNegativas").load("<?php echo base_url("cad_negativas/tabelaHorasNegativas"); ?>", parametros);
-    });
-
+<script
+    type="text/javascript"
+    src="<?php echo base_url('assets/js/validation/cadNegativasValidate.js'); ?>"
+    >
 </script>
 
 <?php $this->endSection('content'); ?>
