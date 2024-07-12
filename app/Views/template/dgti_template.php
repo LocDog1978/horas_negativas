@@ -5,10 +5,10 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="Eventos | Sistema de Controle de Documentos">
-		<meta name="author" content="DGTI - Diretoria Geral de Tecnologia da Informação">
+		<meta name="description" content="Horas Negativas | Sistema de Controle de Horas Negativas">
+		<meta name="author" content="PREFEI - Prefeitura dos Campi">
 		<meta name="Access-Control-Allow-Origin" content="*">
-		<title>NOME DO SISTEMA</title>
+		<title>Horas Negativas</title>
 		<link href="<?php echo base_url('assets/images/logomarca-uerj.png'); ?>" rel="icon" type="image/x-ico" />
 		<!-- Bootstrap core CSS -->
 		<link href="<?php echo base_url('assets/css/bootstrap.css'); ?>" rel="stylesheet" type="text/css" />

@@ -1,12 +1,38 @@
-<div class="alert alert-primary" role="alert">
-    Você selecionou: <h5 style="display: inline-block; margin: 0;"><b><?php echo $nome_posto; ?></b></h5>
+<style>
+    .toast-container {
+        z-index: 1060; /* valor maior que outros elementos da página */
+    }
+</style>
+
+<!-- Toast Container -->
+<div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer">
+        <!-- Toast -->
+        <div class="toast bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true" id="myToast">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto">Notificação</strong>
+                <small>Agora</small>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+                <!-- A mensagem será inserida aqui pelo JavaScript -->
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="d-flex justify-content-center mt-3">
-    <button type="button" id="btnSalvar" class="btn btn-primary mb-5">Salvar</button>
+<div class="container">
+    <div class="row justify-content-center">
+        <div id="alertSomatorio" class="alert alert-primary col-sm-4 text-center" role="alert">
+            Você selecionou: <h5 style="display: inline-block; margin: 0;"><b><?php echo $nome_posto; ?></b></h5>
+            <hr>
+        </div>
+    </div>
 </div>
 
-<div id="successMessage" class="alert alert-success mt-3" style="display: none;"></div>
+<div class="d-flex justify-content-center mt-1">
+    <button type="button" id="btnSalvarTop" class="btn btn-primary mb-2">Salvar</button>
+</div>
 
 <div class="d-flex justify-content-center">
     <div class="table-responsive" style="width: 50%;">
@@ -50,15 +76,13 @@
     </div>
 </div>
 
-<div class="d-flex justify-content-center mt-3">
-    <button type="button" id="btnSalvar" class="btn btn-primary">Salvar</button>
+<div class="d-flex justify-content-center mt-1">
+    <button type="button" id="btnSalvarBottom" class="btn btn-primary">Salvar</button>
 </div>
-
-<div id="successMessage" class="alert alert-success mt-3" style="display: none;"></div>
 
 <script>
 $(document).ready(function() {
-    $('#btnSalvar').click(function() {
+    $('#btnSalvarTop, #btnSalvarBottom').click(function() {
         let dados = [];
 
         // Percorre cada linha da tabela
@@ -78,10 +102,22 @@ $(document).ready(function() {
             method: 'POST',
             data: { dados: dados, posto: '<?php echo $postoID; ?>' },
             success: function(response) {
-                $('#successMessage').text(response.message).show();
-                setTimeout(function() {
-                    $('#successMessage').hide();
-                }, 5000);
+                $('#toastMessage').text(response.message);
+
+                let toastEl = document.getElementById('myToast');
+                let toast = new bootstrap.Toast(toastEl);
+                toast.show();
+
+                // Atualiza o somatório no alerta
+                $('#alertSomatorio').html(`
+                    Você selecionou: <h5 style="display: inline-block; margin: 0;"><b><?php echo $nome_posto; ?></b></h5>
+                    <hr>
+                    Total Diurno: ${response.somatorio_diurno}
+                    <br>
+                    Total Noturno: ${response.somatorio_noturno}
+                    <br>
+                    Somatório Total: ${response.somatorio_total}
+                `);
             },
             error: function(xhr, status, error) {
                 console.error('Erro ao enviar dados:', error);

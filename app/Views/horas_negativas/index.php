@@ -6,7 +6,8 @@
 <form action="<?php echo base_url('cad_negativas/validate'); ?>" id="formCadNegativas" name="formCadNegativas" role="form" class="form-cadNegativas" method="post" accept-charset="utf-8">
 
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-3">
         <label for="Postos" class="form-label"><b>Postos:</b></label>
 
             <div id="postoAux">
@@ -22,7 +23,7 @@
         <div id="divError-posto" class="invalid-feedback"></div>
         <div id="divNotice-posto" class="notice-feedback"></div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <label for="Mês" class="form-label"><b>Mês:</b></label>
         <div id="mesAux">
             <select name="mes" id="mes" class="chosen-select" data-placeholder="Selecione um Mês">
@@ -44,7 +45,7 @@
         <div id="divError-mes" class="invalid-feedback"></div>
         <div id="divNotice-mes" class="notice-feedback"></div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <label for="Ano" class="form-label"><b>Ano:</b></label>
         <div id="anoAux">
             <select name="ano" id="ano" class="chosen-select" data-placeholder="Selecione um Ano">
@@ -57,9 +58,7 @@
         <div id="divError-ano" class="invalid-feedback"></div>
         <div id="divNotice-ano" class="notice-feedback"></div>
     </div>
-    <div class="col-sm-2">
-        <button name="btnValidateHorasNegativas" type="button" id="btnValidateHorasNegativas" value="true" class="btn btn-primary mt-4">Selecionar</button>
-    </div>
+    <div class="col-sm-3"></div>
 </div>
 
 <div class="row">
