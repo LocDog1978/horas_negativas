@@ -44,26 +44,37 @@ class HorasNegativasController extends BaseController
 		return $this->response->setJSON(dias_entre_datas($mes, $ano));
 	}
 
+	// HorasNegativasController.php
 	public function tabelaHorasNegativas()
 	{
-		$periodo = $this->request->getPost('periodo');
-		$postoID = $this->request->getPost('posto');
-		
-		$data['periodo'] = $periodo;
-		$data['postoID'] = $postoID;
-		$data['nome_posto'] = $this->postosModel->getPosto($postoID)->nome;
+	    $periodo = $this->request->getPost('periodo');
+	    $postoID = $this->request->getPost('posto');
 
-		// Carregar os dados existentes do banco de dados
-		$data['horasNegativas'] = [];
-		foreach ($periodo as $data_invisivel) {
-			$horas = $this->horasNegativasModel->getHorasNegativasByPostoData($postoID, $data_invisivel);
-			if ($horas) {
-				$data['horasNegativas'][$data_invisivel] = $horas;
-			}
-		}
+	    $data['periodo'] = $periodo;
+	    $data['postoID'] = $postoID;
+	    $data['nome_posto'] = $this->postosModel->getPosto($postoID)->nome;
 
-		return view('horas_negativas/tabelaHorasNegativas', $data);
+	    // Carregar os dados existentes do banco de dados
+	    $data['horasNegativas'] = [];
+	    $sum_diurno = 0;
+	    $sum_noturno = 0;
+
+	    foreach ($periodo as $data_invisivel) {
+	        $horas = $this->horasNegativasModel->getHorasNegativasByPostoData($postoID, $data_invisivel);
+	        if ($horas) {
+	            $data['horasNegativas'][$data_invisivel] = $horas;
+	            $sum_diurno += intval($horas->diurno);
+	            $sum_noturno += intval($horas->noturno);
+	        }
+	    }
+
+	    $data['sum_diurno'] = $sum_diurno;
+	    $data['sum_noturno'] = $sum_noturno;
+	    $data['total_sum'] = $sum_diurno + $sum_noturno;
+
+	    return view('horas_negativas/tabelaHorasNegativas', $data);
 	}
+
 
 	public function getHorasNegativas()
 	{

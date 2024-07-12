@@ -59,4 +59,25 @@ class HorasNegativasModel extends Model
 			'total_sum' => $sum_diurno + $sum_noturno,
 		];
 	}
+
+	public function sumHorasDiurnas($postoID, $periodo)
+	{
+	    $builder = $this->db->table('horas_negativas');
+	    $builder->selectSum('diurno');
+	    $builder->where('fk_local', $postoID);
+	    $builder->whereIn('data', $periodo);
+	    $query = $builder->get();
+	    return $query->getRow()->diurno_sum ?? 0;
+	}
+
+	public function sumHorasNoturnas($postoID, $periodo)
+	{
+	    $builder = $this->db->table('horas_negativas');
+	    $builder->selectSum('noturno');
+	    $builder->where('fk_local', $postoID);
+	    $builder->whereIn('data', $periodo);
+	    $query = $builder->get();
+	    return $query->getRow()->noturno_sum ?? 0;
+	}
+
 }

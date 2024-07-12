@@ -26,6 +26,11 @@
         <div id="alertSomatorio" class="alert alert-primary col-sm-4 text-center" role="alert">
             Você selecionou: <h5 style="display: inline-block; margin: 0;"><b><?php echo $nome_posto; ?></b></h5>
             <hr>
+            Total Diurno: <?php echo $sum_diurno; ?>
+            <br>
+            Total Noturno: <?php echo $sum_noturno; ?>
+            <br>
+            Somatório Total: <?php echo $total_sum; ?>
         </div>
     </div>
 </div>
@@ -82,6 +87,22 @@
 
 <script>
 $(document).ready(function() {
+
+    function updateSomatorio(sum_diurno, sum_noturno, total_sum) {
+        $('#alertSomatorio').html(`
+            Você selecionou: <h5 style="display: inline-block; margin: 0;"><b><?php echo $nome_posto; ?></b></h5>
+            <hr>
+            Total Diurno: <b>${sum_diurno}</b>
+            <br>
+            Total Noturno: <b>${sum_noturno}</b>
+            <br>
+            Somatório Total: <b>${total_sum}</b>
+        `);
+    }
+
+    // Chame a função updateSomatorio após a tabela ser carregada
+    updateSomatorio(<?php echo $sum_diurno; ?>, <?php echo $sum_noturno; ?>, <?php echo $total_sum; ?>);
+
     $('#btnSalvarTop, #btnSalvarBottom').click(function() {
         let dados = [];
 
@@ -112,11 +133,11 @@ $(document).ready(function() {
                 $('#alertSomatorio').html(`
                     Você selecionou: <h5 style="display: inline-block; margin: 0;"><b><?php echo $nome_posto; ?></b></h5>
                     <hr>
-                    Total Diurno: ${response.somatorio_diurno}
+                    Total Diurno: <b>${response.somatorio_diurno}</b>
                     <br>
-                    Total Noturno: ${response.somatorio_noturno}
+                    Total Noturno: <b>${response.somatorio_noturno}</b>
                     <br>
-                    Somatório Total: ${response.somatorio_total}
+                    Somatório Total: <b>${response.somatorio_total}</b>
                 `);
             },
             error: function(xhr, status, error) {
