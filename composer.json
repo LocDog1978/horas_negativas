@@ -1,0 +1,19 @@
+{
+    "name": "codeigniter4/framework",
+    "description": "The CodeIgniter framework v4",
+    "license": "MIT",
+    "type": "project",
+    "homepage": "https://codeigniter.com",
+    "support": {
+        "forum": "https://forum.codeigniter.com/",
+        "source": "https://github.com/codeigniter4/CodeIgniter4",
+        "slack": "https://codeigniterchat.slack.com"
+    },
+    "require": {
+        "php": "^8.2.4",
+        "ext-intl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "mpdf/mpdf": "8.1.3"
+    }
+}

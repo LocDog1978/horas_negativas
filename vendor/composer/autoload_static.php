@@ -15,10 +15,6 @@ class ComposerStaticInitea5b7d2cd10605100e6ba28c2779cf94
         array (
             'setasign\\Fpdi\\' => 14,
         ),
-        'W' => 
-        array (
-            'WGenial\\NumeroPorExtenso\\' => 25,
-        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -27,10 +23,6 @@ class ComposerStaticInitea5b7d2cd10605100e6ba28c2779cf94
         'M' => 
         array (
             'Mpdf\\' => 5,
-        ),
-        'L' => 
-        array (
-            'Laminas\\Escaper\\' => 16,
         ),
         'H' => 
         array (
@@ -47,13 +39,9 @@ class ComposerStaticInitea5b7d2cd10605100e6ba28c2779cf94
         array (
             0 => __DIR__ . '/..' . '/setasign/fpdi/src',
         ),
-        'WGenial\\NumeroPorExtenso\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/wgenial/numeroporextenso/src',
-        ),
         'Psr\\Log\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+            0 => __DIR__ . '/..' . '/psr/log/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
@@ -62,10 +50,6 @@ class ComposerStaticInitea5b7d2cd10605100e6ba28c2779cf94
         'Mpdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/mpdf/mpdf/src',
-        ),
-        'Laminas\\Escaper\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laminas/laminas-escaper/src',
         ),
         'Http\\Message\\' => 
         array (
