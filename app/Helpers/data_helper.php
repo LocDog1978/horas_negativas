@@ -30,3 +30,32 @@ if (!function_exists('dias_entre_datas')) {
         return $dias;
     }
 }
+
+if (!function_exists('intervalo_dias_formatado')) {
+    function intervalo_dias_formatado() {
+        $currentDate = date('Y-m-d'); // Data atual
+        $day = date('d'); // Dia do mês atual
+        $month = date('m'); // Mês atual
+        $year = date('Y'); // Ano atual
+
+        // Definir o intervalo de datas com base na lógica fornecida
+        if ($day >= 25) {
+            $startDate = DateTime::createFromFormat('Y-m-d', "$year-$month-25");
+            $endDate = DateTime::createFromFormat('Y-m-d', "$year-$month-24");
+            $endDate->modify('+1 month');
+        } else {
+            $startDate = DateTime::createFromFormat('Y-m-d', "$year-$month-25");
+            $startDate->modify('-1 month');
+            $endDate = DateTime::createFromFormat('Y-m-d', "$year-$month-24");
+        }
+
+        // Formatar as datas no formato dd/mm/YYYY
+        $dia_inicial = $startDate->format('d/m/Y');
+        $dia_final = $endDate->format('d/m/Y');
+
+        return [
+            'dia_inicial' => $dia_inicial,
+            'dia_final' => $dia_final
+        ];
+    }
+}

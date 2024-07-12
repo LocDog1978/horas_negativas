@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\PostosModel;
 
 class HorasNegativasModel extends Model
 {
@@ -80,4 +81,54 @@ class HorasNegativasModel extends Model
 	    return $query->getRow()->noturno_sum ?? 0;
 	}
 
+    public function somatorioPeriodo()
+    {
+        $postosModel = new PostosModel();
+        $postos = $postosModel->getAlldata();
+
+        $currentDate = date('Y-m-d'); // Data atual
+        $day = date('d'); // Dia do mês atual
+
+        // Definir o intervalo de datas com base na lógica fornecida
+        if ($day >= 25) {
+            $startDate = date('Y-m-25', strtotime($currentDate));
+            $endDate = date('Y-m-24', strtotime($currentDate . ' +1 month'));
+        } else {
+            $startDate = date('Y-m-25', strtotime($currentDate . ' -1 month'));
+            $endDate = date('Y-m-24', strtotime($currentDate));
+        }
+
+        $resultados = [];
+        $totalDiurno = 0;
+        $totalNoturno = 0;
+
+        foreach ($postos as $posto) {
+            $sums = $this->selectSum('diurno')
+                         ->selectSum('noturno')
+                         ->where('fk_local', $posto->id)
+                         ->where('data >=', $startDate)
+                         ->where('data <=', $endDate)
+                         ->first();
+
+            $diurnoSum = $sums->diurno ?? 0;
+            $noturnoSum = $sums->noturno ?? 0;
+
+            $resultados[] = [
+                'posto' => $posto->nome,
+                'diurno' => $diurnoSum,
+                'noturno' => $noturnoSum,
+            ];
+
+            $totalDiurno += $diurnoSum;
+            $totalNoturno += $noturnoSum;
+        }
+
+        $resultados[] = [
+            'posto' => '<b>TOTAL</b>',
+            'diurno' => $totalDiurno,
+            'noturno' => $totalNoturno,
+        ];
+
+        return $resultados;
+    }
 }
