@@ -16,6 +16,7 @@ class LoginController extends BaseController
 
 	public function index()
 	{
+		$data['isSweetAlertPage'] =  true;
 		$data['currentUser'] = $this->currentUser;
 		if (!session()->usuario_logado) {
 			helper('form');

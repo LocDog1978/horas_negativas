@@ -35,6 +35,7 @@ $routes->get('assets/js/libs/DataTables-1.12.1/traducao', 'Assets\DatatablesCont
 $routes->get('error/e403', 'ErrorController::e403');
 /* relatório */
 $routes->get('relatorio', 'RelatorioController');
+// $routes->get('relatorio', 'RelatorioController::relatorio');
 
 /*** ---------- Cadastro usuários ---------- ***/
 $routes->group('cadastro', ['filter' => 'updateOwnUser'], function($routes) {

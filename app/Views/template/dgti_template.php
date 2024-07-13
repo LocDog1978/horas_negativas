@@ -8,7 +8,7 @@
 		<meta name="description" content="Horas Negativas | Sistema de Controle de Horas Negativas">
 		<meta name="author" content="PREFEI - Prefeitura dos Campi">
 		<meta name="Access-Control-Allow-Origin" content="*">
-		<title>Horas Negativas</title>
+		<title>Horas Negativas | DEGSEG</title>
 		<link href="<?php echo base_url('assets/images/logomarca-uerj.png'); ?>" rel="icon" type="image/x-ico" />
 		<!-- Bootstrap core CSS -->
 		<link href="<?php echo base_url('assets/css/bootstrap.css'); ?>" rel="stylesheet" type="text/css" />

@@ -53,9 +53,23 @@ if (!function_exists('intervalo_dias_formatado')) {
         $dia_inicial = $startDate->format('d/m/Y');
         $dia_final = $endDate->format('d/m/Y');
 
+        // Array de meses em português
+        $meses_portugues = [
+            1 => 'Janeiro', 2 => 'Fevereiro', 3 => 'Março',
+            4 => 'Abril', 5 => 'Maio', 6 => 'Junho',
+            7 => 'Julho', 8 => 'Agosto', 9 => 'Setembro',
+            10 => 'Outubro', 11 => 'Novembro', 12 => 'Dezembro'
+        ];
+
+        // Obter os meses por extenso
+        $mes_inicial_extenso = $meses_portugues[(int)$startDate->format('m')];
+        $mes_final_extenso = $meses_portugues[(int)$endDate->format('m')];
+
         return [
             'dia_inicial' => $dia_inicial,
-            'dia_final' => $dia_final
+            'dia_final' => $dia_final,
+            'mes_inicial_extenso' => $mes_inicial_extenso,
+            'mes_final_extenso' => $mes_final_extenso
         ];
     }
 }

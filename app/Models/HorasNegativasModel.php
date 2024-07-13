@@ -124,7 +124,7 @@ class HorasNegativasModel extends Model
         }
 
         $resultados[] = [
-            'posto' => '<b>TOTAL</b>',
+            'posto' => 'TOTAL',
             'diurno' => $totalDiurno,
             'noturno' => $totalNoturno,
         ];
