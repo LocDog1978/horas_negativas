@@ -121,6 +121,11 @@ class RelatorioController extends BaseController
 					</tbody>
 				</table>
 			</div>';
+
+		// Adicionar observações
+		if (!empty($info['observacoes'])) {
+			$tabela .= "<br>".str_repeat("&nbsp;", 10)."<i>Observações: " . htmlspecialchars($info['observacoes']) . "</i>";
+		}
 		return $tabela;
 	}
 
@@ -135,13 +140,15 @@ class RelatorioController extends BaseController
 		$numeroDocumento = $this->request->getGet('documentNumber');
 		$de = $this->request->getGet('de');
 		$para = $this->request->getGet('para');
+		$observacoes = $this->request->getGet('observacoes');
 
 		$info = [
 			'intervaloDias'     =>  $intervaloDias,
 			'somatorioPeriodo'  =>  $somatorioPeriodo,
 			'numeroDocumento'   =>  $numeroDocumento,
 			'de'                =>  $de,
-			'para'              =>  $para
+			'para'              =>  $para,
+			'observacoes'       =>  $observacoes
 		];
 
 		$this->response->setHeader('Content-Type', 'application/pdf');
