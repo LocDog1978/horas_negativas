@@ -28,6 +28,9 @@ class RelatorioController extends BaseController
         $dia_final              = $info['intervaloDias']['dia_final'];
         $mes_inicial_extenso    = $info['intervaloDias']['mes_inicial_extenso'];
         $mes_final_extenso      = $info['intervaloDias']['mes_final_extenso'];
+        $numeroDocumento        = $info['numeroDocumento'];
+        $de                     = $info['de'];
+        $para                   = $info['para'];
 
         // Configurar a formatação da data
         $formatter = new \IntlDateFormatter(
@@ -54,9 +57,9 @@ class RelatorioController extends BaseController
             </div>
             <div style="text-align: left;">
                 <br>
-                <b>CI UERJ / DISEG - CAMPI Nº COLOQUE_NUMERO_DO_DOCUMENTO_AQUI</b>
-                <p><b>DE: COLOQUE_DE_AQUI</b></p>
-                <p><b>PARA: COLOQUE_PARA_AQUI</b></p>
+                <b>CI UERJ / DISEG - CAMPI Nº ' . htmlspecialchars($numeroDocumento) . '</b>
+                <p><b>DE: ' . htmlspecialchars($de) . '</b></p>
+                <p><b>PARA: ' . htmlspecialchars($para) . '</b></p>
                 <br>
             </div>
             <div style="text-align: center;">
@@ -75,81 +78,93 @@ class RelatorioController extends BaseController
             </table>';
     }
 
-   public function setPag1($info) {
-	    // Iniciar tabela com cabeçalho
-	    $tabela = '
-	        <div style="text-align: center;">
-	            <table id="tabelaDados" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
-	                <thead>
-	                    <tr style="text-align: center; vertical-align: middle; border: 1px solid black;">
-	                        <th style="border: 1px solid black;">POSTOS</th>
-	                        <th style="border: 1px solid black;">HORAS DIURNAS</th>
-	                        <th style="border: 1px solid black;">HORAS NOTURNAS</th>
-	                        <th style="border: 1px solid black;">TOTAL</th>
-	                    </tr>
-	                </thead>
-	                <tbody>';
+    public function setPag1($info) {
+        // Iniciar tabela com cabeçalho
+        $tabela = '
+            <div style="text-align: center;">
+                <table id="tabelaDados" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                    <thead>
+                        <tr style="text-align: center; vertical-align: middle; border: 1px solid black;">
+                            <th style="border: 1px solid black;">POSTOS</th>
+                            <th style="border: 1px solid black;">HORAS DIURNAS</th>
+                            <th style="border: 1px solid black;">HORAS NOTURNAS</th>
+                            <th style="border: 1px solid black;">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
 
-	    // Preencher tabela com dados
-	    foreach ($info['somatorioPeriodo'] as $somatorio) {
-	        $total = isset($somatorio['total']) ? $somatorio['total'] : ($somatorio['diurno'] + $somatorio['noturno']);
-	        $posto = htmlspecialchars($somatorio['posto']);
-	    	if ($posto != "TOTAL") {
-		        $tabela .= '
-		            <tr>
-		                <td style="border: 1px solid black;">' . $posto . '</td>
-		                <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . number_format(htmlspecialchars($somatorio['diurno']), 0, ",", ".") . '</td>
-	                <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . number_format(htmlspecialchars($somatorio['noturno']), 0, ",", ".") . '</td>
-	                <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . number_format($total, 0, ",", ".") . '</td>
-	            </tr>';
-	        } else {
-	        	$tabela .= '
-		            <tr>
-		                <td style="border: 1px solid black;"><b>' . $posto . '</b></td>
-		                <td style="border: 1px solid black; text-align: center; vertical-align: middle;"><b>' . number_format(htmlspecialchars($somatorio['diurno']), 0, ",", ".") . '</b></td>
-	                <td style="border: 1px solid black; text-align: center; vertical-align: middle;"><b>' . number_format(htmlspecialchars($somatorio['noturno']), 0, ",", ".") . '</b></td>
-	                <td style="border: 1px solid black; text-align: center; vertical-align: middle;"><b>' . number_format($total, 0, ",", ".") . '</b></td>
-	            </tr>';
-	        }
-	    }
+        // Preencher tabela com dados
+        foreach ($info['somatorioPeriodo'] as $somatorio) {
+            $total = isset($somatorio['total']) ? $somatorio['total'] : ($somatorio['diurno'] + $somatorio['noturno']);
+            $posto = htmlspecialchars($somatorio['posto']);
+            if ($posto != "TOTAL") {
+                $tabela .= '
+                    <tr>
+                        <td style="border: 1px solid black;">' . $posto . '</td>
+                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . number_format(htmlspecialchars($somatorio['diurno']), 0, ",", ".") . '</td>
+                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . number_format(htmlspecialchars($somatorio['noturno']), 0, ",", ".") . '</td>
+                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . number_format($total, 0, ",", ".") . '</td>
+                    </tr>';
+            } else {
+                $tabela .= '
+                    <tr>
+                        <td style="border: 1px solid black;"><b>' . $posto . '</b></td>
+                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;"><b>' . number_format(htmlspecialchars($somatorio['diurno']), 0, ",", ".") . '</b></td>
+                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;"><b>' . number_format(htmlspecialchars($somatorio['noturno']), 0, ",", ".") . '</b></td>
+                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;"><b>' . number_format($total, 0, ",", ".") . '</b></td>
+                    </tr>';
+            }
+        }
 
-	    // Fechar tabela
-	    $tabela .= '
-	                </tbody>
-	            </table>
-	        </div>';
-	    return $tabela;
-	}
+        // Fechar tabela
+        $tabela .= '
+                    </tbody>
+                </table>
+            </div>';
+        return $tabela;
+    }
 
     public function index()
-    {
-        helper('data_helper');
-        $intervaloDias = intervalo_dias_formatado();
-        $somatorioPeriodo = $this->horasNegativasModel->somatorioPeriodo();
+	{
+	    helper('data_helper');
+	    $intervaloDias = intervalo_dias_formatado();
+	    $somatorioPeriodo = $this->horasNegativasModel->somatorioPeriodo();
 
-        $info = [
-            'intervaloDias'     =>  $intervaloDias,
-            'somatorioPeriodo'  =>  $somatorioPeriodo
-        ];
+	    $numeroDocumento = $this->request->getGet('documentNumber');
+	    $de = $this->request->getGet('de');
+	    $para = $this->request->getGet('para');
 
-        $this->response->setHeader('Content-Type', 'application/pdf');
+	    $info = [
+	        'intervaloDias'     =>  $intervaloDias,
+	        'somatorioPeriodo'  =>  $somatorioPeriodo,
+	        'numeroDocumento'   =>  $numeroDocumento,
+	        'de'                =>  $de,
+	        'para'              =>  $para
+	    ];
 
-        $mpdf = new \Mpdf\Mpdf(
-            [
-                'mode' => 'utf-8',
-                'format' => 'A4-P',
-                'margin_top' => 110, // Ajuste a margem superior para dar espaço ao cabeçalho
-                'margin_bottom' => 30,
-                'default_font_size' => 8
-            ]
-        );
+	    $this->response->setHeader('Content-Type', 'application/pdf');
 
-        $mpdf->SetHTMLHeader($this->setHeader($info));
-        $mpdf->SetHTMLFooter($this->setFooter());
+	    $mpdf = new \Mpdf\Mpdf(
+	        [
+	            'mode' => 'utf-8',
+	            'format' => 'A4-P',
+	            'margin_top' => 110, // Ajuste a margem superior para dar espaço ao cabeçalho
+	            'margin_bottom' => 30,
+	            'default_font_size' => 8
+	        ]
+	    );
 
-        $mpdf->WriteHTML($this->setPag1($info));
+	    $mpdf->SetHTMLHeader($this->setHeader($info));
+	    $mpdf->SetHTMLFooter($this->setFooter());
 
-        $filename = "teste";
-        $mpdf->Output($filename, "I");
-    }
+	    $mpdf->WriteHTML($this->setPag1($info));
+
+	    $mes_inicial = strtolower($intervaloDias['mes_inicial_extenso']);
+	    $mes_final = strtolower($intervaloDias['mes_final_extenso']);
+	    $ano_inicial = date('Y', strtotime(str_replace('/', '-', $intervaloDias['dia_inicial'])));
+	    $ano_final = date('Y', strtotime(str_replace('/', '-', $intervaloDias['dia_final'])));
+
+	    $filename = "{$mes_inicial}_{$ano_inicial}-{$mes_final}_{$ano_final}.pdf";
+	    $mpdf->Output($filename, "I"); // Alterado para "I" para abrir no navegador
+	}
 }
