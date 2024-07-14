@@ -24,11 +24,28 @@ class HomeController extends BaseController
 	{
 		helper('data_helper');
 		$data['currentUser'] = $this->currentUser;
+		$data['isChosenPage'] = true;
 		$data['postosList'] = $this->postosModel->getAllData();
-		$data['somatorioPeriodo'] = $this->horasNegativasModel->somatorioPeriodo();
-		$data['intervaloDias'] = intervalo_dias_formatado();
+
+		$mes = $this->request->getPost('mes') ?? date('n');
+		$ano = $this->request->getPost('ano') ?? date('Y');
+
+		$data['somatorioPeriodo'] = $this->horasNegativasModel->somatorioPeriodo($mes, $ano);
+		$data['intervaloDias'] = intervalo_dias_formatado($mes, $ano);
+
 		return view('inicio', $data);
 	}
-}
 
-?>
+	public function tabela()
+	{
+		helper('data_helper');
+
+		$mes = $this->request->getPost('mes');
+		$ano = $this->request->getPost('ano');
+
+		$data['somatorioPeriodo'] = $this->horasNegativasModel->somatorioPeriodo($mes, $ano);
+		$data['intervaloDias'] = intervalo_dias_formatado($mes, $ano);
+
+		return view('home/tabela', $data);
+	}
+}

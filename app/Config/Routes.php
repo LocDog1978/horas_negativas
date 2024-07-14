@@ -26,6 +26,9 @@ $routes->group('cad_negativas', function($routes) {
 /*** ---------- Miscellaneous ---------- ***/
 /* Home route */
 $routes->get('/', 'HomeController::index');
+$routes->post('/tabela', 'HomeController::tabela');
+
+
 $routes->get('turno', 'TurnoController');
 $routes->get('postos', 'PostosController');
 /* datatables assets */

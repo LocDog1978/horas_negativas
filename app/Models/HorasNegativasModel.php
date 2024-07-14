@@ -63,72 +63,82 @@ class HorasNegativasModel extends Model
 
 	public function sumHorasDiurnas($postoID, $periodo)
 	{
-	    $builder = $this->db->table('horas_negativas');
-	    $builder->selectSum('diurno');
-	    $builder->where('fk_local', $postoID);
-	    $builder->whereIn('data', $periodo);
-	    $query = $builder->get();
-	    return $query->getRow()->diurno_sum ?? 0;
+		$builder = $this->db->table('horas_negativas');
+		$builder->selectSum('diurno');
+		$builder->where('fk_local', $postoID);
+		$builder->whereIn('data', $periodo);
+		$query = $builder->get();
+		return $query->getRow()->diurno_sum ?? 0;
 	}
 
 	public function sumHorasNoturnas($postoID, $periodo)
 	{
-	    $builder = $this->db->table('horas_negativas');
-	    $builder->selectSum('noturno');
-	    $builder->where('fk_local', $postoID);
-	    $builder->whereIn('data', $periodo);
-	    $query = $builder->get();
-	    return $query->getRow()->noturno_sum ?? 0;
+		$builder = $this->db->table('horas_negativas');
+		$builder->selectSum('noturno');
+		$builder->where('fk_local', $postoID);
+		$builder->whereIn('data', $periodo);
+		$query = $builder->get();
+		return $query->getRow()->noturno_sum ?? 0;
 	}
 
-    public function somatorioPeriodo()
-    {
-        $postosModel = new PostosModel();
-        $postos = $postosModel->getAlldata();
+	public function somatorioPeriodo($mes = null, $ano = null)
+	{
+		// Usar mês e ano atuais se não forem fornecidos
+		if (is_null($mes)) {
+			$mes = date('m');
+		}
+		if (is_null($ano)) {
+			$ano = date('Y');
+		}
 
-        $currentDate = date('Y-m-d'); // Data atual
-        $day = date('d'); // Dia do mês atual
+		$postosModel = new PostosModel();
+		$postos = $postosModel->getAlldata();
 
-        // Definir o intervalo de datas com base na lógica fornecida
-        if ($day >= 25) {
-            $startDate = date('Y-m-25', strtotime($currentDate));
-            $endDate = date('Y-m-24', strtotime($currentDate . ' +1 month'));
-        } else {
-            $startDate = date('Y-m-25', strtotime($currentDate . ' -1 month'));
-            $endDate = date('Y-m-24', strtotime($currentDate));
-        }
+		// Verifica se o mês é 12 para ajustar o ano e o mês seguinte
+		if ($mes == 12) {
+			$mesSeguinte = 1;
+			$anoSeguinte = $ano + 1;
+		} else {
+			$mesSeguinte = $mes + 1;
+			$anoSeguinte = $ano;
+		}
 
-        $resultados = [];
-        $totalDiurno = 0;
-        $totalNoturno = 0;
+		// Definir o intervalo de datas com base na lógica fornecida
+		$startDate = date('Y-m-d', strtotime("$ano-$mes-25"));
+		$endDate = date('Y-m-d', strtotime("$anoSeguinte-$mesSeguinte-24"));
 
-        foreach ($postos as $posto) {
-            $sums = $this->selectSum('diurno')
-                         ->selectSum('noturno')
-                         ->where('fk_local', $posto->id)
-                         ->where('data >=', $startDate)
-                         ->where('data <=', $endDate)
-                         ->first();
+		$resultados = [];
+		$totalDiurno = 0;
+		$totalNoturno = 0;
 
-            $diurnoSum = $sums->diurno ?? 0;
-            $noturnoSum = $sums->noturno ?? 0;
+		foreach ($postos as $posto) {
+			$sums = $this->selectSum('diurno')
+						 ->selectSum('noturno')
+						 ->where('fk_local', $posto->id)
+						 ->where('data >=', $startDate)
+						 ->where('data <=', $endDate)
+						 ->first();
 
-            $resultados[] = [
-                'posto' => $posto->nome,
-                'diurno' => $diurnoSum,
-                'noturno' => $noturnoSum,
-            ];
+			$diurnoSum = $sums->diurno ?? 0;
+			$noturnoSum = $sums->noturno ?? 0;
 
-            $totalDiurno += $diurnoSum;
-            $totalNoturno += $noturnoSum;
-        }
+			$resultados[] = [
+				'posto' => $posto->nome,
+				'diurno' => $diurnoSum,
+				'noturno' => $noturnoSum,
+			];
 
-        $resultados[] = [
-            'posto' => 'TOTAL',
-            'diurno' => $totalDiurno,
-            'noturno' => $totalNoturno,
-        ];
+			$totalDiurno += $diurnoSum;
+			$totalNoturno += $noturnoSum;
+		}
 
-        return $resultados;
-    }
+		$resultados[] = [
+			'posto' => 'TOTAL',
+			'diurno' => $totalDiurno,
+			'noturno' => $totalNoturno,
+		];
+
+		return $resultados;
+	}
+
 }
