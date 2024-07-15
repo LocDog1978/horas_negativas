@@ -23,17 +23,17 @@ $routes->group('cad_negativas', function($routes) {
 	$routes->post('getHorasNegativas', 'HorasNegativasController::getHorasNegativas');
 });
 
-/*** ---------- Miscellaneous ---------- ***/
 /* Home route */
 $routes->get('/', 'HomeController::index');
 $routes->post('/tabela', 'HomeController::tabela');
 
 
+/*** ---------- Miscellaneous ---------- ***/
 $routes->get('turno', 'TurnoController');
 $routes->get('postos', 'PostosController');
 /* datatables assets */
 $routes->get('assets/datatables/traducao', 'Assets\DatatablesController::traducao');
-$routes->get('assets/js/libs/DataTables-1.12.1/traducao', 'Assets\DatatablesController::traducao');
+// $routes->get('assets/js/libs/DataTables-1.12.1/traducao', 'Assets\DatatablesController::traducao');
 /* error */
 $routes->get('error/e403', 'ErrorController::e403');
 /* relatório */

@@ -23,6 +23,7 @@ class HorasNegativasController extends BaseController
 		$this->logAlteracoes = new LogAlteracoesModel();
 		$this->postosModel = new PostosModel();
 		$this->horasNegativasModel = new HorasNegativasModel();
+		helper('data_helper');
 	}
 	
 	public function index()
@@ -31,6 +32,7 @@ class HorasNegativasController extends BaseController
 		$data['listaPostos'] = $this->postosModel->getAlldata();
 		$data['isChosenPage'] = true;
 		$data['isDaterangepickerPage'] = true;
+		$data['anos'] = get_years();
 
 		return view('horas_negativas/index', $data);
 	}
@@ -40,7 +42,6 @@ class HorasNegativasController extends BaseController
 		$mes = $this->request->getPost('mes');
 		$ano = $this->request->getPost('ano');
 
-		helper('data_helper');
 		return $this->response->setJSON(dias_entre_datas($mes, $ano));
 	}
 

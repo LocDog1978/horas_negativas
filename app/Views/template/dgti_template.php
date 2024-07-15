@@ -161,17 +161,22 @@
 									<li class="">
 										<a href="<?php echo base_url('cad_negativas'); ?>" class="">Horas Negativas</a>
 									</li>
-									<li class="sub-menu"><a href="#">Cadastro</a>
-										<ul class="">
-											<li class=""><a href="" class="">Postos</a></li>
-											<li class=""><a href="<?=base_url('cadastro/usuarios');?>" class="">Usuários</a></li>
-										</ul>
-									</li>
-									<?php if ((bool)session()->usuario_logado)  : ?>
+									<?php if (((bool)session()->usuario_logado) && ($currentUser->fk_nivel == 1 || $currentUser->fk_nivel == 2)) : ?>
+										<li class="sub-menu"><a href="#">Cadastro</a>
+											<ul class="">
+												<li class=""><a href="" class="">Postos</a></li>
+												<li class=""><a href="<?=base_url('cadastro/usuarios');?>" class="">Usuários</a></li>
+											</ul>
+										</li>
+									<?php endif;
+									if ((bool)session()->usuario_logado)  : ?>
 										<li class=""><a href="<?=base_url('cadastro/usuarios/update/'.$currentUser->id_usuario);?>" class="">Alterar Meus Dados</a></li>
+									<?php endif;
+									if (((bool)session()->usuario_logado) && ($currentUser->fk_nivel == 1 || $currentUser->fk_nivel == 2)) : ?>
+										<hr>
+										<li class=""><a href="<?=base_url('cadastro/logs_alteracoes');?>" class="">Logs de Alterações</a></li>
 									<?php endif; ?>
-									<hr>
-									<li class=""><a href="<?=base_url('cadastro/logs_alteracoes');?>" class="">Logs de Alterações</a></li>
+									<li class=""><a href="<?= base_url('/login/signOut'); ?>" class="">Sair</a></li>
 								</ul>
 							</nav>
 						</div>

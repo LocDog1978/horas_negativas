@@ -3,12 +3,14 @@
 namespace App\Controllers\Cadastro\Usuarios;
 use App\Models\UsuarioModel;
 use App\Models\LogAlteracoesModel;
+use App\Models\TiposNiveisUsuariosModel;
 
 class CadastroUsuariosController extends \CodeIgniter\Controller
 {
 	protected $userModel;
 	protected $currentUser;
 	protected $logAlteracoes;
+	protected $tiposNiveisUsuarios;
 
 	public function __construct()
 	{
@@ -16,6 +18,7 @@ class CadastroUsuariosController extends \CodeIgniter\Controller
 		$this->userModel = new UsuarioModel();
 		$this->currentUser = $this->userModel->getUserData(session()->userID);
 		$this->logAlteracoes = new LogAlteracoesModel();
+		$this->tiposNiveisUsuarios = new TiposNiveisUsuariosModel();
 	}
 
 	public function index(){		
@@ -60,7 +63,7 @@ class CadastroUsuariosController extends \CodeIgniter\Controller
 				'sobrenome'		=> $this->request->getPost('v2'),
 				'login'			=> $this->request->getPost('v3'),
 				'senha'			=> password_hash($this->request->getPost('v4'), PASSWORD_DEFAULT),
-				'nivel'		=> $this->request->getPost('v5'),
+				'fk_nivel'		=> $this->request->getPost('v5'),
 				'ativo'			=> 1
 			]);
 			$idInserted = $this->userModel->insertID();
@@ -91,7 +94,7 @@ class CadastroUsuariosController extends \CodeIgniter\Controller
 				'sobrenome'		=> $this->request->getPost('v2'),
 				'login'			=> $this->request->getPost('v3'),
 				'senha'			=> password_hash($this->request->getPost('v4'), PASSWORD_DEFAULT),
-				'nivel'		=> $this->request->getPost('v5'),
+				'fk_nivel'		=> $this->request->getPost('v5'),
 				'ativo'			=> 1
 			]);
 			return ($this->response->setJSON($this->request->getPost('id')));
@@ -118,7 +121,7 @@ class CadastroUsuariosController extends \CodeIgniter\Controller
 				'sobrenome'		=> $data['user']->sobrenome,
 				'login'			=> $data['user']->login,
 				'senha'			=> password_hash($data['user']->senha, PASSWORD_DEFAULT),
-				'nivel'		=> $data['user']->nivel
+				'fk_nivel'		=> $data['user']->nivel
 			];
 			return view('cadastro/usuarios/add', $data);
 		}

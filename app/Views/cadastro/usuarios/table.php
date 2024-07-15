@@ -81,7 +81,7 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		$('#dataFromDb').DataTable({
-			language: { url: "<?php echo base_url('assets/js/libs/DataTables-1.12.1/traducao'); ?>" }
+			language: { url: "<?php echo base_url('assets/datatables/pt-BR.json'); ?>" }
 		});
 
 		$('.trash-row').on('click', function(){

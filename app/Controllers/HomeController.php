@@ -32,6 +32,8 @@ class HomeController extends BaseController
 
 		$data['somatorioPeriodo'] = $this->horasNegativasModel->somatorioPeriodo($mes, $ano);
 		$data['intervaloDias'] = intervalo_dias_formatado($mes, $ano);
+		$data['mesesPortugues'] = get_meses_portugues();
+		$data['anos'] = get_years();
 
 		return view('inicio', $data);
 	}

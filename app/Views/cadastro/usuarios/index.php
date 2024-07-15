@@ -31,7 +31,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
-		if (<?php echo $currentUser->nivel; ?> === 3) {
+		if (<?php echo $currentUser->fk_nivel; ?> === 3) {
 			$('#header_2').hide();
 		}
 		$('#alertAfterSave').hide();

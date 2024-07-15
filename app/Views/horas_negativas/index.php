@@ -13,11 +13,9 @@
             <div id="postoAux">
                 <select name="posto" id="posto" class="chosen-select" data-placeholder="Selecione um posto">
                     <option></option>
-                    <?php 
-                    foreach($listaPostos as $postos) {
+                    <?php foreach($listaPostos as $postos) {
                         echo '<option value="' . $postos->id . '">' . $postos->nome . '</option>';
-                    }
-                    ?>
+                    } ?>
                 </select>
             </div>
         <div id="divError-posto" class="invalid-feedback"></div>
@@ -50,9 +48,9 @@
         <div id="anoAux">
             <select name="ano" id="ano" class="chosen-select" data-placeholder="Selecione um Ano">
                 <option></option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
+                <?php foreach ($anos as $ano): ?>
+                    <option value="<?= $ano ?>"><?= $ano ?></option>
+                <?php endforeach; ?>
             </select>     
         </div>
         <div id="divError-ano" class="invalid-feedback"></div>

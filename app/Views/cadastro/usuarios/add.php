@@ -30,7 +30,7 @@ $sobrenomeValue = isset($toUpdate['sobrenome']) ? $toUpdate['sobrenome'] : '';
 $loginValue = isset($toUpdate['login']) ? $toUpdate['login'] : '';
 $senhaValue = isset($toUpdate['senha']) ? $toUpdate['senha'] : '';
 $senhaConfirmarValue = isset($toUpdate['senhaConfirmar']) ? $toUpdate['senhaConfirmar'] : '';
-$nivelValue = isset($toUpdate['nivel']) ? $toUpdate['nivel'] : '';
+$nivelValue = isset($toUpdate['fk_nivel']) ? $toUpdate['fk_nivel'] : '';
 
 $openRow = "<div class='mb-3 row'>";
 $openRowOn = "<div class='mb-3 row zebraOn' style='padding: 0; margin: 0 !important;'>";
