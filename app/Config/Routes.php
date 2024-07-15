@@ -29,8 +29,6 @@ $routes->post('/tabela', 'HomeController::tabela');
 
 
 /*** ---------- Miscellaneous ---------- ***/
-$routes->get('turno', 'TurnoController');
-$routes->get('postos', 'PostosController');
 /* datatables assets */
 $routes->get('assets/datatables/traducao', 'Assets\DatatablesController::traducao');
 // $routes->get('assets/js/libs/DataTables-1.12.1/traducao', 'Assets\DatatablesController::traducao');
@@ -56,6 +54,24 @@ $routes->group('cadastro', ['filter' => 'updateOwnUser'], function($routes) {
 	$routes->get('usuarios/delete/(:num)', 'Cadastro\Usuarios\CadastroUsuariosController::delete/$1');
 });
 
+/*** ---------- Cadastro postos ---------- ***/
+$routes->group('cadastro', ['filter' => 'nivel'], function($routes) {
+    $routes->get('postos', 'Cadastro\PostosController::postos');
+    $routes->get('postos/trash/(:num)', 'Cadastro\PostosController::trash/$1');
+    $routes->get('postos/restore/(:num)', 'Cadastro\PostosController::restore/$1');
+    $routes->get('postos/add', 'Cadastro\PostosController::postos');
+    $routes->get('postos/edit/(:num)', 'Cadastro\PostosController::postos/$1');
+    $routes->get('postos/success/(:num)', 'Cadastro\PostosController::postos/$1');
+    $routes->post('postos/insert', 'Cadastro\PostosController::postos');
+    $routes->post('postos/insert_validation', 'Cadastro\PostosController::postos');
+    $routes->post('postos/update/(:num)', 'Cadastro\PostosController::postos/$1');
+    $routes->post('postos/update_validation/(:num)', 'Cadastro\PostosController::postos/$1');
+    $routes->post('postos/ajax_list', 'Cadastro\PostosController::postos');
+    $routes->post('postos/ajax_list_info', 'Cadastro\PostosController::postos');
+});
+$routes->group('cadastro', ['filter' => 'nivel_delete'], function($routes) {
+    $routes->get('fases_da_obra/delete/(:num)', 'Cadastro\FasesDaObraController::fases_da_obra/$1');
+});
 
 /*** ---------- Cadastro logs_alteracoes ---------- ***/
 $routes->group('cadastro', ['filter' => 'nivel'], function($routes) {

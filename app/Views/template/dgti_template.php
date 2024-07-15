@@ -164,7 +164,7 @@
 									<?php if (((bool)session()->usuario_logado) && ($currentUser->fk_nivel == 1 || $currentUser->fk_nivel == 2)) : ?>
 										<li class="sub-menu"><a href="#">Cadastro</a>
 											<ul class="">
-												<li class=""><a href="" class="">Postos</a></li>
+												<li class=""><a href="<?php echo base_url('cadastro/postos'); ?>" class="">Postos</a></li>
 												<li class=""><a href="<?=base_url('cadastro/usuarios');?>" class="">Usuários</a></li>
 											</ul>
 										</li>
