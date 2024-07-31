@@ -9,15 +9,15 @@ class HorasNegativasModel extends Model
 {
 	protected $table            = 'horas_negativas';
 	protected $primaryKey       = 'id';
-	protected $allowedFields    = ['fk_local', 'diurno', 'noturno', 'data'];
+	protected $allowedFields    = ['fk_local', 'diurno', 'noturno', 'data', 'justificativa'];
 	protected $returnType       = 'object';
 
 	public function getHorasNegativasByPostoData($posto, $data)
 	{
-		return $this->select('diurno, noturno')
-					->where('fk_local', $posto)
-					->where('data', $data)
-					->first();
+	    return $this->select('diurno, noturno, justificativa')
+	                ->where('fk_local', $posto)
+	                ->where('data', $data)
+	                ->first();
 	}
 
 	public function saveHoras($dados, $postoID)

@@ -45,7 +45,6 @@ class HorasNegativasController extends BaseController
 		return $this->response->setJSON(dias_entre_datas($mes, $ano));
 	}
 
-	// HorasNegativasController.php
 	public function tabelaHorasNegativas()
 	{
 	    $periodo = $this->request->getPost('periodo');
@@ -55,7 +54,6 @@ class HorasNegativasController extends BaseController
 	    $data['postoID'] = $postoID;
 	    $data['nome_posto'] = $this->postosModel->getPosto($postoID)->nome;
 
-	    // Carregar os dados existentes do banco de dados
 	    $data['horasNegativas'] = [];
 	    $sum_diurno = 0;
 	    $sum_noturno = 0;
@@ -75,7 +73,6 @@ class HorasNegativasController extends BaseController
 
 	    return view('horas_negativas/tabelaHorasNegativas', $data);
 	}
-
 
 	public function getHorasNegativas()
 	{

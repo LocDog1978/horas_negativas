@@ -8,6 +8,20 @@
         .toast-container {
             z-index: 1060; /* valor maior que outros elementos da página */
         }
+        .has-justificativa {
+            position: relative;
+        }
+        .has-justificativa::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -12px;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: red;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
@@ -67,6 +81,7 @@
                     $input_noturno = $data_invisivel . "-n";
                     $diurno_valor = isset($horasNegativas[$data_invisivel]->diurno) ? $horasNegativas[$data_invisivel]->diurno : '';
                     $noturno_valor = isset($horasNegativas[$data_invisivel]->noturno) ? $horasNegativas[$data_invisivel]->noturno : '';
+                    $justificativa_valor = isset($horasNegativas[$data_invisivel]->justificativa) ? $horasNegativas[$data_invisivel]->justificativa : '';
                     ?>
                     <tr>
                         <td style="text-align: center; vertical-align: middle;">
@@ -83,7 +98,9 @@
                         <td><input type="number" min="0" name="<?php echo $input_diurno; ?>" id="<?php echo $input_diurno; ?>" class="form-control" value="<?php echo $diurno_valor; ?>" style="border: none; border-bottom: 1px solid #0072CE; border-radius: 0; width: 100%;"></td>
                         <td><input type="number" min="0" name="<?php echo $input_noturno; ?>" id="<?php echo $input_noturno; ?>" class="form-control" value="<?php echo $noturno_valor; ?>" style="border: none; border-bottom: 1px solid #0072CE; border-radius: 0; width: 100%;"></td>
                         <td style="width: 150px; text-align: center; vertical-align: middle;">
-                            <button type="button" class="btn btn-primary btn-justificativa" data-bs-toggle="modal" data-bs-target="#justificativaModal" data-row="<?php echo $i; ?>"><i class="fa fa-pencil"></i></button>
+                            <button type="button" class="btn btn-primary btn-justificativa <?php echo !empty($justificativa_valor) ? 'has-justificativa' : ''; ?>" data-bs-toggle="modal" data-bs-target="#justificativaModal" data-row="<?php echo $i; ?>" data-justificativa="<?php echo htmlspecialchars($justificativa_valor, ENT_QUOTES, 'UTF-8'); ?>">
+                                <i class="fa fa-pencil"></i>
+                            </button>
                         </td>
                     </tr>
                 <?php } ?>
@@ -109,7 +126,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" id="saveJustificativa">Salvar</button>
+                    <button type="button" class="btn btn-primary" id="saveJustificativaModal">Salvar</button>
                 </div>
             </div>
         </div>
@@ -120,18 +137,32 @@
     <script>
         $(document).ready(function() {
             let selectedRow = null;
-            let justificativas = <?php echo json_encode(array_map(function($item) { return $item->justificativa; }, $horasNegativas)); ?>;
+            let justificativas = <?php echo json_encode(array_map(function($item) { return $item->justificativa ?? ''; }, $horasNegativas)); ?>;
 
             // Abrir modal e carregar justificativa existente, se houver
             $('.btn-justificativa').click(function() {
                 selectedRow = $(this).data('row');
-                $('#justificativaText').val(justificativas[selectedRow] || '');
+                let justificativa = $(this).data('justificativa');
+                $('#justificativaText').val(justificativa || '');
+            });
+
+            // Prevenir que ENTER no modal acione o botão externo de salvar, mas permitir quebra de linha
+            $('#justificativaText').keydown(function(event) {
+                if (event.keyCode === 13 && !event.shiftKey) {
+                    event.preventDefault();
+                }
             });
 
             // Salvar justificativa no array ao clicar em "Salvar" no modal
-            $('#saveJustificativa').click(function() {
+            $('#saveJustificativaModal').click(function() {
                 const justificativa = $('#justificativaText').val();
                 justificativas[selectedRow] = justificativa;
+                $(`.btn-justificativa[data-row="${selectedRow}"]`).data('justificativa', justificativa);
+                if (justificativa) {
+                    $(`.btn-justificativa[data-row="${selectedRow}"]`).addClass('has-justificativa');
+                } else {
+                    $(`.btn-justificativa[data-row="${selectedRow}"]`).removeClass('has-justificativa');
+                }
                 $('#justificativaModal').modal('hide');
             });
 
@@ -175,6 +206,9 @@
                     }
                 });
             });
+
+            // Inicializar tooltips
+            $('[data-bs-toggle="tooltip"]').tooltip();
         });
     </script>
 </body>
