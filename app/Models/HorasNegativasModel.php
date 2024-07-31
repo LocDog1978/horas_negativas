@@ -29,17 +29,19 @@ class HorasNegativasModel extends Model
 			$data_invisivel = $item['data_invisivel'];
 			$diurno = $item['diurno'];
 			$noturno = $item['noturno'];
+			$justificativa = $item['justificativa'];
 
 			// Verificar se já existe um registro com a mesma data_invisivel e fk_local
 			$existingRecord = $this->where('data', $data_invisivel)
-								   ->where('fk_local', $postoID)
-								   ->first();
+								->where('fk_local', $postoID)
+								->first();
 
 			if ($existingRecord) {
 				// Se existir, faz um UPDATE
 				$this->update($existingRecord->id, [
 					'diurno' => $diurno == "" ? NULL : $diurno,
 					'noturno' => $noturno == "" ? NULL : $noturno,
+					'justificativa' => $justificativa,
 				]);
 			} else {
 				// Se não existir, faz um INSERT
@@ -48,6 +50,7 @@ class HorasNegativasModel extends Model
 					'diurno' => $diurno == "" ? NULL : $diurno,
 					'noturno' => $noturno == "" ? NULL : $noturno,
 					'fk_local' => $postoID,
+					'justificativa' => $justificativa,
 				]);
 			}
 			$sum_diurno += intval($diurno);
@@ -60,6 +63,7 @@ class HorasNegativasModel extends Model
 			'total_sum' => $sum_diurno + $sum_noturno,
 		];
 	}
+
 
 	public function sumHorasDiurnas($postoID, $periodo)
 	{
