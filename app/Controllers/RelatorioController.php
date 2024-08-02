@@ -131,66 +131,76 @@ class RelatorioController extends BaseController
 	}
 
 	public function setPag2($info) {
-		$dia_inicial            = $info['intervaloDias']['dia_inicial'];
-		$dia_final              = $info['intervaloDias']['dia_final'];
-		$mes_inicial_extenso    = $info['intervaloDias']['mes_inicial_extenso'];
-		$mes_final_extenso      = $info['intervaloDias']['mes_final_extenso'];
+    $dia_inicial            = $info['intervaloDias']['dia_inicial'];
+    $dia_final              = $info['intervaloDias']['dia_final'];
+    $mes_inicial_extenso    = $info['intervaloDias']['mes_inicial_extenso'];
+    $mes_final_extenso      = $info['intervaloDias']['mes_final_extenso'];
 
-		// Iniciar tabela com cabeçalho
-		$tabela = '
-		<div style="text-align: center;">
-			<p><b>JUSTIFICATIVAS REFERENTE AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial.' À '.$dia_final.'</b></p>
-		</div>
-		<div style="text-align: center;">
-			<table id="tabelaDados" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
-				<thead>
-					<tr style="text-align: center; vertical-align: middle; border: 1px solid black;">
-						<th style="border: 1px solid black; width: 20%;">POSTOS</th>
-						<th style="border: 1px solid black; width: 20%;">DATA</th>
-						<th style="border: 1px solid black; width: 60%;">JUSTIFICATIVAS</th>
-					</tr>
-				</thead>
-				<tbody>';
+    // Iniciar tabela com cabeçalho
+    $tabela = '
+    <div style="text-align: center;">
+        <p><b>JUSTIFICATIVAS REFERENTE AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial.' À '.$dia_final.'</b></p>
+    </div>
+    <div style="text-align: center;">
+        <table id="tabelaDados" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+            <thead>
+                <tr style="text-align: center; vertical-align: middle; border: 1px solid black;">
+                    <th style="border: 1px solid black; width: 20%;">POSTOS</th>
+                    <th style="border: 1px solid black; width: 20%;">DATA</th>
+                    <th style="border: 1px solid black; width: 60%;">JUSTIFICATIVAS</th>
+                </tr>
+            </thead>
+            <tbody>';
 
-		// Preencher tabela com dados
-		foreach ($info['justificativaPeriodo'] as $postoData) {
-			$posto = htmlspecialchars($postoData['posto']);
-			$justificativas = $postoData['justificativas'];
-			$rowspan = count($justificativas);
+    // Verificar se há justificativas para exibir
+    $justificativasEncontradas = false;
 
-			if ($rowspan > 0) {
-				$tabela .= '
-				<tr>
-					<td style="border: 1px solid black; text-align: center; vertical-align: middle;" rowspan="' . $rowspan . '">' . $posto . '</td>
-					<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . date('d/m/Y', strtotime(htmlspecialchars($justificativas[0]->data))) . '</td>
-					<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . htmlspecialchars($justificativas[0]->justificativa) . '</td>
-				</tr>';
+    // Preencher tabela com dados
+    foreach ($info['justificativaPeriodo'] as $postoData) {
+        $posto = htmlspecialchars($postoData['posto']);
+        $justificativas = array_filter($postoData['justificativas'], function($j) {
+            return !empty($j->justificativa);
+        });
+        $rowspan = count($justificativas);
 
-				for ($i = 1; $i < $rowspan; $i++) {
-					$tabela .= '
-					<tr>
-						<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . date('d/m/Y', strtotime(htmlspecialchars($justificativas[$i]->data))) . '</td>
-						<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . htmlspecialchars($justificativas[$i]->justificativa) . '</td>
-					</tr>';
-				}
-			} else {
-				$tabela .= '
-				<tr>
-					<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . $posto . '</td>
-					<td style="border: 1px solid black; text-align: center; vertical-align: middle;">-</td>
-					<td style="border: 1px solid black; text-align: center; vertical-align: middle;">-</td>
-				</tr>';
-			}
-		}
+        if ($rowspan > 0) {
+            $justificativasEncontradas = true;
 
-		// Fechar tabela
-		$tabela .= '
-				</tbody>
-			</table>
-		</div>';
+            // Exibir a primeira linha com o rowspan
+            $primeiraJustificativa = array_shift($justificativas);
+            $tabela .= '
+            <tr>
+                <td style="border: 1px solid black; text-align: center; vertical-align: middle;" rowspan="' . $rowspan . '">' . $posto . '</td>
+                <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . date('d/m/Y', strtotime($primeiraJustificativa->data)) . '</td>
+                <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . htmlspecialchars($primeiraJustificativa->justificativa) . '</td>
+            </tr>';
 
-		return $tabela;
-	}
+            // Exibir as demais linhas para o posto sem o posto (sem rowspan)
+            foreach ($justificativas as $justificativa) {
+                $tabela .= '
+                <tr>
+                    <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . date('d/m/Y', strtotime($justificativa->data)) . '</td>
+                    <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . htmlspecialchars($justificativa->justificativa) . '</td>
+                </tr>';
+            }
+        }
+    }
+
+    if (!$justificativasEncontradas) {
+        $tabela .= '
+        <tr>
+            <td colspan="3" style="border: 1px solid black; text-align: center; vertical-align: middle;">Sem justificativas lançadas no período.</td>
+        </tr>';
+    }
+
+    // Fechar tabela
+    $tabela .= '
+            </tbody>
+        </table>
+    </div>';
+
+    return $tabela;
+}
 
 
 

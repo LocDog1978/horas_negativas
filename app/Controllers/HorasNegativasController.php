@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
@@ -64,13 +63,15 @@ class HorasNegativasController extends BaseController
 				if (!isset($horas->justificativa)) {
 					$horas->justificativa = '';
 				}
+				$horas->diurno = is_null($horas->diurno) ? '' : $horas->diurno;
+				$horas->noturno = is_null($horas->noturno) ? '' : $horas->noturno;
 				$data['horasNegativas'][$data_invisivel] = $horas;
 				$sum_diurno += intval($horas->diurno);
 				$sum_noturno += intval($horas->noturno);
 			} else {
 				$data['horasNegativas'][$data_invisivel] = (object)[
-					'diurno' => 0,
-					'noturno' => 0,
+					'diurno' => '',
+					'noturno' => '',
 					'justificativa' => ''
 				];
 			}

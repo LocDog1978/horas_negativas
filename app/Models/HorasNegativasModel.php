@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Models;
 
 use CodeIgniter\Model;
-use App\Models\PostosModel;
 
 class HorasNegativasModel extends Model
 {
@@ -187,6 +185,4 @@ class HorasNegativasModel extends Model
 
 		return $resultados;
 	}
-
-
 }

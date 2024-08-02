@@ -95,15 +95,15 @@
 							</div>
 						</td>
 						<td style="display: none;"><?php echo $data_invisivel; ?></td> <!-- Coluna invisível -->
-						<td><input type="number" min="0" name="<?php echo $input_diurno; ?>" id="<?php echo $input_diurno; ?>" class="form-control" value="<?php echo $diurno_valor; ?>" style="border: none; border-bottom: 1px solid #0072CE; border-radius: 0; width: 100%;"></td>
-						<td><input type="number" min="0" name="<?php echo $input_noturno; ?>" id="<?php echo $input_noturno; ?>" class="form-control" value="<?php echo $noturno_valor; ?>" style="border: none; border-bottom: 1px solid #0072CE; border-radius: 0; width: 100%;"></td>
+						<td><input type="number" min="0" name="<?php echo $input_diurno; ?>" id="<?php echo $input_diurno; ?>" class="form-control" value="<?php echo htmlspecialchars($diurno_valor); ?>" style="border: none; border-bottom: 1px solid #0072CE; border-radius: 0; width: 100%;"></td>
+						<td><input type="number" min="0" name="<?php echo $input_noturno; ?>" id="<?php echo $input_noturno; ?>" class="form-control" value="<?php echo htmlspecialchars($noturno_valor); ?>" style="border: none; border-bottom: 1px solid #0072CE; border-radius: 0; width: 100%;"></td>
 						<td style="width: 150px; text-align: center; vertical-align: middle;">
 							<button type="button" class="btn btn-primary btn-justificativa <?php echo !empty($justificativa_valor) ? 'has-justificativa' : ''; ?>" data-bs-toggle="modal" data-bs-target="#justificativaModal" data-row="<?php echo $index; ?>" data-justificativa="<?php echo htmlspecialchars($justificativa_valor, ENT_QUOTES, 'UTF-8'); ?>">
 								<i class="fa fa-pencil"></i>
 							</button>
 						</td>
 						<td style="display: none;">
-							<input type="text" name="justificativa_invisivel_<?php echo $data_invisivel; ?>" class="form-control" value="<?php echo $justificativa_valor; ?>">
+							<input type="text" name="justificativa_invisivel_<?php echo $data_invisivel; ?>" class="form-control" value="<?php echo htmlspecialchars($justificativa_valor); ?>">
 						</td> <!-- Coluna invisível -->
 					</tr>
 				<?php } ?>
