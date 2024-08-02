@@ -144,4 +144,49 @@ class HorasNegativasModel extends Model
 		return $resultados;
 	}
 
+	public function getJustificativasPeriodo($mes = null, $ano = null)
+	{
+		// Usar mês e ano atuais se não forem fornecidos
+		if (is_null($mes)) {
+			$mes = date('m');
+		}
+		if (is_null($ano)) {
+			$ano = date('Y');
+		}
+
+		$postosModel = new PostosModel();
+		$postos = $postosModel->getAlldata();
+
+		// Verifica se o mês é 12 para ajustar o ano e o mês seguinte
+		if ($mes == 12) {
+			$mesSeguinte = 1;
+			$anoSeguinte = $ano + 1;
+		} else {
+			$mesSeguinte = $mes + 1;
+			$anoSeguinte = $ano;
+		}
+
+		// Definir o intervalo de datas com base na lógica fornecida
+		$startDate = date('Y-m-d', strtotime("$ano-$mes-25"));
+		$endDate = date('Y-m-d', strtotime("$anoSeguinte-$mesSeguinte-24"));
+
+		$resultados = [];
+
+		foreach ($postos as $posto) {
+			$justificativas = $this->select('data, justificativa')
+								->where('fk_local', $posto->id)
+								->where('data >=', $startDate)
+								->where('data <=', $endDate)
+								->findAll();
+
+			$resultados[] = [
+				'posto' => $posto->nome,
+				'justificativas' => $justificativas,
+			];
+		}
+
+		return $resultados;
+	}
+
+
 }

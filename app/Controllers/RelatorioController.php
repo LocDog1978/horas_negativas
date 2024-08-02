@@ -23,11 +23,7 @@ class RelatorioController extends BaseController
 
 	public function setHeader($info) {
 		$logo = ROOTPATH . "assets\\images\\logo.svg";
-
-		$dia_inicial            = $info['intervaloDias']['dia_inicial'];
-		$dia_final              = $info['intervaloDias']['dia_final'];
-		$mes_inicial_extenso    = $info['intervaloDias']['mes_inicial_extenso'];
-		$mes_final_extenso      = $info['intervaloDias']['mes_final_extenso'];
+		
 		$numeroDocumento        = $info['numeroDocumento'];
 		$de                     = $info['de'];
 		$para                   = $info['para'];
@@ -61,10 +57,8 @@ class RelatorioController extends BaseController
 				<p><b>DE: ' . htmlspecialchars($de) . '</b></p>
 				<p><b>PARA: ' . htmlspecialchars($para) . '</b></p>
 				<br>
-			</div>
-			<div style="text-align: center;">
-				<p><b>HORAS NEGATIVAS REFERENTE AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial.' À '.$dia_final.'</b></p>
 			</div>';
+			
 	}
 
 	public function setFooter() {
@@ -79,8 +73,15 @@ class RelatorioController extends BaseController
 	}
 
 	public function setPag1($info) {
+		$dia_inicial            = $info['intervaloDias']['dia_inicial'];
+		$dia_final              = $info['intervaloDias']['dia_final'];
+		$mes_inicial_extenso    = $info['intervaloDias']['mes_inicial_extenso'];
+		$mes_final_extenso      = $info['intervaloDias']['mes_final_extenso'];
 		// Iniciar tabela com cabeçalho
 		$tabela = '
+		<div style="text-align: center;">
+				<p><b>HORAS NEGATIVAS REFERENTE AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial.' À '.$dia_final.'</b></p>
+			</div><br>
 			<div style="text-align: center;">
 				<table id="tabelaDados" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
 					<thead>
@@ -129,6 +130,39 @@ class RelatorioController extends BaseController
 		return $tabela;
 	}
 
+	public function setPag2($info) {
+		$dia_inicial            = $info['intervaloDias']['dia_inicial'];
+		$dia_final              = $info['intervaloDias']['dia_final'];
+		$mes_inicial_extenso    = $info['intervaloDias']['mes_inicial_extenso'];
+		$mes_final_extenso      = $info['intervaloDias']['mes_final_extenso'];
+		// Iniciar tabela com cabeçalho
+		$tabela = '
+		<div style="text-align: center;">
+				<p><b>JUSTIFICATIVAS REFERENTE AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial.' À '.$dia_final.'</b></p>
+			</div>';
+		$tabela .=	'<div style="text-align: center;">
+				<table id="tabelaDados" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+					<thead>
+						<tr style="text-align: center; vertical-align: middle; border: 1px solid black;">
+							<th style="border: 1px solid black;">POSTOS</th>
+							<th style="border: 1px solid black;">DATA</th>
+							<th style="border: 1px solid black;">JUSTIFICATIVAS</th>
+							
+						</tr>
+					</thead>
+					</table>
+					</div>';
+		// Preencher tabela com dados
+		foreach ($info['justificativaPeriodo'] as $postoData) {
+			$posto = $postoData['posto'];
+			$tabela .= '
+					<tr>
+						<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . $posto. '</td>
+					</tr>';
+		}
+		return $tabela;
+	}
+
 	public function index()
 	{
 		helper('data_helper');
@@ -136,19 +170,24 @@ class RelatorioController extends BaseController
 		$ano = $this->request->getGet('ano') ?? date('Y');
 		$intervaloDias = intervalo_dias_formatado($mes, $ano);
 		$somatorioPeriodo = $this->horasNegativasModel->somatorioPeriodo($mes, $ano);
+		$justificativasPeriodo = $this->horasNegativasModel->getJustificativasPeriodo($mes, $ano);
 
+		// echo "<pre>";
+		// dd(print_r($justificativasPeriodo));
+		
 		$numeroDocumento = $this->request->getGet('documentNumber');
 		$de = $this->request->getGet('de');
 		$para = $this->request->getGet('para');
 		$observacoes = $this->request->getGet('observacoes');
 
 		$info = [
-			'intervaloDias'     =>  $intervaloDias,
-			'somatorioPeriodo'  =>  $somatorioPeriodo,
-			'numeroDocumento'   =>  $numeroDocumento,
-			'de'                =>  $de,
-			'para'              =>  $para,
-			'observacoes'       =>  $observacoes
+			'intervaloDias'     		=>  $intervaloDias,
+			'somatorioPeriodo'  		=>  $somatorioPeriodo,
+			'numeroDocumento'   		=>  $numeroDocumento,
+			'de'                		=>  $de,
+			'para'              		=>  $para,
+			'observacoes'       		=>  $observacoes,
+			'justificativaPeriodo'		=>	$justificativasPeriodo
 		];
 
 		$this->response->setHeader('Content-Type', 'application/pdf');
@@ -157,7 +196,7 @@ class RelatorioController extends BaseController
 			[
 				'mode' => 'utf-8',
 				'format' => 'A4-P',
-				'margin_top' => 110, // Ajuste a margem superior para dar espaço ao cabeçalho
+				'margin_top' => 100, // Ajuste a margem superior para dar espaço ao cabeçalho
 				'margin_bottom' => 30,
 				'default_font_size' => 8
 			]
@@ -172,6 +211,9 @@ class RelatorioController extends BaseController
 		$mes_final = strtolower($intervaloDias['mes_final_extenso']);
 		$ano_inicial = date('Y', strtotime(str_replace('/', '-', $intervaloDias['dia_inicial'])));
 		$ano_final = date('Y', strtotime(str_replace('/', '-', $intervaloDias['dia_final'])));
+
+		$mpdf->AddPage();
+		$mpdf->WriteHTML($this->setPag2($info));
 
 		$filename = "{$mes_inicial}_{$ano_inicial}-{$mes_final}_{$ano_final}.pdf";
 		$mpdf->Output($filename, "I"); // Alterado para "I" para abrir no navegador
