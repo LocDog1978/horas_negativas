@@ -7,17 +7,17 @@ use App\Models\PostosModel;
 
 class HorasNegativasModel extends Model
 {
-	protected $table            = 'horas_negativas';
-	protected $primaryKey       = 'id';
-	protected $allowedFields    = ['fk_local', 'diurno', 'noturno', 'data', 'justificativa'];
-	protected $returnType       = 'object';
+	protected $table = 'horas_negativas';
+	protected $primaryKey = 'id';
+	protected $allowedFields = ['fk_local', 'diurno', 'noturno', 'data', 'justificativa'];
+	protected $returnType = 'object';
 
 	public function getHorasNegativasByPostoData($posto, $data)
 	{
-	    return $this->select('diurno, noturno, justificativa')
-	                ->where('fk_local', $posto)
-	                ->where('data', $data)
-	                ->first();
+		return $this->select('diurno, noturno, justificativa')
+					->where('fk_local', $posto)
+					->where('data', $data)
+					->first();
 	}
 
 	public function saveHoras($dados, $postoID)
@@ -41,7 +41,7 @@ class HorasNegativasModel extends Model
 				$this->update($existingRecord->id, [
 					'diurno' => $diurno == "" ? NULL : $diurno,
 					'noturno' => $noturno == "" ? NULL : $noturno,
-					'justificativa' => $justificativa,
+					'justificativa' => $justificativa == "" ? NULL : $justificativa,
 				]);
 			} else {
 				// Se não existir, faz um INSERT
@@ -50,7 +50,7 @@ class HorasNegativasModel extends Model
 					'diurno' => $diurno == "" ? NULL : $diurno,
 					'noturno' => $noturno == "" ? NULL : $noturno,
 					'fk_local' => $postoID,
-					'justificativa' => $justificativa,
+					'justificativa' => $justificativa == "" ? NULL : $justificativa,
 				]);
 			}
 			$sum_diurno += intval($diurno);
@@ -63,7 +63,6 @@ class HorasNegativasModel extends Model
 			'total_sum' => $sum_diurno + $sum_noturno,
 		];
 	}
-
 
 	public function sumHorasDiurnas($postoID, $periodo)
 	{

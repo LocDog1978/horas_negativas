@@ -25,7 +25,7 @@ class HorasNegativasController extends BaseController
 		$this->horasNegativasModel = new HorasNegativasModel();
 		helper('data_helper');
 	}
-	
+
 	public function index()
 	{
 		$data['currentUser'] = $this->currentUser;
@@ -47,31 +47,40 @@ class HorasNegativasController extends BaseController
 
 	public function tabelaHorasNegativas()
 	{
-	    $periodo = $this->request->getPost('periodo');
-	    $postoID = $this->request->getPost('posto');
+		$periodo = $this->request->getPost('periodo');
+		$postoID = $this->request->getPost('posto');
 
-	    $data['periodo'] = $periodo;
-	    $data['postoID'] = $postoID;
-	    $data['nome_posto'] = $this->postosModel->getPosto($postoID)->nome;
+		$data['periodo'] = $periodo;
+		$data['postoID'] = $postoID;
+		$data['nome_posto'] = $this->postosModel->getPosto($postoID)->nome;
 
-	    $data['horasNegativas'] = [];
-	    $sum_diurno = 0;
-	    $sum_noturno = 0;
+		$data['horasNegativas'] = [];
+		$sum_diurno = 0;
+		$sum_noturno = 0;
 
-	    foreach ($periodo as $data_invisivel) {
-	        $horas = $this->horasNegativasModel->getHorasNegativasByPostoData($postoID, $data_invisivel);
-	        if ($horas) {
-	            $data['horasNegativas'][$data_invisivel] = $horas;
-	            $sum_diurno += intval($horas->diurno);
-	            $sum_noturno += intval($horas->noturno);
-	        }
-	    }
+		foreach ($periodo as $data_invisivel) {
+			$horas = $this->horasNegativasModel->getHorasNegativasByPostoData($postoID, $data_invisivel);
+			if ($horas) {
+				if (!isset($horas->justificativa)) {
+					$horas->justificativa = '';
+				}
+				$data['horasNegativas'][$data_invisivel] = $horas;
+				$sum_diurno += intval($horas->diurno);
+				$sum_noturno += intval($horas->noturno);
+			} else {
+				$data['horasNegativas'][$data_invisivel] = (object)[
+					'diurno' => 0,
+					'noturno' => 0,
+					'justificativa' => ''
+				];
+			}
+		}
 
-	    $data['sum_diurno'] = $sum_diurno;
-	    $data['sum_noturno'] = $sum_noturno;
-	    $data['total_sum'] = $sum_diurno + $sum_noturno;
+		$data['sum_diurno'] = $sum_diurno;
+		$data['sum_noturno'] = $sum_noturno;
+		$data['total_sum'] = $sum_diurno + $sum_noturno;
 
-	    return view('horas_negativas/tabelaHorasNegativas', $data);
+		return view('horas_negativas/tabelaHorasNegativas', $data);
 	}
 
 	public function getHorasNegativas()
@@ -87,5 +96,4 @@ class HorasNegativasController extends BaseController
 			'message' => "Horas cadastradas com sucesso!"
 		]);
 	}
-
 }
