@@ -135,33 +135,64 @@ class RelatorioController extends BaseController
 		$dia_final              = $info['intervaloDias']['dia_final'];
 		$mes_inicial_extenso    = $info['intervaloDias']['mes_inicial_extenso'];
 		$mes_final_extenso      = $info['intervaloDias']['mes_final_extenso'];
+
 		// Iniciar tabela com cabeçalho
 		$tabela = '
 		<div style="text-align: center;">
-				<p><b>JUSTIFICATIVAS REFERENTE AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial.' À '.$dia_final.'</b></p>
-			</div>';
-		$tabela .=	'<div style="text-align: center;">
-				<table id="tabelaDados" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
-					<thead>
-						<tr style="text-align: center; vertical-align: middle; border: 1px solid black;">
-							<th style="border: 1px solid black;">POSTOS</th>
-							<th style="border: 1px solid black;">DATA</th>
-							<th style="border: 1px solid black;">JUSTIFICATIVAS</th>
-							
-						</tr>
-					</thead>
-					</table>
-					</div>';
+			<p><b>JUSTIFICATIVAS REFERENTE AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial.' À '.$dia_final.'</b></p>
+		</div>
+		<div style="text-align: center;">
+			<table id="tabelaDados" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+				<thead>
+					<tr style="text-align: center; vertical-align: middle; border: 1px solid black;">
+						<th style="border: 1px solid black; width: 20%;">POSTOS</th>
+						<th style="border: 1px solid black; width: 20%;">DATA</th>
+						<th style="border: 1px solid black; width: 60%;">JUSTIFICATIVAS</th>
+					</tr>
+				</thead>
+				<tbody>';
+
 		// Preencher tabela com dados
 		foreach ($info['justificativaPeriodo'] as $postoData) {
-			$posto = $postoData['posto'];
-			$tabela .= '
+			$posto = htmlspecialchars($postoData['posto']);
+			$justificativas = $postoData['justificativas'];
+			$rowspan = count($justificativas);
+
+			if ($rowspan > 0) {
+				$tabela .= '
+				<tr>
+					<td style="border: 1px solid black; text-align: center; vertical-align: middle;" rowspan="' . $rowspan . '">' . $posto . '</td>
+					<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . date('d/m/Y', strtotime(htmlspecialchars($justificativas[0]->data))) . '</td>
+					<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . htmlspecialchars($justificativas[0]->justificativa) . '</td>
+				</tr>';
+
+				for ($i = 1; $i < $rowspan; $i++) {
+					$tabela .= '
 					<tr>
-						<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . $posto. '</td>
+						<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . date('d/m/Y', strtotime(htmlspecialchars($justificativas[$i]->data))) . '</td>
+						<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . htmlspecialchars($justificativas[$i]->justificativa) . '</td>
 					</tr>';
+				}
+			} else {
+				$tabela .= '
+				<tr>
+					<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . $posto . '</td>
+					<td style="border: 1px solid black; text-align: center; vertical-align: middle;">-</td>
+					<td style="border: 1px solid black; text-align: center; vertical-align: middle;">-</td>
+				</tr>';
+			}
 		}
+
+		// Fechar tabela
+		$tabela .= '
+				</tbody>
+			</table>
+		</div>';
+
 		return $tabela;
 	}
+
+
 
 	public function index()
 	{
@@ -197,7 +228,7 @@ class RelatorioController extends BaseController
 				'mode' => 'utf-8',
 				'format' => 'A4-P',
 				'margin_top' => 100, // Ajuste a margem superior para dar espaço ao cabeçalho
-				'margin_bottom' => 30,
+				'margin_bottom' => 34,
 				'default_font_size' => 8
 			]
 		);
