@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 31-Jul-2024 às 20:09
--- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Tempo de geração: 02/08/2024 às 15:59
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `horas_negativas`
+-- Estrutura para tabela `horas_negativas`
 --
 
 CREATE TABLE `horas_negativas` (
@@ -37,7 +37,7 @@ CREATE TABLE `horas_negativas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `horas_negativas`
+-- Despejando dados para a tabela `horas_negativas`
 --
 
 INSERT INTO `horas_negativas` (`id`, `fk_local`, `diurno`, `noturno`, `data`, `justificativa`) VALUES
@@ -72,11 +72,11 @@ INSERT INTO `horas_negativas` (`id`, `fk_local`, `diurno`, `noturno`, `data`, `j
 (29, 7, NULL, NULL, '2024-02-22', ''),
 (30, 7, NULL, NULL, '2024-02-23', ''),
 (31, 7, NULL, NULL, '2024-02-24', ''),
-(32, 1, 4, 4, '2024-01-25', ''),
-(33, 1, 2, 42, '2024-01-26', ''),
-(34, 1, 4, NULL, '2024-01-27', ''),
-(35, 1, NULL, NULL, '2024-01-28', ''),
-(36, 1, NULL, NULL, '2024-01-29', ''),
+(32, 1, 4, 1, '2024-01-25', 'caleidoscópio'),
+(33, 1, 2, 42, '2024-01-26', 'lamartine babo alegrete'),
+(34, 1, 4, NULL, '2024-01-27', 'estava vazio'),
+(35, 1, 7, 20, '2024-01-28', 'bilubilubilu tetéia'),
+(36, 1, 1, 2, '2024-01-29', 'cu de faraó'),
 (37, 1, NULL, NULL, '2024-01-30', ''),
 (38, 1, NULL, NULL, '2024-01-31', ''),
 (39, 1, NULL, NULL, '2024-02-01', ''),
@@ -102,7 +102,7 @@ INSERT INTO `horas_negativas` (`id`, `fk_local`, `diurno`, `noturno`, `data`, `j
 (59, 1, NULL, NULL, '2024-02-21', ''),
 (60, 1, NULL, NULL, '2024-02-22', ''),
 (61, 1, NULL, NULL, '2024-02-23', ''),
-(62, 1, NULL, NULL, '2024-02-24', ''),
+(62, 1, NULL, NULL, '2024-02-24', 'last number '),
 (63, 1, 7, NULL, '2024-02-25', ''),
 (64, 1, NULL, NULL, '2024-02-26', ''),
 (65, 1, NULL, NULL, '2024-02-27', ''),
@@ -318,7 +318,7 @@ INSERT INTO `horas_negativas` (`id`, `fk_local`, `diurno`, `noturno`, `data`, `j
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `log_alteracoes`
+-- Estrutura para tabela `log_alteracoes`
 --
 
 CREATE TABLE `log_alteracoes` (
@@ -331,7 +331,7 @@ CREATE TABLE `log_alteracoes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `log_alteracoes`
+-- Despejando dados para a tabela `log_alteracoes`
 --
 
 INSERT INTO `log_alteracoes` (`id`, `tabela`, `info`, `acao`, `data_hora`, `usuario`) VALUES
@@ -357,7 +357,7 @@ INSERT INTO `log_alteracoes` (`id`, `tabela`, `info`, `acao`, `data_hora`, `usua
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `posto`
+-- Estrutura para tabela `posto`
 --
 
 CREATE TABLE `posto` (
@@ -366,7 +366,7 @@ CREATE TABLE `posto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `posto`
+-- Despejando dados para a tabela `posto`
 --
 
 INSERT INTO `posto` (`id`, `nome`) VALUES
@@ -394,7 +394,7 @@ INSERT INTO `posto` (`id`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `somatorio_periodo`
+-- Estrutura para tabela `somatorio_periodo`
 --
 
 CREATE TABLE `somatorio_periodo` (
@@ -409,7 +409,7 @@ CREATE TABLE `somatorio_periodo` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tipos_niveis_usuario`
+-- Estrutura para tabela `tipos_niveis_usuario`
 --
 
 CREATE TABLE `tipos_niveis_usuario` (
@@ -419,7 +419,7 @@ CREATE TABLE `tipos_niveis_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tipos_niveis_usuario`
+-- Despejando dados para a tabela `tipos_niveis_usuario`
 --
 
 INSERT INTO `tipos_niveis_usuario` (`id`, `nivel`, `descricao`) VALUES
@@ -430,7 +430,7 @@ INSERT INTO `tipos_niveis_usuario` (`id`, `nivel`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Estrutura para tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -444,7 +444,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuarios`
+-- Despejando dados para a tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `sobrenome`, `login`, `senha`, `fk_nivel`, `ativo`) VALUES
@@ -459,43 +459,43 @@ INSERT INTO `usuarios` (`id`, `nome`, `sobrenome`, `login`, `senha`, `fk_nivel`,
 --
 
 --
--- Índices para tabela `horas_negativas`
+-- Índices de tabela `horas_negativas`
 --
 ALTER TABLE `horas_negativas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `log_alteracoes`
+-- Índices de tabela `log_alteracoes`
 --
 ALTER TABLE `log_alteracoes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `posto`
+-- Índices de tabela `posto`
 --
 ALTER TABLE `posto`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `somatorio_periodo`
+-- Índices de tabela `somatorio_periodo`
 --
 ALTER TABLE `somatorio_periodo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tipos_niveis_usuario`
+-- Índices de tabela `tipos_niveis_usuario`
 --
 ALTER TABLE `tipos_niveis_usuario`
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Índices para tabela `usuarios`
+-- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
