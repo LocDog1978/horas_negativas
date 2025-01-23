@@ -69,6 +69,8 @@ class RelatorioController extends BaseController
 		$dia_final              = $info['intervaloDias']['dia_final'];
 		$mes_inicial_extenso    = $info['intervaloDias']['mes_inicial_extenso'];
 		$mes_final_extenso      = $info['intervaloDias']['mes_final_extenso'];
+		$dia_inicial_ajustado   = $info['diaInicialAjustado'];
+		$dia_final_ajustado		= $info['diaFinalAjustado'];
 		// Iniciar tabela com cabeçalho
 		$tabela = '
 		<div style="text-align: left;">
@@ -79,7 +81,7 @@ class RelatorioController extends BaseController
 			<br>
 		</div>
 		<div style="text-align: center;">
-				<p><b>HORAS NEGATIVAS REFERENTE AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial.' À '.$dia_final.'</b></p>
+				<p><b>HORAS NEGATIVAS REFERENTES AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial_ajustado.' À '.$dia_final_ajustado.'</b></p>
 			</div><br>
 			<div style="text-align: center;">
 				<table id="tabelaDados" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
@@ -127,93 +129,95 @@ class RelatorioController extends BaseController
 			$tabela .= "<br>".str_repeat("&nbsp;", 10)."<i>Observações: " . htmlspecialchars($info['observacoes']) . "</i>";
 		}
 		$tabela .= '
-		    <div style="position: absolute; bottom: 130px; left: 40%; transform: translate(-50%, 0); text-align: center;">
-		        <table style="border-collapse: collapse; text-align: center; font-size: 12px;">
-		            <tr>
-		                <td>Andréa Travassos Rocha</td>
-		            </tr>
-		            <tr>
-		                <td>Chefe do DISEG-CAMPI</td>
-		            </tr>
-		            <tr>
-		                <td>Matrícula 34012-5 / ID 607902-4</td>
-		            </tr>
-		        </table>
-		    </div>';
+			<div style="position: absolute; bottom: 130px; left: 40%; transform: translate(-50%, 0); text-align: center;">
+				<table style="border-collapse: collapse; text-align: center; font-size: 12px;">
+					<tr>
+						<td>Andréa Travassos Rocha</td>
+					</tr>
+					<tr>
+						<td>Chefe do DISEG-CAMPI</td>
+					</tr>
+					<tr>
+						<td>Matrícula 34012-5 / ID 607902-4</td>
+					</tr>
+				</table>
+			</div>';
 		return $tabela;
 	}
 
 	public function setPag2($info) {
-    $dia_inicial            = $info['intervaloDias']['dia_inicial'];
-    $dia_final              = $info['intervaloDias']['dia_final'];
-    $mes_inicial_extenso    = $info['intervaloDias']['mes_inicial_extenso'];
-    $mes_final_extenso      = $info['intervaloDias']['mes_final_extenso'];
+	$dia_inicial            = $info['intervaloDias']['dia_inicial'];
+	$dia_final              = $info['intervaloDias']['dia_final'];
+	$mes_inicial_extenso    = $info['intervaloDias']['mes_inicial_extenso'];
+	$mes_final_extenso      = $info['intervaloDias']['mes_final_extenso'];
+	$dia_inicial_ajustado   = $info['diaInicialAjustado'];
+	$dia_final_ajustado		= $info['diaFinalAjustado'];
 
-    // Iniciar tabela com cabeçalho
-    $tabela = str_repeat("<br>", 3);
-    $tabela .= '
-    <div style="text-align: center;">
-        <p><b>JUSTIFICATIVAS REFERENTE AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial.' À '.$dia_final.'</b></p>
-    </div>
-    <div style="text-align: center;">
-        <table id="tabelaDados" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
-            <thead>
-                <tr style="text-align: center; vertical-align: middle; border: 1px solid black;">
-                    <th style="border: 1px solid black; width: 20%;">POSTOS</th>
-                    <th style="border: 1px solid black; width: 20%;">DATA</th>
-                    <th style="border: 1px solid black; width: 60%;">JUSTIFICATIVAS</th>
-                </tr>
-            </thead>
-            <tbody>';
+	// Iniciar tabela com cabeçalho
+	$tabela = str_repeat("<br>", 3);
+	$tabela .= '
+	<div style="text-align: center;">
+		<p><b>JUSTIFICATIVAS REFERENTES AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial_ajustado.' À '.$dia_final_ajustado.'</b></p>
+	</div>
+	<div style="text-align: center;">
+		<table id="tabelaDados" style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+			<thead>
+				<tr style="text-align: center; vertical-align: middle; border: 1px solid black;">
+					<th style="border: 1px solid black; width: 20%;">POSTOS</th>
+					<th style="border: 1px solid black; width: 20%;">DATA</th>
+					<th style="border: 1px solid black; width: 60%;">JUSTIFICATIVAS</th>
+				</tr>
+			</thead>
+			<tbody>';
 
-    // Verificar se há justificativas para exibir
-    $justificativasEncontradas = false;
+	// Verificar se há justificativas para exibir
+	$justificativasEncontradas = false;
 
-    // Preencher tabela com dados
-    foreach ($info['justificativaPeriodo'] as $postoData) {
-        $posto = htmlspecialchars($postoData['posto']);
-        $justificativas = array_filter($postoData['justificativas'], function($j) {
-            return !empty($j->justificativa);
-        });
-        $rowspan = count($justificativas);
+	// Preencher tabela com dados
+	foreach ($info['justificativaPeriodo'] as $postoData) {
+		$posto = htmlspecialchars($postoData['posto']);
+		$justificativas = array_filter($postoData['justificativas'], function($j) {
+			return !empty($j->justificativa);
+		});
+		$rowspan = count($justificativas);
 
-        if ($rowspan > 0) {
-            $justificativasEncontradas = true;
+		if ($rowspan > 0) {
+			$justificativasEncontradas = true;
 
-            // Exibir a primeira linha com o rowspan
-            $primeiraJustificativa = array_shift($justificativas);
-            $tabela .= '
-            <tr>
-                <td style="border: 1px solid black; text-align: center; vertical-align: middle;" rowspan="' . $rowspan . '">' . $posto . '</td>
-                <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . date('d/m/Y', strtotime($primeiraJustificativa->data)) . '</td>
-                <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . htmlspecialchars($primeiraJustificativa->justificativa) . '</td>
-            </tr>';
+			// Exibir a primeira linha com o rowspan
+			$primeiraJustificativa = array_shift($justificativas);
+			$tabela .= '
+			<tr>
+				<td style="border: 1px solid black; text-align: center; vertical-align: middle;" rowspan="' . $rowspan . '">' . $posto . '</td>
+				<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . date('d/m/Y', strtotime($primeiraJustificativa->data)) . '</td>
+				<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . htmlspecialchars($primeiraJustificativa->justificativa) . '</td>
+			</tr>';
 
-            // Exibir as demais linhas para o posto sem o posto (sem rowspan)
-            foreach ($justificativas as $justificativa) {
-                $tabela .= '
-                <tr>
-                    <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . date('d/m/Y', strtotime($justificativa->data)) . '</td>
-                    <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . htmlspecialchars($justificativa->justificativa) . '</td>
-                </tr>';
-            }
-        }
-    }
+			// Exibir as demais linhas para o posto sem o posto (sem rowspan)
+			foreach ($justificativas as $justificativa) {
+				$tabela .= '
+				<tr>
+					<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . date('d/m/Y', strtotime($justificativa->data)) . '</td>
+					<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . htmlspecialchars($justificativa->justificativa) . '</td>
+				</tr>';
+			}
+		}
+	}
 
-    if (!$justificativasEncontradas) {
-        $tabela .= '
-        <tr>
-            <td colspan="3" style="border: 1px solid black; text-align: center; vertical-align: middle;">Sem justificativas lançadas no período.</td>
-        </tr>';
-    }
+	if (!$justificativasEncontradas) {
+		$tabela .= '
+		<tr>
+			<td colspan="3" style="border: 1px solid black; text-align: center; vertical-align: middle;">Sem justificativas lançadas no período.</td>
+		</tr>';
+	}
 
-    // Fechar tabela
-    $tabela .= '
-            </tbody>
-        </table>
-    </div>';
+	// Fechar tabela
+	$tabela .= '
+			</tbody>
+		</table>
+	</div>';
 
-    return $tabela;
+	return $tabela;
 }
 
 
@@ -227,22 +231,45 @@ class RelatorioController extends BaseController
 		$somatorioPeriodo = $this->horasNegativasModel->somatorioPeriodo($mes, $ano);
 		$justificativasPeriodo = $this->horasNegativasModel->getJustificativasPeriodo($mes, $ano);
 
-		// echo "<pre>";
-		// dd(print_r($justificativasPeriodo));
-		
 		$numeroDocumento = $this->request->getGet('documentNumber');
 		$de = $this->request->getGet('de');
 		$para = $this->request->getGet('para');
 		$observacoes = $this->request->getGet('observacoes');
 
+		// Função para ajustar o mês e ano, somando 1 ao mês
+		function ajustarMesAno($data)
+		{
+			$partes = explode('/', $data);
+			$dia = $partes[0];
+			$mes = intval($partes[1]);
+			$ano = intval($partes[2]);
+
+			$mes++;
+			if ($mes > 12) {
+				$mes = 1;
+				$ano++;
+			}
+
+			return sprintf('%02d/%02d/%04d', $dia, $mes, $ano);
+		}
+
+		// Ajustar os dias inicial e final com incremento de mês
+		$diaInicial = $this->request->getGet('dia_inicial') ?? '25/11/2024';
+		$diaFinal = $this->request->getGet('dia_final') ?? '24/12/2024';
+
+		$diaInicialAjustado = ajustarMesAno($diaInicial);
+		$diaFinalAjustado = ajustarMesAno($diaFinal);
+
 		$info = [
-			'intervaloDias'     		=>  $intervaloDias,
-			'somatorioPeriodo'  		=>  $somatorioPeriodo,
-			'numeroDocumento'   		=>  $numeroDocumento,
-			'de'                		=>  $de,
-			'para'              		=>  $para,
-			'observacoes'       		=>  $observacoes,
-			'justificativaPeriodo'		=>	$justificativasPeriodo
+			'intervaloDias'           => $intervaloDias,
+			'somatorioPeriodo'        => $somatorioPeriodo,
+			'numeroDocumento'         => $numeroDocumento,
+			'de'                      => $de,
+			'para'                    => $para,
+			'observacoes'             => $observacoes,
+			'justificativaPeriodo'    => $justificativasPeriodo,
+			'diaInicialAjustado'      => $diaInicialAjustado,
+			'diaFinalAjustado'        => $diaFinalAjustado
 		];
 
 		$this->response->setHeader('Content-Type', 'application/pdf');
