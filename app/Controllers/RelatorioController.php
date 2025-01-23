@@ -23,10 +23,6 @@ class RelatorioController extends BaseController
 
 	public function setHeader($info) {
 		$logo = ROOTPATH . "assets\\images\\logo.svg";
-		
-		$numeroDocumento        = $info['numeroDocumento'];
-		$de                     = $info['de'];
-		$para                   = $info['para'];
 
 		// Configurar a formatação da data
 		$formatter = new \IntlDateFormatter(
@@ -50,13 +46,6 @@ class RelatorioController extends BaseController
 			</div>
 			<div style="text-align: right;">
 				<p>Rio de Janeiro, ' . $dataAtual . '</p>
-			</div>
-			<div style="text-align: left;">
-				<br>
-				<b>CI UERJ / DISEG - CAMPI Nº ' . htmlspecialchars($numeroDocumento) . '</b>
-				<p><b>DE: ' . htmlspecialchars($de) . '</b></p>
-				<p><b>PARA: ' . htmlspecialchars($para) . '</b></p>
-				<br>
 			</div>';
 			
 	}
@@ -73,12 +62,22 @@ class RelatorioController extends BaseController
 	}
 
 	public function setPag1($info) {
+		$numeroDocumento        = $info['numeroDocumento'];
+		$de                     = $info['de'];
+		$para                   = $info['para'];
 		$dia_inicial            = $info['intervaloDias']['dia_inicial'];
 		$dia_final              = $info['intervaloDias']['dia_final'];
 		$mes_inicial_extenso    = $info['intervaloDias']['mes_inicial_extenso'];
 		$mes_final_extenso      = $info['intervaloDias']['mes_final_extenso'];
 		// Iniciar tabela com cabeçalho
 		$tabela = '
+		<div style="text-align: left;">
+			<br>
+			<b>CI UERJ / DISEG - CAMPI Nº ' . htmlspecialchars($numeroDocumento) . '</b>
+			<p><b>DE: ' . htmlspecialchars($de) . '</b></p>
+			<p><b>PARA: ' . htmlspecialchars($para) . '</b></p>
+			<br>
+		</div>
 		<div style="text-align: center;">
 				<p><b>HORAS NEGATIVAS REFERENTE AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial.' À '.$dia_final.'</b></p>
 			</div><br>
@@ -127,6 +126,20 @@ class RelatorioController extends BaseController
 		if (!empty($info['observacoes'])) {
 			$tabela .= "<br>".str_repeat("&nbsp;", 10)."<i>Observações: " . htmlspecialchars($info['observacoes']) . "</i>";
 		}
+		$tabela .= '
+		    <div style="position: absolute; bottom: 130px; left: 40%; transform: translate(-50%, 0); text-align: center;">
+		        <table style="border-collapse: collapse; text-align: center; font-size: 12px;">
+		            <tr>
+		                <td>Andréa Travassos Rocha</td>
+		            </tr>
+		            <tr>
+		                <td>Chefe do DISEG-CAMPI</td>
+		            </tr>
+		            <tr>
+		                <td>Matrícula 34012-5 / ID 607902-4</td>
+		            </tr>
+		        </table>
+		    </div>';
 		return $tabela;
 	}
 
@@ -137,7 +150,8 @@ class RelatorioController extends BaseController
     $mes_final_extenso      = $info['intervaloDias']['mes_final_extenso'];
 
     // Iniciar tabela com cabeçalho
-    $tabela = '
+    $tabela = str_repeat("<br>", 3);
+    $tabela .= '
     <div style="text-align: center;">
         <p><b>JUSTIFICATIVAS REFERENTE AOS MESES '. mb_strtoupper($mes_inicial_extenso, 'UTF-8') . '/' . mb_strtoupper($mes_final_extenso, 'UTF-8') .' DO DIA '.$dia_inicial.' À '.$dia_final.'</b></p>
     </div>
@@ -237,7 +251,7 @@ class RelatorioController extends BaseController
 			[
 				'mode' => 'utf-8',
 				'format' => 'A4-P',
-				'margin_top' => 100, // Ajuste a margem superior para dar espaço ao cabeçalho
+				'margin_top' => 61,
 				'margin_bottom' => 34,
 				'default_font_size' => 8
 			]
