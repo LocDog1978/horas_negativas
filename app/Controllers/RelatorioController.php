@@ -97,25 +97,30 @@ class RelatorioController extends BaseController
 
 		// Preencher tabela com dados
 		foreach ($info['somatorioPeriodo'] as $somatorio) {
-			$total = isset($somatorio['total']) ? $somatorio['total'] : ($somatorio['diurno'] + $somatorio['noturno']);
-			$posto = htmlspecialchars($somatorio['posto']);
-			if ($posto != "TOTAL") {
-				$tabela .= '
-					<tr>
-						<td style="border: 1px solid black;">' . $posto . '</td>
-						<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . number_format(htmlspecialchars($somatorio['diurno']), 0, ",", ".") . '</td>
-						<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . number_format(htmlspecialchars($somatorio['noturno']), 0, ",", ".") . '</td>
-						<td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . number_format($total, 0, ",", ".") . '</td>
-					</tr>';
-			} else {
-				$tabela .= '
-					<tr>
-						<td style="border: 1px solid black;"><b>' . $posto . '</b></td>
-						<td style="border: 1px solid black; text-align: center; vertical-align: middle;"><b>' . number_format(htmlspecialchars($somatorio['diurno']), 0, ",", ".") . '</b></td>
-						<td style="border: 1px solid black; text-align: center; vertical-align: middle;"><b>' . number_format(htmlspecialchars($somatorio['noturno']), 0, ",", ".") . '</b></td>
-						<td style="border: 1px solid black; text-align: center; vertical-align: middle;"><b>' . number_format($total, 0, ",", ".") . '</b></td>
-					</tr>';
-			}
+		    // Converter diurno e noturno para minutos antes da soma
+		    $diurnoMin = timeToMinutes($somatorio['diurno'] ?? '00:00');
+		    $noturnoMin = timeToMinutes($somatorio['noturno'] ?? '00:00');
+		    $totalMin = $diurnoMin + $noturnoMin;
+
+		    $posto = htmlspecialchars($somatorio['posto']);
+
+		    if ($posto != "TOTAL") {
+		        $tabela .= '
+		            <tr>
+		                <td style="border: 1px solid black;">' . $posto . '</td>
+		                <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . htmlspecialchars($somatorio['diurno']) . '</td>
+		                <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . htmlspecialchars($somatorio['noturno']) . '</td>
+		                <td style="border: 1px solid black; text-align: center; vertical-align: middle;">' . minutesToTime($totalMin) . '</td>
+		            </tr>';
+		    } else {
+		        $tabela .= '
+		            <tr>
+		                <td style="border: 1px solid black;"><b>' . $posto . '</b></td>
+		                <td style="border: 1px solid black; text-align: center; vertical-align: middle;"><b>' . htmlspecialchars($somatorio['diurno']) . '</b></td>
+		                <td style="border: 1px solid black; text-align: center; vertical-align: middle;"><b>' . htmlspecialchars($somatorio['noturno']) . '</b></td>
+		                <td style="border: 1px solid black; text-align: center; vertical-align: middle;"><b>' . minutesToTime($totalMin) . '</b></td>
+		            </tr>';
+		    }
 		}
 
 		// Fechar tabela
@@ -224,7 +229,7 @@ class RelatorioController extends BaseController
 
 	public function index()
 	{
-		helper('data_helper');
+		helper('data');
 		$mes = $this->request->getGet('mes') ?? date('n');
 		$ano = $this->request->getGet('ano') ?? date('Y');
 		$intervaloDias = intervalo_dias_formatado($mes, $ano);

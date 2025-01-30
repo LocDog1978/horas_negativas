@@ -10,6 +10,12 @@ class HorasNegativasModel extends Model
 	protected $allowedFields = ['fk_local', 'diurno', 'noturno', 'data', 'justificativa'];
 	protected $returnType = 'object';
 
+	public function __construct()
+	{
+		parent::__construct();
+		helper('data');
+	}
+
 	public function getHorasNegativasByPostoData($posto, $data)
 	{
 		return $this->select('diurno, noturno, justificativa')
@@ -29,122 +35,133 @@ class HorasNegativasModel extends Model
 			$noturno = $item['noturno'];
 			$justificativa = $item['justificativa'];
 
-			// Verificar se já existe um registro com a mesma data_invisivel e fk_local
+			// Converter os tempos para minutos usando o helper
+			$diurno_min = timeToMinutes($diurno);
+			$noturno_min = timeToMinutes($noturno);
+
+			// Buscar registro existente
 			$existingRecord = $this->where('data', $data_invisivel)
-								->where('fk_local', $postoID)
-								->first();
+								   ->where('fk_local', $postoID)
+								   ->first();
 
 			if ($existingRecord) {
-				// Se existir, faz um UPDATE
+				// Atualiza o registro existente
 				$this->update($existingRecord->id, [
-					'diurno' => $diurno == "" ? NULL : $diurno,
-					'noturno' => $noturno == "" ? NULL : $noturno,
-					'justificativa' => $justificativa == "" ? NULL : $justificativa,
+					'diurno' => empty($diurno) ? NULL : $diurno,
+					'noturno' => empty($noturno) ? NULL : $noturno,
+					'justificativa' => empty($justificativa) ? NULL : $justificativa,
 				]);
 			} else {
-				// Se não existir, faz um INSERT
+				// Insere um novo registro
 				$this->insert([
 					'data' => $data_invisivel,
-					'diurno' => $diurno == "" ? NULL : $diurno,
-					'noturno' => $noturno == "" ? NULL : $noturno,
+					'diurno' => empty($diurno) ? NULL : $diurno,
+					'noturno' => empty($noturno) ? NULL : $noturno,
 					'fk_local' => $postoID,
-					'justificativa' => $justificativa == "" ? NULL : $justificativa,
+					'justificativa' => empty($justificativa) ? NULL : $justificativa,
 				]);
 			}
-			$sum_diurno += intval($diurno);
-			$sum_noturno += intval($noturno);
+
+			// Somar os tempos
+			$sum_diurno += $diurno_min;
+			$sum_noturno += $noturno_min;
 		}
 
 		return [
-			'sum_diurno' => $sum_diurno,
-			'sum_noturno' => $sum_noturno,
-			'total_sum' => $sum_diurno + $sum_noturno,
+			'sum_diurno' => minutesToTime($sum_diurno),
+			'sum_noturno' => minutesToTime($sum_noturno),
+			'total_sum' => minutesToTime($sum_diurno + $sum_noturno),
 		];
 	}
 
 	public function sumHorasDiurnas($postoID, $periodo)
 	{
-		$builder = $this->db->table('horas_negativas');
-		$builder->selectSum('diurno');
-		$builder->where('fk_local', $postoID);
-		$builder->whereIn('data', $periodo);
-		$query = $builder->get();
-		return $query->getRow()->diurno_sum ?? 0;
+		$soma = $this->selectSum('diurno')
+					 ->where('fk_local', $postoID)
+					 ->whereIn('data', $periodo)
+					 ->first();
+
+		return timeToMinutes($soma->diurno ?? '00:00');
 	}
 
 	public function sumHorasNoturnas($postoID, $periodo)
 	{
-		$builder = $this->db->table('horas_negativas');
-		$builder->selectSum('noturno');
-		$builder->where('fk_local', $postoID);
-		$builder->whereIn('data', $periodo);
-		$query = $builder->get();
-		return $query->getRow()->noturno_sum ?? 0;
+		$soma = $this->selectSum('noturno')
+					 ->where('fk_local', $postoID)
+					 ->whereIn('data', $periodo)
+					 ->first();
+
+		return timeToMinutes($soma->noturno ?? '00:00');
 	}
 
 	public function somatorioPeriodo($mes = null, $ano = null)
 	{
-		// Usar mês e ano atuais se não forem fornecidos
-		if (is_null($mes)) {
-			$mes = date('m');
-		}
-		if (is_null($ano)) {
-			$ano = date('Y');
-		}
+	    if (is_null($mes)) {
+	        $mes = date('m');
+	    }
+	    if (is_null($ano)) {
+	        $ano = date('Y');
+	    }
 
-		$postosModel = new PostosModel();
-		$postos = $postosModel->getAlldata();
+	    $postosModel = new PostosModel();
+	    $postos = $postosModel->getAlldata();
 
-		// Verifica se o mês é 12 para ajustar o ano e o mês seguinte
-		if ($mes == 12) {
-			$mesSeguinte = 1;
-			$anoSeguinte = $ano + 1;
-		} else {
-			$mesSeguinte = $mes + 1;
-			$anoSeguinte = $ano;
-		}
+	    // Ajusta o ano e o mês seguinte
+	    if ($mes == 12) {
+	        $mesSeguinte = 1;
+	        $anoSeguinte = $ano + 1;
+	    } else {
+	        $mesSeguinte = $mes + 1;
+	        $anoSeguinte = $ano;
+	    }
 
-		// Definir o intervalo de datas com base na lógica fornecida
-		$startDate = date('Y-m-d', strtotime("$ano-$mes-25"));
-		$endDate = date('Y-m-d', strtotime("$anoSeguinte-$mesSeguinte-24"));
+	    $startDate = date('Y-m-d', strtotime("$ano-$mes-25"));
+	    $endDate = date('Y-m-d', strtotime("$anoSeguinte-$mesSeguinte-24"));
 
-		$resultados = [];
-		$totalDiurno = 0;
-		$totalNoturno = 0;
+	    $resultados = [];
+	    $totalDiurno = 0;
+	    $totalNoturno = 0;
 
-		foreach ($postos as $posto) {
-			$sums = $this->selectSum('diurno')
-						 ->selectSum('noturno')
-						 ->where('fk_local', $posto->id)
-						 ->where('data >=', $startDate)
-						 ->where('data <=', $endDate)
-						 ->first();
+	    foreach ($postos as $posto) {
+	        // Busca todos os registros individuais do período para somar corretamente os minutos
+	        $horas = $this->select('diurno, noturno')
+	                      ->where('fk_local', $posto->id)
+	                      ->where('data >=', $startDate)
+	                      ->where('data <=', $endDate)
+	                      ->findAll();
 
-			$diurnoSum = $sums->diurno ?? 0;
-			$noturnoSum = $sums->noturno ?? 0;
+	        $diurnoTotalMin = 0;
+	        $noturnoTotalMin = 0;
 
-			$resultados[] = [
-				'posto' => $posto->nome,
-				'diurno' => $diurnoSum,
-				'noturno' => $noturnoSum,
-			];
+	        foreach ($horas as $hora) {
+	            $diurnoTotalMin += timeToMinutes($hora->diurno ?? '00:00');
+	            $noturnoTotalMin += timeToMinutes($hora->noturno ?? '00:00');
+	        }
 
-			$totalDiurno += $diurnoSum;
-			$totalNoturno += $noturnoSum;
-		}
+	        // Adiciona os resultados já convertidos corretamente
+	        $resultados[] = [
+	            'posto' => $posto->nome,
+	            'diurno' => minutesToTime($diurnoTotalMin),
+	            'noturno' => minutesToTime($noturnoTotalMin),
+	        ];
 
-		$resultados[] = [
-			'posto' => 'TOTAL',
-			'diurno' => $totalDiurno,
-			'noturno' => $totalNoturno,
-		];
+	        // Soma total para exibir no final
+	        $totalDiurno += $diurnoTotalMin;
+	        $totalNoturno += $noturnoTotalMin;
+	    }
 
-		return $resultados;
+	    // Adiciona linha TOTAL
+	    $resultados[] = [
+	        'posto' => 'TOTAL',
+	        'diurno' => minutesToTime($totalDiurno),
+	        'noturno' => minutesToTime($totalNoturno),
+	    ];
+
+	    return $resultados;
 	}
 
 	public function getJustificativasPeriodo($mes = null, $ano = null)
 	{
-		// Usar mês e ano atuais se não forem fornecidos
 		if (is_null($mes)) {
 			$mes = date('m');
 		}
@@ -155,7 +172,6 @@ class HorasNegativasModel extends Model
 		$postosModel = new PostosModel();
 		$postos = $postosModel->getAlldata();
 
-		// Verifica se o mês é 12 para ajustar o ano e o mês seguinte
 		if ($mes == 12) {
 			$mesSeguinte = 1;
 			$anoSeguinte = $ano + 1;
@@ -164,7 +180,6 @@ class HorasNegativasModel extends Model
 			$anoSeguinte = $ano;
 		}
 
-		// Definir o intervalo de datas com base na lógica fornecida
 		$startDate = date('Y-m-d', strtotime("$ano-$mes-25"));
 		$endDate = date('Y-m-d', strtotime("$anoSeguinte-$mesSeguinte-24"));
 
@@ -172,10 +187,10 @@ class HorasNegativasModel extends Model
 
 		foreach ($postos as $posto) {
 			$justificativas = $this->select('data, justificativa')
-								->where('fk_local', $posto->id)
-								->where('data >=', $startDate)
-								->where('data <=', $endDate)
-								->findAll();
+								   ->where('fk_local', $posto->id)
+								   ->where('data >=', $startDate)
+								   ->where('data <=', $endDate)
+								   ->findAll();
 
 			$resultados[] = [
 				'posto' => $posto->nome,

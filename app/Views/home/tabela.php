@@ -16,7 +16,17 @@
                         <td><?= ($somatorio['posto'] == "TOTAL") ? "<b>".$somatorio['posto']."</b>" : $somatorio['posto'] ?></td>
                         <td><?= $somatorio['diurno'] ?></td>
                         <td><?= $somatorio['noturno'] ?></td>
-                        <td><?= isset($somatorio['total']) ? $somatorio['total'] : ($somatorio['diurno'] + $somatorio['noturno']) ?></td>
+                        <td>
+                            <?php
+                            // Converte HH:MM para minutos antes de somar
+                            $diurnoMin = timeToMinutes($somatorio['diurno']);
+                            $noturnoMin = timeToMinutes($somatorio['noturno']);
+                            $totalMin = $diurnoMin + $noturnoMin;
+
+                            // Converte de volta para HH:MM
+                            echo minutesToTime($totalMin);
+                            ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

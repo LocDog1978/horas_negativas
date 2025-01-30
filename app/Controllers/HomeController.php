@@ -18,11 +18,11 @@ class HomeController extends BaseController
 		$this->currentUser = $this->userModel->getUserData(session()->userID);
 		$this->postosModel = new PostosModel();
 		$this->horasNegativasModel = new HorasNegativasModel();
+		helper('data');
 	}
 
 	public function index()
 	{
-		helper('data_helper');
 		$data['currentUser'] = $this->currentUser;
 		$data['isChosenPage'] = true;
 		$data['postosList'] = $this->postosModel->getAllData();
@@ -40,8 +40,6 @@ class HomeController extends BaseController
 
 	public function tabela()
 	{
-		helper('data_helper');
-
 		$mes = $this->request->getPost('mes');
 		$ano = $this->request->getPost('ano');
 

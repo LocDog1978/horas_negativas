@@ -106,3 +106,36 @@ if (!function_exists('get_years')) {
         return $years;
     }
 }
+
+if (!function_exists('timeToMinutes')) {
+    /**
+     * Converte um tempo no formato HH:MM para minutos inteiros.
+     */
+    function timeToMinutes($time)
+    {
+        if (empty($time) || strpos($time, ':') === false) {
+            return 0; // Retorna 0 se a string estiver vazia ou sem ":"
+        }
+
+        list($h, $m) = explode(':', $time);
+
+        return ((int)$h * 60) + (int)$m;
+    }
+}
+
+if (!function_exists('minutesToTime')) {
+    /**
+     * Converte minutos inteiros para o formato HH:MM.
+     */
+    function minutesToTime($minutes)
+    {
+        if (!is_numeric($minutes) || $minutes < 0) {
+            return '00:00'; // Evita erros caso um valor inválido seja passado
+        }
+
+        $h = floor($minutes / 60);
+        $m = $minutes % 60;
+
+        return sprintf('%02d:%02d', $h, $m);
+    }
+}

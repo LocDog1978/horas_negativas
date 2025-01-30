@@ -6,7 +6,7 @@
 	<title>Horas Negativas</title>
 	<style>
 		.toast-container {
-			z-index: 1060; /* valor maior que outros elementos da página */
+			z-index: 1060;
 		}
 		.has-justificativa {
 			position: relative;
@@ -21,6 +21,13 @@
 			height: 8px;
 			background-color: red;
 			border-radius: 50%;
+		}
+		table {
+			border: 2px solid black;
+		}
+		th, td {
+			border: 2px solid black;
+			text-align: center;
 		}
 	</style>
 </head>
@@ -41,8 +48,7 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div id="alertSomatorio" class="alert alert-primary col-sm-4 text-center" role="alert">
 				Você selecionou: <h5 style="display: inline-block; margin: 0;"><b><?php echo $nome_posto; ?></b></h5>
@@ -61,17 +67,16 @@
 	</div>
 
 	<div class="d-flex justify-content-center">
-		<div class="table-responsive" style="width: 50%;">
+		<div class="table-responsive" style="width: 100%;">
 			<table id="tabelaDados" class="table table-bordered table-hover table-sm" style="width: 100%;">
 				<thead>
-					<tr style="text-align: center; vertical-align: middle;">
+					<tr style="text-align: center; vertical-align: middle; border: 2px solid black">
 						<th>#</th>
 						<th>Data</th>
-						<th style="display: none;">Data invisível</th> <!-- Coluna invisível -->
+						<th style="display: none;">Data invisível</th>
 						<th>Diurno</th>
 						<th>Noturno</th>
 						<th>Justificativa</th>
-						<th style="display: none;">Justificativa invisível</th> <!-- Coluna invisível -->
 					</tr>
 				</thead>
 				<tbody>
@@ -84,27 +89,16 @@
 					$justificativa_valor = isset($horasNegativas[$data_invisivel]->justificativa) ? $horasNegativas[$data_invisivel]->justificativa : '';
 				?>
 					<tr>
-						<td style="text-align: center; vertical-align: middle;">
-							<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-								<b><?php echo $index + 1; ?></b>
-							</div>
+						<td style="text-align: center; vertical-align: middle; border: 2px solid black"><b><?php echo $index + 1; ?></b></td>
+						<td style="width: 150px; text-align: center; vertical-align: middle; border: 2px solid black">
+							<?php echo date("d/m/Y", strtotime($data_invisivel)); ?>
 						</td>
-						<td style="width: 150px; text-align: center; vertical-align: middle;">
-							<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-								<?php echo date("d/m/Y", strtotime($data_invisivel)); ?>
-							</div>
+						<td style="display: none;"> <?php echo $data_invisivel; ?> </td>
+						<td style="border: 2px solid black"><input type="time" name="<?php echo $input_diurno; ?>" id="<?php echo $input_diurno; ?>" class="form-control" value="<?php echo htmlspecialchars($diurno_valor); ?>" ></td>
+						<td style="border: 2px solid black"><input type="time" name="<?php echo $input_noturno; ?>" id="<?php echo $input_noturno; ?>" class="form-control" value="<?php echo htmlspecialchars($noturno_valor); ?>" ></td>
+						<td style="border: 2px solid black">
+							<textarea name="justificativa_<?php echo $data_invisivel; ?>" class="form-control justificativa" rows="2"><?php echo htmlspecialchars($justificativa_valor); ?></textarea>
 						</td>
-						<td style="display: none;"><?php echo $data_invisivel; ?></td> <!-- Coluna invisível -->
-						<td><input type="number" min="0" name="<?php echo $input_diurno; ?>" id="<?php echo $input_diurno; ?>" class="form-control" value="<?php echo htmlspecialchars($diurno_valor); ?>" style="border: none; border-bottom: 1px solid #0072CE; border-radius: 0; width: 100%;"></td>
-						<td><input type="number" min="0" name="<?php echo $input_noturno; ?>" id="<?php echo $input_noturno; ?>" class="form-control" value="<?php echo htmlspecialchars($noturno_valor); ?>" style="border: none; border-bottom: 1px solid #0072CE; border-radius: 0; width: 100%;"></td>
-						<td style="width: 150px; text-align: center; vertical-align: middle;">
-							<button type="button" class="btn btn-primary btn-justificativa <?php echo !empty($justificativa_valor) ? 'has-justificativa' : ''; ?>" data-bs-toggle="modal" data-bs-target="#justificativaModal" data-row="<?php echo $index; ?>" data-justificativa="<?php echo htmlspecialchars($justificativa_valor, ENT_QUOTES, 'UTF-8'); ?>">
-								<i class="fa fa-pencil"></i>
-							</button>
-						</td>
-						<td style="display: none;">
-							<input type="text" name="justificativa_invisivel_<?php echo $data_invisivel; ?>" class="form-control" value="<?php echo htmlspecialchars($justificativa_valor); ?>">
-						</td> <!-- Coluna invisível -->
 					</tr>
 				<?php } ?>
 				</tbody>
@@ -116,59 +110,8 @@
 		<button type="button" id="btnSalvarBottom" class="btn btn-primary">Salvar</button>
 	</div>
 
-	<!-- Modal para Justificativa -->
-	<div class="modal fade" id="justificativaModal" tabindex="-1" aria-labelledby="justificativaModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="justificativaModalLabel">Justificativa</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<textarea id="justificativaText" class="form-control" rows="4" placeholder="Digite a justificativa..."></textarea>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-					<button type="button" class="btn btn-primary" id="saveJustificativaModal">Salvar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<script>
 		$(document).ready(function() {
-			let selectedRow = null;
-			let justificativas = <?php echo json_encode(array_map(function($item) { return $item->justificativa ?? ''; }, $horasNegativas)); ?>;
-
-			// Abrir modal e carregar justificativa existente, se houver
-			$('.btn-justificativa').click(function() {
-				selectedRow = $(this).data('row');
-				let justificativa = $(this).data('justificativa');
-				$('#justificativaText').val(justificativa || '');
-			});
-
-			// Prevenir que ENTER no modal acione o botão externo de salvar, mas permitir quebra de linha
-			$('#justificativaText').keydown(function(event) {
-				if (event.keyCode === 13 && !event.shiftKey) {
-					event.preventDefault();
-				}
-			});
-
-			// Salvar justificativa no array ao clicar em "Salvar" no modal
-			$('#saveJustificativaModal').click(function() {
-				const justificativa = $('#justificativaText').val();
-				justificativas[selectedRow] = justificativa;
-				const dataInvisivel = $(`.btn-justificativa[data-row="${selectedRow}"]`).closest('tr').find('td:nth-child(3)').text().trim();
-				$(`input[name="justificativa_invisivel_${dataInvisivel}"]`).val(justificativa);
-				if (justificativa) {
-					$(`.btn-justificativa[data-row="${selectedRow}"]`).addClass('has-justificativa');
-				} else {
-					$(`.btn-justificativa[data-row="${selectedRow}"]`).removeClass('has-justificativa');
-				}
-				$('#justificativaModal').modal('hide');
-			});
-
-			// Enviar dados ao clicar nos botões "Salvar"
 			$('#btnSalvarTop, #btnSalvarBottom').click(function() {
 				let dados = [];
 
@@ -177,9 +120,9 @@
 					linha.id = $(this).find('td:first-child').text().trim();
 					linha.data = $(this).find('td:nth-child(2)').text().trim();
 					linha.data_invisivel = $(this).find('td:nth-child(3)').text().trim();
-					linha.diurno = $(this).find('input[type="number"]:eq(0)').val();
-					linha.noturno = $(this).find('input[type="number"]:eq(1)').val();
-					linha.justificativa = $(this).find('input[type="text"]:eq(0)').val();
+					linha.diurno = $(this).find('input[type="time"]:eq(0)').val();
+					linha.noturno = $(this).find('input[type="time"]:eq(1)').val();
+					linha.justificativa = $(this).find('textarea.justificativa').val();
 
 					dados.push(linha);
 				});
@@ -207,16 +150,6 @@
 						console.error('Erro ao enviar dados:', error);
 					}
 				});
-			});
-
-			// Inicializar tooltips
-			$('[data-bs-toggle="tooltip"]').tooltip();
-
-			// Mostrar bolinhas vermelhas para justificativas existentes
-			$('.btn-justificativa').each(function() {
-				if ($(this).data('justificativa')) {
-					$(this).addClass('has-justificativa');
-				}
 			});
 		});
 	</script>
