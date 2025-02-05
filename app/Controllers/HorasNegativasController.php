@@ -46,65 +46,64 @@ class HorasNegativasController extends BaseController
 
 	public function tabelaHorasNegativas()
 	{
-	    $periodo = $this->request->getPost('periodo');
-	    $postoID = $this->request->getPost('posto');
+		$periodo = $this->request->getPost('periodo');
+		$postoID = $this->request->getPost('posto');
 
-	    $data['periodo'] = $periodo;
-	    $data['postoID'] = $postoID;
-	    $data['nome_posto'] = $this->postosModel->getPosto($postoID)->nome;
+		$data['periodo'] = $periodo;
+		$data['postoID'] = $postoID;
+		$data['nome_posto'] = $this->postosModel->getPosto($postoID)->nome;
 
-	    $data['horasNegativas'] = [];
-	    $sum_diurno = 0;
-	    $sum_noturno = 0;
+		$data['horasNegativas'] = [];
+		$sum_diurno = 0;
+		$sum_noturno = 0;
 
-	    // Função para converter HH:MM para minutos
-	    function timeToMinutes($time)
-	    {
-	        if (empty($time)) {
-	            return 0;
-	        }
-	        list($h, $m) = explode(':', $time);
-	        return ($h * 60) + $m;
-	    }
+		// Função para converter HH:MM para minutos
+		function timeToMinutes($time)
+		{
+			if (empty($time)) {
+				return 0;
+			}
+			list($h, $m) = explode(':', $time);
+			return ($h * 60) + $m;
+		}
 
-	    // Função para converter minutos de volta para HH:MM
-	    function minutesToTime($minutes)
-	    {
-	        $h = floor($minutes / 60);
-	        $m = $minutes % 60;
-	        return sprintf('%02d:%02d', $h, $m);
-	    }
+		// Função para converter minutos de volta para HH:MM
+		function minutesToTime($minutes)
+		{
+			$h = floor($minutes / 60);
+			$m = $minutes % 60;
+			return sprintf('%02d:%02d', $h, $m);
+		}
 
-	    foreach ($periodo as $data_invisivel) {
-	        $horas = $this->horasNegativasModel->getHorasNegativasByPostoData($postoID, $data_invisivel);
-	        if ($horas) {
-	            if (!isset($horas->justificativa)) {
-	                $horas->justificativa = '';
-	            }
-	            $horas->diurno = is_null($horas->diurno) ? '' : $horas->diurno;
-	            $horas->noturno = is_null($horas->noturno) ? '' : $horas->noturno;
-	            $data['horasNegativas'][$data_invisivel] = $horas;
+		foreach ($periodo as $data_invisivel) {
+			$horas = $this->horasNegativasModel->getHorasNegativasByPostoData($postoID, $data_invisivel);
+			if ($horas) {
+				if (!isset($horas->justificativa)) {
+					$horas->justificativa = '';
+				}
+				$horas->diurno = is_null($horas->diurno) ? '' : $horas->diurno;
+				$horas->noturno = is_null($horas->noturno) ? '' : $horas->noturno;
+				$data['horasNegativas'][$data_invisivel] = $horas;
 
-	            // Converter para minutos e somar
-	            $sum_diurno += timeToMinutes($horas->diurno);
-	            $sum_noturno += timeToMinutes($horas->noturno);
-	        } else {
-	            $data['horasNegativas'][$data_invisivel] = (object)[
-	                'diurno' => '',
-	                'noturno' => '',
-	                'justificativa' => ''
-	            ];
-	        }
-	    }
+				// Converter para minutos e somar
+				$sum_diurno += timeToMinutes($horas->diurno);
+				$sum_noturno += timeToMinutes($horas->noturno);
+			} else {
+				$data['horasNegativas'][$data_invisivel] = (object)[
+					'diurno' => '',
+					'noturno' => '',
+					'justificativa' => ''
+				];
+			}
+		}
 
-	    // Converter os totais de volta para HH:MM
-	    $data['sum_diurno'] = minutesToTime($sum_diurno);
-	    $data['sum_noturno'] = minutesToTime($sum_noturno);
-	    $data['total_sum'] = minutesToTime($sum_diurno + $sum_noturno);
+		// Converter os totais de volta para HH:MM
+		$data['sum_diurno'] = minutesToTime($sum_diurno);
+		$data['sum_noturno'] = minutesToTime($sum_noturno);
+		$data['total_sum'] = minutesToTime($sum_diurno + $sum_noturno);
 
-	    return view('horas_negativas/tabelaHorasNegativas', $data);
+		return view('horas_negativas/tabelaHorasNegativas', $data);
 	}
-
 
 	public function getHorasNegativas()
 	{
