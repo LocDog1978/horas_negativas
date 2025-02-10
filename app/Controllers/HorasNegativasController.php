@@ -57,24 +57,6 @@ class HorasNegativasController extends BaseController
 		$sum_diurno = 0;
 		$sum_noturno = 0;
 
-		// Função para converter HH:MM para minutos
-		function timeToMinutes($time)
-		{
-			if (empty($time)) {
-				return 0;
-			}
-			list($h, $m) = explode(':', $time);
-			return ($h * 60) + $m;
-		}
-
-		// Função para converter minutos de volta para HH:MM
-		function minutesToTime($minutes)
-		{
-			$h = floor($minutes / 60);
-			$m = $minutes % 60;
-			return sprintf('%02d:%02d', $h, $m);
-		}
-
 		foreach ($periodo as $data_invisivel) {
 			$horas = $this->horasNegativasModel->getHorasNegativasByPostoData($postoID, $data_invisivel);
 			if ($horas) {
